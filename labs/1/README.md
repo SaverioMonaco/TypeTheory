@@ -1,5 +1,5 @@
 
-## Lab 1:
+## Lab 1 Transcript:
 ### Introduction
 _Three mottos:_
 1. proving = programming
