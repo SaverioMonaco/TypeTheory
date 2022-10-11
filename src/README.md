@@ -8,6 +8,8 @@
 | Run (Emacs)  | $\to$ | Ctrl-C Ctrl-N         |
 | Case Assist  | $\to$ | Ctrl-C Ctrl-C         | 
 | Remove hole  | $\to$ | Ctrl-C Ctrl-␣         |
+| Type hint    | $\to$ | Ctrl-C Ctrl-,         |
 ## Laboratory sessions:
 ### 1. Simple data types, constants and functions;
+### 2. Dependent types
 
