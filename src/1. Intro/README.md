@@ -1,5 +1,5 @@
 
-## Lab 1 Transcript:
+## LBooleans, natural numbers, basic functions:
 ### Introduction
 _Three mottos:_
 1. proving = programming

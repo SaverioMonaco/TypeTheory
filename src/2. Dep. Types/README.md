@@ -1,4 +1,4 @@
-## Lab 2 Transcript:
+## Vectors, basic functions with vectors:
 #### on to dependent types!
 * ***Negative example***
   The type "list of integers" depends on the type of integers, but this is still a type (and not a value), and hence the type "list of integers" would not usually be called a "dependent type".
