@@ -94,7 +94,8 @@ In English:
 
 Let us verify now the following Theorem
 > _Every natural number is either even or odd_
-We need a function that takes a natural numbe as input and outputs a witness that is even or odd:
+
+We need a function that takes a natural number as input and outputs a witness that is even or odd:
 
 First we need to create the conjunction of the two sets:
 ```agda
