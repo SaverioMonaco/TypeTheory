@@ -1,4 +1,5 @@
 -- Exercise 2:
+-- Look at it after LAB2
 ---------------------------
 ----[ NATURAL NUMBERS ]----
 ---------------------------

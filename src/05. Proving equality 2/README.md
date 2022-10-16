@@ -1,4 +1,7 @@
 ## More on equality of natural numbers; also polymorphic equality
+
+As always we start with the previous definitions:
+```agda
 data ℕ : Set where
   zero : ℕ
   succ : ℕ → ℕ
@@ -7,76 +10,140 @@ _+_ : ℕ → ℕ → ℕ
 zero   + b = b
 succ a + b = succ (a + b)
 
-_+'_ : ℕ → ℕ → ℕ
-a +' zero   = a
-a +' succ b = succ (a +' b)
-
-
-data _≡_ {X : Set} : X → X → Set where
-  refl : {a : X} → (a ≡ a)   -- "reflexivity"
+data _≡_ : ℕ → ℕ → Set where
+  refl : {a : ℕ} → (a ≡ a)   -- "reflexivity"
   -- bailout : {a b : ℕ} → (a ≡ b)
 
-{-
-theorem : zero ≡ succ zero
-theorem = bailout
--}
-
--- (zero ≡ zero) is the type of witnesses that zero equals zero (this type
--- is inhabited).
--- (zero ≡ succ zero) is the type of witnesses that zero equals succ zero (this type
--- is empty).
 lemma : zero ≡ zero    -- \==
 lemma = refl
 
 lemma' : (b : ℕ) → ((zero + b) ≡ b)
 lemma' b = refl
+```
 
-{-
-factorial : ℕ → ℕ
-factorial zero = {!!}
-factorial (succ n) = {!!}
--}
+- `(zero ≡ zero)` is the type of witnesses that zero equals zero (this type is inhabited).
+- `(zero ≡ succ zero)` is the type of witnesses that zero equals succ zero (this type is empty).
 
+Last time, we were trying to demonstrate the following lemma:
+```agda
+lemma'' : (a : ℕ) → ((a + zero) ≡ a)
+-- In this case both side are manifestly equal and we can use refl
+lemma'' zero     = refl
+lemma'' (succ a) = ?
+```
+
+What we need is a value of type `(succ (a + zero) ≡ a)`.
+
+```agda
 cong : {A B : Set} {x y : A} → (f : A → B) → (x ≡ y) → (f x ≡ f y)
 cong f refl = refl
+```
 
-lemma-+-zero : (a : ℕ) → ((a + zero) ≡ a)
+```agda
+lemma'' : (a : ℕ) → ((a + zero) ≡ a)
+lemma'' zero = refl
+lemma'' (succ a) = cong succ (lemma'' a)
+```
+
+Let's prove symmetry:
+```agda
+symm : {A : Set} {x y : A} → x ≡ y → y ≡ x
+symm refl = refl
+```
+
+#### Exercise: Transitivity
+```agda
+-- For x, y and z natural numbers, if x is equal to y
+-- and y is equal to z, then x is equal to z
+trans : {x y z : ℕ} → x ≡ y → y ≡ z → x ≡ z 
+trans p q = ?
+```
+<details>
+  <summary>Solution</summary>
+
+  ```agda
+  trans : {x y z : ℕ} → x ≡ y → y ≡ z → x ≡ z 
+  trans p q = ?
+  ```
+
+</details>
+
+Now we have all the main properties of the equality, _symmetry_, _transitivity_ and _congruence_ we are unstoppable.
+
+---
+Let us get back to the definition of addition how we defined it:
+```agda
+_+_ : ℕ → ℕ → ℕ
+zero   + b = b
+succ a + b = succ (a + b)
+```
+That is not the only way how we could we have defined it:
+```agda
+_+'_ : ℕ → ℕ → ℕ
+a +' zero   = a
+a +' succ b = succ (a +' b)
+```
+That would work just as well, two different definitions with the same result that we could prove and we kinda already did:
+```agda
+lemma-+-zero : (a : ℕ) → ((a + zero) ≡ a )
 lemma-+-zero zero     = refl
 lemma-+-zero (succ a) = cong succ (lemma-+-zero a)
--- (lemma-+-zero a) is a value of type ((a + zero) ≡ a).
--- What we need is a value of type (succ (a + zero) ≡ succ a).
 
 lemma-+-succ : (a b : ℕ) → ((a + succ b) ≡ succ (a + b))
 lemma-+-succ zero     b = refl
 lemma-+-succ (succ a) b = cong succ (lemma-+-succ a b)
+```
 
-symm : {A : Set} {x y : A} → x ≡ y → y ≡ x
-symm refl = refl
-
--- EXERCISE
-trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
-trans p q = {!!}
-
+Let us now try to prove commutativity of the addition, namely that `a + b = b + a` for every pair of natural numbers a and b:
+```agda
+-- function that takes a and b as natural numbers as 
+-- inputs, and which outputs a witness that a+b=b+a
 lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
+-- first we demonstrate that zero + b = b + zero, namely that
+-- b = b + zero (direct computation from the definition of +)
+-- lemma-+-commutative zero  b = (lemma-+-zero b)
+-- would not work, lemma-+-zero shows a witness that
+-- (b + zero) = b, but what we need is that b = (b + zero),
+-- the other way around!
 lemma-+-commutative zero     b = symm (lemma-+-zero b)
-lemma-+-commutative (succ a) b =
-  trans (cong succ (lemma-+-commutative a b)) (symm (lemma-+-succ b a))
-
--- LET'S RESUME AT 15:40 :-)
-
+-- by itself(by what we proved)
+-- Agda computes succ a + b = succ (a + b)
 {-
   succ a + b = succ (a + b) = succ (b + a) = b + succ a
              ^              ^              ^
              |              |              |
             def    induction hypothesis    +---- symm (lemma-+-succ b a)
 -}
+lemma-+-commutative (succ a) b =
+  --     cong : x ≡ y → f x ≡  f y
+  --                induction
+  --                                                (a + succ b) ≡ succ (a + b)
+  --                                           succ (a + b) ≡ (a + succ b)
+  trans (cong succ (lemma-+-commutative a b)) (symm (lemma-+-succ b a))
+```
+This was our first true non trivial proof, hurray! :tada:
 
-
-
+Let us go back to the equality and let us make it more general so it can take any type of variable:
+```agda
+data _≡_ {X : Set} : X → X → Set where
+  refl : {a : X} → (a ≡ a)   -- "reflexivity"
+  -- bailout : {a b : ℕ} → (a ≡ b)
+```
+---
+#### Easy lemmas about Lists:
+```agda
 data List (A : Set) : Set where
-  []  : List A
-  _∷_ : A → List A → List A
+  []  : List A              -- empty list
+  _∷_ : A → List A → List A -- prepend constructor
+```
 
+First, let us prove that if we reverse a list twice, we get the initial list:
+```agda
+  -- for instance, "reverse (a ∷ b ∷ c ∷ [])" is "c ∷ b ∷ a ∷ []".
+  reverse : List A → List A
+  reverse []       = []
+  reverse (x ∷ xs) = reverse xs ∷ʳ x
+```
 module _ {A : Set} (favorite-number : ℕ) (f : ℕ → ℕ) where
   -- the "snoc" operation ("backwards cons"),
   -- i.e. append an element at the end
@@ -84,10 +151,7 @@ module _ {A : Set} (favorite-number : ℕ) (f : ℕ → ℕ) where
   []       ∷ʳ y = y ∷ []
   (x ∷ xs) ∷ʳ y = x ∷ (xs ∷ʳ y)
 
-  -- for instance, "reverse (a ∷ b ∷ c ∷ [])" is "c ∷ b ∷ a ∷ []".
-  reverse : List A → List A
-  reverse []       = []
-  reverse (x ∷ xs) = reverse xs ∷ʳ x
+
 
   lemma-reverse-∷ʳ : (ys : List A) (x : A) → reverse (ys ∷ʳ x) ≡ (x ∷ reverse ys)
   lemma-reverse-∷ʳ []       x = refl

@@ -1,5 +1,5 @@
 -- Exercise 1:
-
+-- Look at it after LAB1
 -----------------
 ---[ GENERAL ]---
 -----------------
