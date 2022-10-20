@@ -1,0 +1,43 @@
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+-- Addition
+_+_ : ℕ → ℕ → ℕ
+zero + b = b
+succ a + b = succ (a + b)
+
+------------------------------------------
+-- >> EXERCISE 1
+-- Define the function "half" which divides its input in two.
+-- >> half (succ (succ (succ (succ zero)))) = succ (succ zero)
+-- >> half (succ (succ (succ zero))) = succ zero (round down)
+------------------------------------------
+half : ℕ → ℕ
+half zero = zero
+half (succ zero) = succ zero
+half (succ a) = succ (half a)
+
+------------------------------------------
+-- >> EXERCISE 2
+-- Define (cut-off) subtraction. For instance "succ zero - succ zero" (1-1)
+-- and "succ zero - succ (succ zero)" (1-2) should both be "zero".
+------------------------------------------
+_-_ : ℕ → ℕ → ℕ
+zero - zero = zero
+zero - b    = zero
+a - zero    = a
+succ a - succ b  = a - b
+
+------------------------------------------
+-- >> EXERCISE 3
+-- Define multiplication and exponentiation.
+------------------------------------------
+_×_ : ℕ → ℕ → ℕ
+zero × b = zero
+a × zero = zero
+a × (succ zero) = a
+(succ zero) × b = b
+(succ a) × b = (a × b) + b
+
+
