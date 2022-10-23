@@ -2,7 +2,9 @@
 0. [Commands](#commands)
 1. [Types and Functions](#sets&func)
 2. [Framework for defining functions](#framework)
-3. [Lists](#lists)
+3. [Lists and Vectors](#lists)
+4. [Module System](#modules)
+5. [if... else](#ifelse)
 ---
 | **Command**  |       | **Input Combination** |
 |--------------|-------|-----------------------|
@@ -143,3 +145,129 @@ vector_example : Vector ℕ (succ (succ (succ zero)))
 vector_example = zero ∷ ((succ zero) ∷ ((succ (succ (succ zero))) ∷ []))
 ```
 For examples of applications of functions to Vectors and Lists see [./EX2_Lists_n_Vectors](EX2_Lists_n_Vectors.agda)
+
+## 4. Module System <a name="modules"></a>
+When building large programs it is crucial to be able to split the program over multiple files and to not have to type check and compile all the files for every change. The module system offers a structured way to do this.
+
+Assume you are working in a file called `main.agda` and you need to access Types and Functions in other files `imports/naturals.agda` and `imports/booleans.agda`
+
+```
+root
+│   main.agda  
+│
+└───imports
+    |   naturals.agda
+    |   booleans.agda
+```
+The files in the import folder in which we define the helping functions and types must be formatted as it follows
+```agda
+module import.$filename where
+  ...
+```
+For example:
+```agda
+module imports.naturals where
+  data ℕ : Set where
+    zero : ℕ
+    succ : ℕ → ℕ
+
+  one = succ zero
+
+  add1 : ℕ → ℕ
+  add1 a = succ a
+```
+In order to use the code in `main.agda` from the imported folder we need to tell to import them.
+In `main.agda`
+```agda
+open import imports.naturals
+open import imports.booleans
+```
+Now we can use the Types and Functions as it they where in the file:
+```
+>> add1 zero
+succ zero
+```
+
+## 5. if... else <a name="ifelse"></a>
+Agda does not really have `if... else` statements, the closest structure to that is `with` in Agda
+Example: **Filter list**
+```agda
+data Bool : Set where
+  true  : Bool
+  false : Bool
+
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+-- Define a function that returns false if
+-- the argument integer is zero, truìe otherwise
+not-zero : ℕ → Bool
+not-zero zero = false
+not-zero (succ n) = true
+
+-- Arguments:
+-- > A → Bool filer function
+-- > List A list to filter
+filter : {A : Set} → (A → Bool) → List A → List A
+filter p [] = []
+filter p (x ∷ xs) with p x
+...    | true  = x ∷ filter p xs
+...    | false = filter p xs
+
+-- natural-vector = [3,0,2,0,1,0]
+natural-vector = (succ (succ (succ zero))) ∷ 
+                 (zero ∷ (succ (succ zero) ∷
+                 (zero ∷ (succ zero ∷ (zero ∷ [])))))
+```
+```
+>> filter not-zero natural-vector
+succ (succ (succ zero)) ∷ (succ (succ zero) ∷ (succ zero ∷ []))
+```
+```agda
+-- [3,2,1]
+```
+Example: **Compare numbers**
+You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
+You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
+You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
+```agda
+data Bool : Set where
+  true  : Bool
+  false : Bool
+
+data Comparison : Set where
+  greater : Comparison
+  less    : Comparison
+  equal   : Comparison
+
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+_<_ : (a : ℕ) → (b : ℕ) → Bool
+zero < zero     = false
+zero < (succ b) = true
+(succ a) < zero = false
+(succ a) < (succ b) = a < b
+
+one = succ zero
+two = succ one
+three = succ two
+four = succ three
+five = succ four
+
+compare : ℕ → ℕ → Comparison
+compare x y with x < y | y < x
+...            | true  | _     = less
+...            | _     | true  = greater
+...            | false | false = equal
+```
+```
+>> compare two one
+greater
+>> compare one three
+less
+>> compare four four
+equal
+```
