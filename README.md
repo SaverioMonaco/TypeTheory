@@ -5,6 +5,7 @@
 3. [Lists and Vectors](#lists)
 4. [Module System](#modules)
 5. [if... else](#ifelse)
+6. [Step for proving lemmas (Equality)](#eq1)
 ---
 | **Command**  |       | **Input Combination** |
 |--------------|-------|-----------------------|
@@ -271,3 +272,169 @@ less
 >> compare four four
 equal
 ```
+
+## 6. Proving lemmas (Equality) <a name="eq1"></a>
+In Agda:
+- The ordinary equality sign '=' is for definitions.
+- In contrast, '≡' is the customary notation in the comunity for _observations, results_.
+
+But first we have to define what '≡' is. Agda does not know about that yet.
+Here we define it for natural numbers, but it can be easily extended for any set.
+```agda
+data _≡_ : ℕ → ℕ → Set where
+  -- every given thing is equal to itself
+  refl : {a : ℕ} → (a ≡ a)   -- "reflexivity"
+```
+The only property we require from `≡` is _refleivity_, namely that for every number a, a is equal to a.
+
+Just from this only property, the other basic properties can be defined:
+1. **congruence**: If x and y are equal, any function applied to them must return equal values:
+```agda
+cong : {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
+cong f refl = refl
+```
+2. **symmetry**: If x is equal to y, y is equal to x:
+```agda
+symm : {A : Set} {x y : A} → x ≡ y → y ≡ x
+symm refl = refl
+```
+3. **transitivity**: If x is equal to y and y is equal to z, x is equal to z:
+```agda
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl p = p
+```
+#### Example 1: Proving (a + zero) ≡ a
+First we need to define the basic stuff:
+```agda
+-- Natural Numbers
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+-- Addition
+_+_ : ℕ → ℕ → ℕ
+zero   + b = b
+succ a + b = succ (a + b)
+
+-- Equality
+data _≡_ {X : Set} : X → X → Set where
+  refl : {a : X} → a ≡ a
+
+-- Equality: Congruence Property
+cong : {A B : Set} {x y : A} → (f : A → B) → x ≡ y → f x ≡ f y
+cong f refl = refl
+
+-- Equality: Symmetry Property
+symm : {A : Set} {x y : A} → x ≡ y → y ≡ x
+symm refl = refl
+
+-- Equality: Transitivity Property
+trans : {A : Set} {x y z : A} → x ≡ y → y ≡ z → x ≡ z
+trans refl p = p
+
+```
+Now we go to proving the lemma:
+1. Name the lemma and state what you want to prove:
+```
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+```
+2. Add the general template:
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero a = ?
+```
+3. Compile (Ctrl-C Ctrl-L):
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero a = { }0
+```
+This created a hole which can be filled anytime
+
+4. Try a case split, since we only have a single parameter (a) we split a
+(Inside the hole: Ctrl-C Ctrl-C)
+```
+pattern variables to case (empty for split on result): a
+```
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero zero = { }0
+lemma-+-zero (succ a) = { }1
+```
+5. Get some insights of the holes:
+(Inside the hole 0, Ctrl-C Ctrl-,)
+```
+Goal: zero ≡ zero
+```
+Here we need to prove something we already define in `≡`, namely `refl`
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero zero = {refl }0
+lemma-+-zero (succ a) = { }1
+```
+(Inside the hole 1, Ctrl-C Ctrl-,)
+```
+Goal: succ (a + zero) ≡ succ a
+```
+Which is basically the lemma we want to prove, but with succ in front of both term, this calls for congruence:
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero zero = {refl }0
+lemma-+-zero (succ a) = {cong succ (lemma-+-zero a) }1
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero zero = {refl }0
+lemma-+-zero (succ a) = {cong succ (lemma-+-zero a) }1
+ ```
+
+6. Remove the holes with Ctrl-C Ctrl-␣
+```agda
+lemma-+-zero : (a : ℕ) → (a + zero) ≡ a
+lemma-+-zero zero = refl
+lemma-+-zero (succ a) = cong succ (lemma-+-zero a)
+ ```
+
+The holes will be eliminated only if the demonstration is consistent, now that this lemma is considered proven we can use it to proves other lemmas and so on...
+
+#### Example 2: A more complicated example: 
+Assuming we also demonstrated the following lemma:
+```agda
+lemma-+-succ : (a b : ℕ) → (a + succ b) ≡ succ (a + b)
+lemma-+-succ zero b = refl
+lemma-+-succ (succ a) b = cong succ (lemma-+-succ a b)
+ ```
+Now we want to demonstate the commutative property of the addition:
+```agda
+lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
+lemma-+-commutative a b = ?
+```
+(Case split in a)
+```agda
+lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
+lemma-+-commutative zero b = { }0
+lemma-+-commutative (succ a) b = { }1
+```
+`zero` case asks for the following proof (Ctrl-C Ctrl-,):
+```
+Goal: (b : ℕ) → b ≡ (b + zero)
+```
+Which is quite the `lemma-+-zero` but on the other way around:
+```agda
+lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
+lemma-+-commutative zero b = symm (lemma-+-zero b)
+lemma-+-commutative (succ a) b = { }0
+```
+The next hole is rather less trivial, it asks for:
+```
+Goal: succ (a + b) ≡ (b + succ a)
+```
+We basically need to go from the left-hand side `succ (a + b)` to the right-hand side `(b + succ a)` using only lemmas and properties we already demonstrated/defined.
+For this example, the steps are:
+1. `succ (a + b) ---> succ (b + a)` thanks to `lemma-+-commutative a b`
+2. `succ (b + a) ---> (a + succ b)` thanks to `symm lemma-+-succ b a`
+This translates to:
+```agda
+lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
+lemma-+-commutative zero b = symm (lemma-+-zero b)
+lemma-+-commutative (succ a) b = trans (cong succ (lemma-+-commutative a b)) (symm (lemma-+-succ b a))
+```
+For other demonstrations of lemmas about equality see [./EX4_Equality.agda](EX4_Equality.agda)

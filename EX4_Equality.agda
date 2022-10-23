@@ -103,7 +103,7 @@ lemma-+-zero zero = refl
 lemma-+-zero (succ a) = cong succ (lemma-+-zero a)
 
 lemma-+-succ : (a b : ℕ) → (a + succ b) ≡ succ (a + b)
-lemma-+-succ zero b = refl
+lemma-+-succ zero b = ?
 lemma-+-succ (succ a) b = cong succ (lemma-+-succ a b)
 
 lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
