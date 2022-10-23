@@ -50,3 +50,33 @@ is-tautology₁ f = f false && f true
 ---------------------------
 is-tautology₂ : (Bool → Bool → Bool) → Bool
 is-tautology₂ f = (f true true && f false false) && (f false true && f true false)
+
+
+data Comparison : Set where
+  greater : Comparison
+  less    : Comparison
+  equal   : Comparison
+
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+_<_ : (a : ℕ) → (b : ℕ) → Bool
+zero < zero     = false
+zero < (succ b) = true
+(succ a) < zero = false
+(succ a) < (succ b) = a < b
+
+one = succ zero
+two = succ one
+three = succ two
+four = succ three
+five = succ four
+
+compare : ℕ → ℕ → Comparison
+compare x y with x < y | y < x
+...            | true  | _     = less
+...            | _     | true  = greater
+...            | false | false = equal
+
+

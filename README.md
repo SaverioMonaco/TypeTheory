@@ -142,4 +142,4 @@ data Vector (A : Set) : ℕ → Set where
 vector_example : Vector ℕ (succ (succ (succ zero)))
 vector_example = zero ∷ ((succ zero) ∷ ((succ (succ (succ zero))) ∷ []))
 ```
-For examples of applications of functions to Vectors and Lists see [./EX2_List_n_Vectors](EX2_Lists_n_Vectors.agda)
+For examples of applications of functions to Vectors and Lists see [./EX2_Lists_n_Vectors](EX2_Lists_n_Vectors.agda)
