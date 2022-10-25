@@ -438,3 +438,72 @@ lemma-+-commutative zero b = symm (lemma-+-zero b)
 lemma-+-commutative (succ a) b = trans (cong succ (lemma-+-commutative a b)) (symm (lemma-+-succ b a))
 ```
 For other demonstrations of lemmas about equality see [./EX4_Equality.agda](EX4_Equality.agda)
+
+## Decidability
+_"Decidability in CS is the property (some properties) that there are machines which are able to find out wether that property holds or not"_
+**Decidable properties** : Examples:
+- property that a natural number being a prime number
+- property that a number to be positive or zero
+  
+**Non-decidable properties** : Examples:
+- property that a given function from ℕ to ℕ to have a zero (for this you would need to simulate the input for all possible natural number, which requires an infinite amount of time, just because to prove that a given function does NOT have a zero, you need to try every possible natural number)
+
+How can this be formalized in Agda?
+
+```agda
+-- "Dec A" is the type of witnesses that A is decidable:
+data Dec (A : Set) : Set where 
+  yes :   A → Dec A 
+  no  : ¬ A → Dec A 
+```
+There are two kinds of inhabitands of that type. If you want to verify `A`, you can (at your own choosing) either verify `A` or `¬ A`.
+
+Example: **Positivity is decidable**
+```agda
+data Positive : ℕ → Set where
+  succs-are-positive : (a : ℕ) → Positive (succ a)
+
+positivity-is-decidable : (a : ℕ) → Dec (Positive a)
+positivity-is-decidable zero      = ?
+positivity-is-decidable (succ a)  = yes (succs-are-positive a) 
+```
+What do we put for `zero` in `?`?
+For a moment let us try to fill that hole with a `yes` 
+```agda
+positivity-is-decidable : (a : ℕ) → Dec (Positive a)
+positivity-is-decidable zero      = yes ?
+positivity-is-decidable (succ a)  = yes (succs-are-positive a) 
+```
+Now in `?` we need a witness that `zero` is positive, which we are not able to.
+
+```agda
+data Positive : ℕ → Set where
+  succs-are-positive : (a : ℕ) → Positive (succ a)
+
+positivity-is-decidable : (a : ℕ) → Dec (Positive a)
+positivity-is-decidable zero      = no  (λ ()) 
+positivity-is-decidable (succ a)  = yes (succs-are-positive a) 
+```
+
+```agda
+-- "Every inhabited set of natural numbers contains a mininmum"
+-- this is true
+-- We can picture a function P : ℕ → Set as a set of natural numbers
+-- namely, the number n belongs to this set if and only if P n is
+-- inhabited, hence P n is the type of witnesses that n belongs to the set.
+data _≤_ (P : ℕ → Set) → (a₀ : ℕ) → P a₀ → ℕ 
+  -- fill this in
+
+-- function that computes the minimum
+minimum : (P : ℕ → Set) → (a₀ : ℕ) → P a₀ → ℕ
+minimum = ?
+
+-- function that verify that the minimum is
+-- computed correctly
+lemma-minimum-is-computed-correctly
+  : (P : ℕ → Set) → (a₀ : ℕ) → (p : P a₀)
+  → (n : ℕ) → P n → a₀ ≤ n 
+lemma-minimum-is-computed-correctly = ?
+```
+The two holes cannot be filled, intuitively: if the given minimum given `a₀` is `zero` we are done.
+If it is greater than `zero` we would need to check wether there is a smaller number in the Set, which cannot be mechanically done.

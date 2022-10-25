@@ -103,7 +103,7 @@ lemma-+-zero zero = refl
 lemma-+-zero (succ a) = cong succ (lemma-+-zero a)
 
 lemma-+-succ : (a b : ℕ) → (a + succ b) ≡ succ (a + b)
-lemma-+-succ zero b = ?
+lemma-+-succ zero b = {!!}
 lemma-+-succ (succ a) b = cong succ (lemma-+-succ a b)
 
 lemma-+-commutative : (a b : ℕ) → (a + b) ≡ (b + a)
@@ -278,4 +278,55 @@ _++ᵥ_ : {A : Set} {n m : ℕ} → Vector A n → Vector A m → Vector A (n + 
 lemma-take-drop : {A : Set} {n : ℕ} → (k : ℕ) → (xs : Vector A (k + n)) →  (take k xs ++ᵥ drop k xs) ≡ xs
 lemma-take-drop zero xs = refl
 lemma-take-drop (succ k) (x ∷ xs) = cong (λ xs → x ∷ xs) (lemma-take-drop k xs)
+
+------------------------------------------
+------------------------------------------
+-- MORE LEMMAS
+------------------------------------------
+
+------------------------------------------
+-- >> EXERCISE 19
+-- (a + (b + c)) ≡ (b + (a + c))
+------------------------------------------
+lemma-+-swap : (a b c : ℕ) → (a + (b + c)) ≡ (b + (a + c))
+lemma-+-swap zero b c = refl
+-- Goal: succ (a + (b + c)) ≡ (b + succ (a + c))
+--       ————————————————————————————————————————
+lemma-+-swap (succ a) b c = trans (cong succ (lemma-+-swap a b c)) (symm (lemma-+-succ b (a + c)))
+
+------------------------------------------
+-- >> EXERCISE 20
+-- Verify associativity of multiplication.
+------------------------------------------
+lemma-·-associative : (a b c : ℕ) → ((a · (b · c)) ≡ ((a · b) · c))
+lemma-·-associative zero b c = refl
+-- ((b · c) + (a · (b · c))) ≡ ((b + (a · b)) · c)
+lemma-·-associative (succ a) b c = trans (cong (λ x → ((b · c) + x)) (lemma-·-associative a b c)) ( symm (lemma-·-distributive b (a · b) c) )
+
+------------------------------------------
+-- >> EXERCISE 21
+-- Verify (a · zero) ≡ zero
+------------------------------------------
+lemma-·-zero : (a : ℕ) → ((a · zero) ≡ zero)
+lemma-·-zero zero = refl
+lemma-·-zero (succ a) = lemma-·-zero a
+
+------------------------------------------
+-- >> EXERCISE 22
+-- Verify lemma-·-succ
+------------------------------------------
+lemma-·-succ : (a b : ℕ) → ((a · succ b) ≡ (a + (a · b)))
+lemma-·-succ zero b = refl
+-- Goal: succ (b + (a · succ b)) ≡ succ (a + (b + (a · b)))
+lemma-·-succ (succ a) b = trans (cong (λ x → succ (b + (x)) ) (lemma-·-succ a b) ) (cong succ (lemma-+-swap b a (a · b)) )
+
+------------------------------------------
+-- >> EXERCISE 23
+-- Verify commutativity of multiplication.
+------------------------------------------
+lemma-·-commutative : (a b : ℕ) → ((a · b) ≡ (b · a))
+lemma-·-commutative zero b = symm (lemma-·-zero b)
+-- Goal: (b + (a · b)) ≡ (b · succ a)
+lemma-·-commutative (succ a) b = trans (cong ( λ x → b + x ) (lemma-·-commutative a b) ) (symm (lemma-·-succ b a))
+
 

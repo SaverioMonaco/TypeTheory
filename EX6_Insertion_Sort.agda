@@ -1,8 +1,3 @@
--- AGDA IN PADOVA 2022
--- Exercise sheet 6
-
-infixr 5 _∷_
-
 data List (A : Set) : Set where
   []  : List A
   _∷_ : A → List A → List A
@@ -22,7 +17,7 @@ module Implementation
   insert : (x : A) → List A → List A
   insert x []       = x ∷ []
   insert x (y ∷ ys) with cmp x y
-  ... | left  x≤y = x ∷ y ∷ ys
+  ... | left  x≤y = (x ∷ (y ∷ ys) )
   ... | right y≤x = y ∷ insert x ys
 
   sort : List A → List A
@@ -39,7 +34,7 @@ module Verification₁ {A : Set} (_≤_ : A → A → Set) (cmp : (x y : A) → 
   data IsOrdered : List A → Set where
     empty     : IsOrdered []
     singleton : {x : A} → IsOrdered (x ∷ [])
-    cons      : {x y : A} {ys : List A} → x ≤ y → IsOrdered (y ∷ ys) → IsOrdered (x ∷ y ∷ ys)
+    cons      : {x y : A} {ys : List A} → x ≤ y → IsOrdered (y ∷ ys) → IsOrdered (x ∷ (y ∷ ys))
 
   lemma₀ : (x y : A) (ys : List A) → y ≤ x → IsOrdered (y ∷ ys) → IsOrdered (y ∷ insert x ys)
   lemma₀ x y []       y≤x p = cons y≤x singleton
@@ -76,19 +71,27 @@ module Verification₂ {A : Set} (_≤_ : A → A → Set) (cmp : (x y : A) → 
     empty : IsPerm [] []
     cons  : {x : A} {xs ys xys : List A} → (x ◂ ys ↝ xys) → IsPerm xs ys → IsPerm (x ∷ xs) xys
 
-  -- EXERCISE: Make sense of the preceding two definitions.
-
   -- EXERCISE: Fill in this hole.
-  example : (x y z : A) → IsPerm (x ∷ y ∷ z ∷ []) (z ∷ x ∷ y ∷ [])
-  example x y z = {!!}
+  example : (x y z : A) → IsPerm (x ∷ (y ∷ (z ∷ []))) (z ∷ (x ∷ (y ∷ [])))
+  example x y z = cons (there here) (cons (there here) (cons here empty))
 
   -- EXERCISE: Verify this lemma.
   lemma : (x : A) (ys : List A) → x ◂ ys ↝ insert x ys
-  lemma x ys = {!!}
+  lemma x [] = here
+  --  x ◂ y ∷ ys ↝ insert x (y ∷ ys)
+  lemma x (y ∷ ys) with cmp x y
+  ... | left  p = here
+  -- Goal: x ◂ y ∷ ys ↝ (y ∷ insert x ys)
+  --              x ◂ ys ↝ insert x ys
+  ... | right q = there (lemma x ys)
 
   -- EXERCISE: Deduce this theorem.
   theorem : (xs : List A) → IsPerm xs (sort xs)
-  theorem xs = {!!}
+  theorem [] = empty
+  -- IsPerm (x ∷ xs) (sort (x ∷ xs))
+  --                       x ◂ _ys_134 ↝ sort (x ∷ xs)
+  --                                             IsPerm xs (sort xs)
+  theorem (x ∷ xs) = cons (lemma x ((sort xs))) (theorem xs)
 
 module CorrectByConstruction₁
   {A : Set} (_≤_ : A → A → Set)
@@ -128,13 +131,17 @@ module CorrectByConstruction₂
     cons : {ys xys : List A} → (x : A) → OPList x ys → l ≤ x → (x ◂ ys ↝ xys) → OPList l xys
 
   -- EXERCISE: Fill this in.
-  insert : {!!}
-  insert = {!!}
+  insert : {l : A} → (x : A) → l ≤ x → (xs : List A) → OPList l xs → OPList l (x ∷ xs)
+  insert x l≤x _ nil = cons x nil l≤x here
+  insert x l≤x _ (cons {ys} y p l≤y c) with cmp x y
+  ... | left  x≤y = cons x (cons y p x≤y c) l≤x here
+  ... | right y≤x = cons y (insert x y≤x ys p) l≤y (there c)
 
   -- EXERCISE: Fill this in.
   sort : (xs : List A) → OPList min xs
-  sort = {!!}
-
+  sort []       = nil
+  sort (x ∷ xs) = insert x min≤ xs (sort xs)
+  
 -- The modules CorrectByConstruction₁ and CorrectByConstruction₂ require a least element "min".
 -- EXERCISE: Define for any type A together with a relation _≤_ on A a new
 -- type "* A" which is A adjoined by a new least element -∞. Use
@@ -147,4 +154,3 @@ module Lift {A : Set} (_≤_ : A → A → Set) where
   -- EXERCISE: Verify that there is a least element for this relation.
   -- EXERCISE: Verify that if we have a function cmp for A then we also have such a function for * A.
   -- EXERCISE: Define a correct-by-construction sort function for A, by using * A.
-
