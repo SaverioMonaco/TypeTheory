@@ -31,9 +31,9 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
   
   $$\varnothing\space cont \quad \text{F-c)}\space\space\frac{A\space\space type\space\space[\Gamma]}{\Gamma,x \in A \space cont} ((x\in A)\space not\space in\space\space \Gamma)$$
 
-  "_Il vuoto è un contesto. Se A è un tipo sotto contesto Gamma, allora posso estendere il contesto gamma con una variabile x di A a patto che $x \in A$ non compaia in Gamma_"
+  "_Il vuoto è un contesto. Se A è un tipo sotto contesto Gamma, allora posso estendere il contesto gamma con una variabile x di A a patto che_ $x \in A$ _non compaia in Gamma_"
 
-  Questa regola è ausiliaria perch può essere derivata dalle altre, in un contesto minimalista sarebbe meglio ometterla perché una teoria con meno regole è preferibile, ma metterla rende tutto più facile.
+  Questa regola è ausiliaria perché può essere derivata dalle altre, in un contesto minimalista sarebbe meglio ometterla perché una teoria con meno regole è preferibile, ma metterla rende tutto più facile.
 
 <span style="color:green">**Cosa è esattamente un contesto?**<br>Un contesto è l'insieme di regole/predicati che abbiamo già ricavato. Dopo sarà più chiaro quando faremo l'albero di derivazione.</span>
 
