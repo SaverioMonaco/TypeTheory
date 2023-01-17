@@ -11,20 +11,26 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 
 #### Forme di Giudizio:
 * **Giudizio di Tipo**: A type $[\Gamma]$
+  
   "_A type sotto contesto Gamma_"
 
   A è un tipo (possibilmente dipendente da variabili del contesto $\Gamma$) possibilmente indiciato da variabile nel contesto $\Gamma$
 
 * **Giudizio di uguaglianza tra Tipi**: A = B type $[\Gamma]$
- "_A è uguale a B type sotto contesto Gamma_"
-
-    Il tipo A dipendente da $\Gamma$ è uguale al tipo B dipendente da $\Gamma$.
+  
+  "_A è uguale a B type sotto contesto Gamma_"
+  
+  Il tipo A dipendente da $\Gamma$ è uguale al tipo B dipendente da $\Gamma$.
 
 * **Giudizio di Tipo**: a $\in$ A type $[\Gamma]$
+  
   "_a appartiene ad A sotto contesto Gamma_"
+
   a è un elemento del tipo A possibilmente indiciato (ovvero dipendente da $\Gamma$)
 * **Giudizio di Tipo**: a = b $\in$ A type $[\Gamma]$
+  
   "_a è uguale a b sotto contesto Gamma_" 
+
   a è uguale a b è un giudizio che indica che a è un elemento del tipo A dipendente da $\Gamma$ è uguale in modo definizionale/computazionale al termine b come elemento del tipo A dipendente da $\Gamma$
 
 * **Giudizio Ausiliario** 
@@ -42,6 +48,7 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 <span style="color:green">**Qual è la differenza tra uguaglianza definizionale e computazionale?** <br> </span>
 
 **Nota** $a \in A$ della teoria dei tipi indica una appartenenza **differente** dal concetto insiemistico:
+
 * In set Theory abbiammo 
   
   $$1 \in Nat $$
@@ -58,6 +65,7 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 
 #### Regole di formazione dei tipi singoletto 
 Il singoletto è il tipo generale più semplice da studiare, poiché per definizione contiene un singolo elemento. Qui enunciamo le regole per la formazione dei suddetti tipi:
+
 * **Regola di Formazione del tipo singoletto**
   
   $$\text{S)}\space\space\frac{\Gamma \space\space cont}{N_1 \space type \space\space[\Gamma]}$$
@@ -71,6 +79,7 @@ $$\text{I-S)}\space\space\frac{\Gamma \space\space cont}{* \in N_1 \space\space[
 _"Se Gamma è un contesto allora star appartiene ad N1 sotto contesto Gamma"_
 
 Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto verso qualsiasi altro tipo:
+
 * **Regola di Eliminazione**
   
   $$\text{E-S)}\space\space\frac{t_1 \in N_1\space\space[\Gamma]\quad M(z) \space\space type \space\space [\Gamma, z\in N_1]\quad c\in M(*)\space\space [\Gamma]}{El_{N_1}(t,c) \in \underbrace{M(t)}_{M(z)[z/t]}\space\space[\Gamma]}$$
@@ -83,8 +92,9 @@ Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto
    
 $$\text{C-S)}\space\space\frac{M(z) \space\space type\space\space[\Gamma, z \in N_1]\quad c \in M(*)\space [\Gamma]}{El_{N_1}(*,c)= c \in M(*)\space\space[\Gamma]}$$
   
-  _"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sotto contesto Gamma allora l'eliminatore EL($*$,c) è uguale a c in M(*) sotto contesto Gamma"_
-  In questa regola cominciamo a mettere un'uguaglianza.
+_"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sotto contesto Gamma allora l'eliminatore EL(*,c) è uguale a c in M(*) sotto contesto Gamma"_
+
+In questa regola cominciamo a mettere un'uguaglianza.
 
 ---
 ## 3. Regole strutturali
@@ -99,7 +109,9 @@ $J_1, ..., J_n$ sono le premesse, J è la conclusione.
 L'unico assioma della teoria dei tipi è che il vuoto è un contesto $(:= [\space\space]\space cont)$ quindi per ogni derivazione dovremmo partire dall'assunzione $[\space\space]\space cont$
 
 In Logica (calcolo dei sequenti) esiste un assioma di identità:
+
 $$\phi \vdash \phi$$
+
 _"Se phi è vera allora possiamo derivare phi"_
 
 Possiamo aggiungere un assioma equivalente alla teoria dei tipi:
@@ -118,14 +130,17 @@ Queste due regole a parole inducono delle regole della teoria dei tipi abbastanz
 * **Regola di riflessività** 
   
 $$\frac{A\space type \space[\Gamma]}{A=A\space\space type \space[\Gamma]}$$
+
 * **Regola di simmetria** 
   
 $$\frac{A= B\space\space type \space[\Gamma]}{B=A\space\space type \space[\Gamma]}$$
+
 * **Regola di transitività** 
   
 $$\frac{A= B\space\space type \space[\Gamma]\quad B= C\space\space type \space[\Gamma]}{A=C\space\space type \space[\Gamma]}$$
 
 * **Riflessività dei termini**
+  
 $$\frac{a \in A\space type \space[\Gamma]}{a=a\in A\space\space type \space[\Gamma]}$$
 
 * **Simmetria dei termini**
@@ -186,15 +201,15 @@ $$
 
 Continuando, possiamo allungare $\pi_1$ aggiungendo un altro elemento:
 
-$$
-\begin{matrix}
+$$\begin{matrix}
 \text{F-S)} & [\space\space] \space cont \\
 \hline
 \text{F-C)} & N_1 \space type \space [\space\space] \\
 \hline 
 \text{F-S)} & [x_1\in N_1]\space cont\\ \hline
-\text{F-C)} &N_1 \space type \space [x_1\in N_1] \\ \hline 
- & [x_1\in N_1, x_2\in N_1]\space cont
+\text{F-C)} &N_1 \space type \space [x_1\in N_1] \\ 
+\hline 
+& [x_1\in N_1, x_2\in N_1]\space cont
 \end{matrix}$$
 
 Possiamo generalizzare ottenendo:
