@@ -44,15 +44,15 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 **Nota** $a \in A$ della teoria dei tipi indica una appartenenza **differente** dal concetto insiemistico:
 * In set Theory abbiammo 
   
-  $$\underbrace{1}_\text{è un insieme} \in \underbrace{Nat}_\text{è un insieme} $$
+  $$ 1 \in Nat $$
 
-  Dove 1 è un insieme singoletto (avente solo un elemento)
+  Dove 1 è un insieme singoletto (avente solo un elemento) e Nat è l'insieme dei naturali
   <br>
 * Nella teoria dei tipi (di Russel)
   
-  $$\underbrace{1}_\text{è un elemento} \in \underbrace{Nat}_\text{è un tipo} $$
+  $$ 1 \in Nat $$
 
-  1 è un elemento e non un tipo. Stiamo imponendo una gerarchia (elemento<tipo) per evitare il paradosso di Russel della teoria di Frege. 
+  1 è un elemento e non un tipo, mentre Nat è un tipo. Stiamo imponendo una gerarchia (elemento<tipo) per evitare il paradosso di Russel della teoria di Frege. 
 
 <span style="color:green">**Perché la teoria di Frege è inconsistente? (il paradosso di Russel)** <br> TODO</span>
 
