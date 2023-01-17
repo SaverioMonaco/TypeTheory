@@ -80,10 +80,10 @@ Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto
   Noi riusciamo a trovare elementi di tipo M(t) (l'eliminatore), se noi sappiamo cosa succede in M(*). In altre parole riusciamo ad avere una funzione che ci porta da N1 (tramite $t \in N_1$) a $M(t)$
 
 * **Seconda regola di Eliminazione** 
+   
+$$\text{C-S)}\space\space\frac{M(z) \space\space type\space\space[\Gamma, z \in N_1]\quad c \in M(*)\space [\Gamma]}{El_{N_1}(*,c)= c \in M(*)\space\space[\Gamma]}$$
   
-  $$\text{C-S)}\space\space\frac{M(z) \space\space type\space\space[\Gamma, z \in N_1]\quad c \in M(*)\space [\Gamma]}{El_{N_1}(*,c)= c \in M(*)\space\space[\Gamma]}$$
-  
-  _"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M($*$) sotto contesto Gamma allora l'eliminatore EL($*$,c) è uguale a c in M($*$) sotto contesto Gamma"_
+  _"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sotto contesto Gamma allora l'eliminatore EL($*$,c) è uguale a c in M(*) sotto contesto Gamma"_
   In questa regola cominciamo a mettere un'uguaglianza.
 
 ---
