@@ -44,13 +44,13 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 **Nota** $a \in A$ della teoria dei tipi indica una appartenenza **differente** dal concetto insiemistico:
 * In set Theory abbiammo 
   
-  $$ 1 \in Nat $$
+  $$1 \in Nat $$
 
   Dove 1 è un insieme singoletto (avente solo un elemento) e Nat è l'insieme dei naturali
   <br>
 * Nella teoria dei tipi (di Russel)
   
-  $$ 1 \in Nat $$
+  $$1 \in Nat $$
 
   1 è un elemento e non un tipo, mentre Nat è un tipo. Stiamo imponendo una gerarchia (elemento<tipo) per evitare il paradosso di Russel della teoria di Frege. 
 
