@@ -4,7 +4,9 @@ niente
 <div style="text-align: right"><span style="color:orange">Lezione 6</span></div>
 
 In questo capitolo inizieremo ad usare una notazione della logica per la derivazione di conclusioni / formulazione di giudizi:
+
 $$\frac{\text{(molteplici) ipotesi/ giudizi}}{\text{(unica) conclusione / giudizio}}$$
+
 La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giudizio** (alla Frege), in un giudizio si asserisce qualcosa (come vero). Per asserire questo qualcosa, vengono introdotte **4 forme di giudizio** che serviranno come building blocks di tutta la teoria.
 
 #### Forme di Giudizio:
@@ -71,7 +73,9 @@ Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto
   <div style="text-align: right"><span style="color:orange">Lezione 7</span></div>
 
 **Definizione:** Derivazione = albero ($\pi$) i cui nodi sono dati da regole di inferenza della forma:
+
 $$\frac{J_1, ..., J_n}{J}$$
+
 $J_1, ..., J_n$ sono le premesse, J è la conclusione.
 
 L'unico assioma della teoria dei tipi è che il vuoto è un contesto $(:= [\space\space]\space cont)$ quindi per ogni derivazione dovremmo partire dall'assunzione $[\space\space]\space cont$
@@ -82,7 +86,9 @@ _"Se phi è vera allora possiamo derivare phi"_
 
 Possiamo aggiungere un assioma equivalente alla teoria dei tipi:
 * **Regola di Costruzione delle variabili**
+  
 $$\frac{\Gamma,\space x\in A,\space \Delta \space cont}{x\in A\space[\Gamma,\space x\in A,\space \Delta]}$$
+
 _"Se abbiamo x in A e pensiamo x in A come proposizione allora possiamo dedurre x in A"_.
 
 #### 3.1 Regole dell'uguaglianza
@@ -92,19 +98,24 @@ Oltre a questa regola possiamo aggiungere regole per la relazione di equivalenza
 
 Queste due regole a parole inducono delle regole della teoria dei tipi abbastanza ovvie:
 * **Regola di riflessività** 
+  
 $$\frac{A\space type \space[\Gamma]}{A=A\space\space type \space[\Gamma]}$$
 * **Regola di simmetria** 
+  
 $$\frac{A= B\space\space type \space[\Gamma]}{B=A\space\space type \space[\Gamma]}$$
 * **Regola di transitività** 
+  
 $$\frac{A= B\space\space type \space[\Gamma]\quad B= C\space\space type \space[\Gamma]}{A=C\space\space type \space[\Gamma]}$$
 
 * **Riflessività dei termini**
 $$\frac{a \in A\space type \space[\Gamma]}{a=a\in A\space\space type \space[\Gamma]}$$
 
 * **Simmetria dei termini**
+  
 $$\frac{a = b \in A\space type \space[\Gamma]}{b=a\in A\space\space type \space[\Gamma]}$$
 
 * **Transitività dei termini**
+  
 $$\frac{a = b \in A\space type \space[\Gamma]\quad b = c \in A\space type \space[\Gamma]}{a=c\in A\space\space type \space[\Gamma]}$$
 
 **Definizioni:** Regole proprie del calcolo e regole derivabili/ammissibili:
@@ -118,12 +129,16 @@ Vedi dispensa
 Vedi dispenza
 
 L'idea delle regole di indebolimento è che se noi abbiamo un qualcosa derivabile sotto contesto Gamma, e sappiamo che $[\Gamma,\Delta]$ è un contesto, allora allo stesso modo possiamo derivare lo stesso giudizio col contesto esteso $[\Gamma,\Delta]$
+
 $$\frac{J [\Gamma] \quad  [\Gamma,\Delta]\space cont}{J\space[\Gamma,\Delta]}$$
+
 #### 3.4 Regole di Scambio
 Vedi dispensa
 
 Quando definiamo un contesto, stiamo anche indicando una sorta di progressione/costruzione del contesto stesso:
+
 $$[\Gamma, \Delta]$$
+
 Prima abbiamo definito Gamma e poi Delta.
 
 Le regole di scambio permettono di scambiare l'ordine dei due sotto-contesti. Ovviamente questo può essere fatto se il secondo contesto non dipende da tipi del primo contesto.
@@ -134,12 +149,14 @@ Le regole di scambio permettono di scambiare l'ordine dei due sotto-contesti. Ov
 Come già accennato, il singoletto è il tipo più semplice, e le sue regole saranno paradigmatiche per gli altri tipi.
 
 * **Regola di formazione del singoletto**
+  
   $$\text{F-S)}\space \frac{\Gamma \space cont}{N_1 \space type \space \space [\Gamma]}$$
 
 
 Possiamo già usare delle regole per creare i primi alberi di derivazione:
 **Esempio**
 Partiamo dal contesto vuoto (unico assioma della teoria dei tipi):
+
 $$
 \begin{matrix}
 \text{F-S)} & [\space\space] \space cont \\
@@ -150,6 +167,7 @@ $$
 \end{matrix}\qquad := \pi_1$$
 
 Continuando, possiamo allungare $\pi_1$ aggiungendo un altro elemento:
+
 $$
 \begin{matrix}
 \text{F-S)} & [\space\space] \space cont \\
@@ -160,6 +178,7 @@ $$
 \text{F-C)} &N_1 \space type \space [x_1\in N_1] \\ \hline 
  & [x_1\in N_1, x_2\in N_1]\space cont
 \end{matrix}$$
+
 Possiamo generalizzare ottenendo:
 $ [x_1\in N_1,..., x_n\in N_1]\space cont$ dalle solo due regole di formazione del singoletto e formazione del contesto.
 
