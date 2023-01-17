@@ -206,14 +206,15 @@ $$\begin{matrix}
 \hline
 \text{F-C)} & N_1 \space type \space [\space\space] \\
 \hline 
-\text{F-S)} & [x_1\in N_1]\space cont\\ \hline
+\text{F-S)} & [x_1\in N_1]\space cont\\
+\hline
 \text{F-C)} &N_1 \space type \space [x_1\in N_1] \\ 
 \hline 
 & [x_1\in N_1, x_2\in N_1]\space cont
 \end{matrix}$$
 
-Possiamo generalizzare ottenendo:
-$ [x_1\in N_1,..., x_n\in N_1]\space cont$ dalle solo due regole di formazione del singoletto e formazione del contesto.
+Possiamo generalizzare ottenendo: 
+$[x_1\in N_1,..., x_n\in N_1]\space cont$ dalle solo due regole di formazione del singoletto e formazione del contesto.
 
 **Nota:** Il contesto non è telescopico (dove un sotto-contesto dipende da un altro), quindi volendo possiamo usare le regole di scambio a piacimento.
 
