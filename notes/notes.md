@@ -239,6 +239,7 @@ $$\text{E-S)}_\text{Dipendente}\space \frac{M(z) \space type \space [\Gamma, z \
 Si può dimostrare che usando $\text{E-S)}_{dip}$ + regole di sostituzione è equivalente ad $\text{E-S)}$.
 
 L'eliminatore rappresenta un _ricorsore_: è una funzione definita per ricorsione su $N_1$:
+
 * $El_{N_1}(z,c)[z/*] = El_{N_1}(*,c) = c \in M(*)$
 
 ***Nota personale:*** Fino a questo momento c'è un po' di confusione per quanto riguarda il concetto di singoletto e di Eliminatore: Se $El_{N_1}(*,c) = c$ dove $*$ è un elemento del singoletto, poiché il singoletto possiede un solo elemento per definizione, non dovrebbero essere tutti gli eliminatori uguali? Perché definire più termini del singoletto?
