@@ -75,7 +75,7 @@ Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto
   
   $$\text{E-S)}\space\space\frac{t_1 \in N_1\space\space[\Gamma]\quad M(z) \space\space type \space\space [\Gamma, z\in N_1]\quad c\in M(*)\space\space [\Gamma]}{El_{N_1}(t,c) \in \underbrace{M(t)}_{M(z)[z/t]}\space\space[\Gamma]}$$
 
-  _"Se t1 è un termine di tipo N1 sotto contesto Gamma ed M(z) è un tipo dipendente da Gamma e z in tipo N1 e so che c  tipo M ($*$) sotto contesto Gamma allora posso dedurre l'eliminatore."_
+  _"Se t1 è un termine di tipo N1 sotto contesto Gamma ed M(z) è un tipo dipendente da Gamma e z in tipo N1 e so che c  tipo M (*) sotto contesto Gamma allora posso dedurre l'eliminatore."_
 
   Noi riusciamo a trovare elementi di tipo M(t) (l'eliminatore), se noi sappiamo cosa succede in M(*). In altre parole riusciamo ad avere una funzione che ci porta da N1 (tramite $t \in N_1$) a $M(t)$
 
