@@ -6,6 +6,7 @@
 4. [Module System](#modules)
 5. [if... else](#ifelse)
 6. [Step for proving lemmas (Equality)](#eq1)
+7. [Decidability](#dec)
 ---
 | **Command**  |       | **Input Combination** |
 |--------------|-------|-----------------------|
@@ -439,7 +440,7 @@ lemma-+-commutative (succ a) b = trans (cong succ (lemma-+-commutative a b)) (sy
 ```
 For other demonstrations of lemmas about equality see [./EX4_Equality.agda](EX4_Equality.agda)
 
-## Decidability
+## 7. Decidability <a name="dec"></a>
 _"Decidability in CS is the property (some properties) that there are machines which are able to find out wether that property holds or not"_
 **Decidable properties** : Examples:
 - property that a natural number being a prime number
