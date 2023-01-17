@@ -26,7 +26,7 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
   a è uguale a b è un giudizio che indica che a è un elemento del tipo A dipendente da $\Gamma$ è uguale in modo definizionale/computazionale al termine b come elemento del tipo A dipendente da $\Gamma$
 
 * **Giudizio Ausiliario** 
-  $$\varnothing\, cont \quad \text{F-c)}\,\,\frac{A\,\, type\,\,[\Gamma]}{\Gamma,x \in A \,cont} ((x\in A)\, not\, in\,\, \Gamma)$$
+  $$\varnothing\space cont \quad \text{F-c)}\space\space\frac{A\space\space type\space\space[\Gamma]}{\Gamma,x \in A \spacecont} ((x\in A)\space not\space in\space\space \Gamma)$$
   "_Il vuoto è un contesto. Se A è un tipo sotto contesto Gamma, allora posso estendere il contesto gamma con una variabile x di A a patto che $x\in A$ non compaia in Gamma_"
 
   Questa regola è ausiliaria perch può essere derivata dalle altre, in un contesto minimalista sarebbe meglio ometterla perché una teoria con meno regole è preferibile, ma metterla rende tutto più facile.
@@ -51,19 +51,19 @@ La teoria dei Tipi di Martin-Loef è stata formulata usando la nozione di **giud
 #### Regole di formazione dei tipi singoletto 
 Il singoletto è il tipo generale più semplice da studiare, poiché per definizione contiene un singolo elemento. Qui enunciamo le regole per la formazione dei suddetti tipi:
 * **Regola di Formazione del tipo singoletto**
-  $$\text{S)}\,\,\frac{\Gamma \,\,cont}{N_1 \,type \,\,[\Gamma]}$$_"Se Gamma è un contesto, allora N1 è un tipo sotto contesto Gamma"_
+  $$\text{S)}\space\space\frac{\Gamma \space\spacecont}{N_1 \spacetype \space\space[\Gamma]}$$_"Se Gamma è un contesto, allora N1 è un tipo sotto contesto Gamma"_
 
 * **Regola di introduzione della * nel singoletto**
-$$\text{I-S)}\,\,\frac{\Gamma \,\,cont}{* \in N_1 \,\,[\Gamma]}$$_"Se Gamma è un contesto allora star appartiene ad N1 sotto contesto Gamma"_
+$$\text{I-S)}\space\space\frac{\Gamma \space\spacecont}{* \in N_1 \space\space[\Gamma]}$$_"Se Gamma è un contesto allora star appartiene ad N1 sotto contesto Gamma"_
 
 Regola che mi permette di dire come fare a scrivere funzioni dal tipo singoletto verso qualsiasi altro tipo:
 * **Regola di Eliminazione**
-  $$\text{E-S)}\,\,\frac{t_1 \in N_1\,\,[\Gamma]\quad M(z) \,\,type \,\, [\Gamma, z\in N_1]\quad c\in M(*)\,\, [\Gamma]}{El_{N_1}(t,c) \in \underbrace{M(t)}_{M(z)[z/t]}\,\,[\Gamma]}$$
+  $$\text{E-S)}\space\space\frac{t_1 \in N_1\space\space[\Gamma]\quad M(z) \space\spacetype \space\space [\Gamma, z\in N_1]\quad c\in M(*)\space\space [\Gamma]}{El_{N_1}(t,c) \in \underbrace{M(t)}_{M(z)[z/t]}\space\space[\Gamma]}$$
   _"Se t1 è un termine di tipo N1 sotto contesto Gamma ed M(z) è un tipo dipendente da Gamma e z in tipo N1 e so che c  tipo M (*) sotto contesto Gamma allora posso dedurre l'eliminatore."_
 
   Noi riusciamo a trovare elementi di tipo M(t) (l'eliminatore), se noi sappiamo cosa succede in M(*). In altre parole riusciamo ad avere una funzione che ci porta da N1 (tramite $t \in N_1$) a $M(t)$
 
-* **Seconda regola di Eliminazione** $$\text{C-S)}\,\,\frac{M(z) \,\,type\,\,[\Gamma, z \in N_1]\quad c \in M(*)\, [\Gamma]}{El_{N_1}(*,c)= c \in M(*)\,\,[\Gamma]}$$_"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sotto contesto Gamma allora l'eliminatore EL(*,c) è uguale a c in M(*) sotto contesto Gamma"_
+* **Seconda regola di Eliminazione** $$\text{C-S)}\space\space\frac{M(z) \space\spacetype\space\space[\Gamma, z \in N_1]\quad c \in M(*)\space [\Gamma]}{El_{N_1}(*,c)= c \in M(*)\space\space[\Gamma]}$$_"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sotto contesto Gamma allora l'eliminatore EL(*,c) è uguale a c in M(*) sotto contesto Gamma"_
   In questa regola cominciamo a mettere un'uguaglianza.
 
 ---
@@ -118,7 +118,7 @@ Vedi dispensa
 Vedi dispenza
 
 L'idea delle regole di indebolimento è che se noi abbiamo un qualcosa derivabile sotto contesto Gamma, e sappiamo che $[\Gamma,\Delta]$ è un contesto, allora allo stesso modo possiamo derivare lo stesso giudizio col contesto esteso $[\Gamma,\Delta]$
-$$\frac{J [\Gamma] \quad  [\Gamma,\Delta]\, cont}{J\space[\Gamma,\Delta]}$$
+$$\frac{J [\Gamma] \quad  [\Gamma,\Delta]\space cont}{J\space[\Gamma,\Delta]}$$
 #### 3.4 Regole di Scambio
 Vedi dispensa
 
@@ -166,17 +166,21 @@ $ [x_1\in N_1,..., x_n\in N_1]\space cont$ dalle solo due regole di formazione d
 **Nota:** Il contesto non è telescopico (dove un sotto-contesto dipende da un altro), quindi volendo possiamo usare le regole di scambio a piacimento.
 
 * **Regola di Introduzione del singoletto**
-  $$\text{I-S)}\space \frac{\Gamma \space cont}{* \in N_1 \space \space [\Gamma]}$$
+  
+$$\text{I-S)}\space \frac{\Gamma \space cont}{* \in N_1 \space \space [\Gamma]}$$
   
 
 * **Regola di Eliminazione del singoletto**
+  
 $$\text{E-S)}\space \frac{t_1 \in N_1 \space [\Gamma] \quad M(z) \space type \space [z \in N_1]\quad  c\in \overbrace{M(*)}^{M(z)[z/*]} \space \space [\Gamma]}{El_{N_1}(t, c) \in M(t)\space \space [\Gamma]}$$
 
 * **Regola di Conversione del singoletto**
+
 $$\text{C-S)}\space \frac{\quad M(z) \space type \space [\Gamma, z \in N_1]\quad  c\in M(*) \space[\Gamma]}{El_{N_1}(*, c) = c \in M(t)\space \space [\Gamma]}$$
 
 La regola di eliminazione si può equivalentemente scrivere in un altro modo:
 * **Regola di Eliminazione del singoletto 2**
+  
 $$\text{E-S)}_\text{Dipendente}\space \frac{M(z) \space type \space [\Gamma, z \in N_1]\quad  c\in M(*) \space \space [\Gamma]}{El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]}$$
 
 Si può dimostrare che usando $\text{E-S)}_{dip}$ + regole di sostituzione è equivalente ad $\text{E-S)}$.
