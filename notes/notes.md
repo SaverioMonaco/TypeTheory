@@ -240,9 +240,9 @@ Si può dimostrare che usando $\text{E-S)}_{dip}$ + regole di sostituzione è eq
 
 L'eliminatore rappresenta un _ricorsore_: è una funzione definita per ricorsione su $N_1$:
 
-* $El_{N1}(z,c)[z/*] = El_{N1}(*,c) = c \in M(*)$
+* $El_{N_1}(z,c)[z/\ast] = El_{N_1}(\ast,c) = c \in M(\ast)$
 
-***Nota personale:*** Fino a questo momento c'è un po' di confusione per quanto riguarda il concetto di singoletto e di Eliminatore: Se $El_{N1}(*,c) = c$ dove $*$ è un elemento del singoletto, poiché il singoletto possiede un solo elemento per definizione, non dovrebbero essere tutti gli eliminatori uguali? Perché definire più termini del singoletto?
+***Nota personale:*** Fino a questo momento c'è un po' di confusione per quanto riguarda il concetto di singoletto e di Eliminatore: Se $El_{N_1}(\ast,c) = c$ dove $\ast$ è un elemento del singoletto, poiché il singoletto possiede un solo elemento per definizione, non dovrebbero essere tutti gli eliminatori uguali? Perché definire più termini del singoletto?
 
 Credo che la risposta stia nel fatto di uguaglianza definizionale vs uguaglianza matematica ma ancora non mi è totalmente chiaro.
 
