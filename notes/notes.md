@@ -268,7 +268,7 @@ $$\text{I-S)}\space \frac{\Gamma \space cont}{* \in N_1 \space \space [\Gamma]}$
 
 * **Regola di Eliminazione del singoletto**
   
-$$\text{E-S)}\space \frac{t_1 \in N_1 \space [\Gamma] \quad M(z) \space type \space [z \in N_1]\quad  c\in \overbrace{M(*)}^{M(z)[z/*]} \space \space [\Gamma]}{El_{N_1}(t, c) \in M(t)\space \space [\Gamma]}$$
+$$\text{E-S)}\space \frac{t_1 \in N_1 \space [\Gamma] \quad M(z) \space type \space [\Gamma, z \in N_1]\quad  c\in \overbrace{M(*)}^{M(z)[z/*]} \space \space [\Gamma]}{El_{N_1}(t, c) \in M(t)\space \space [\Gamma]}$$
 
 * **Regola di Conversione del singoletto**
 
@@ -291,3 +291,77 @@ Credo che la risposta stia nel fatto di uguaglianza definizionale vs uguaglianza
 
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 9</span></div>
+
+## 5. Altre regole strutturali derivabili
+Aggiungiamo altre regole strutturali (derivabili) molto utili per semplificare le future dimostrazioni. Sono regole derivabili, quindi possono essere ottenute dalla teoria che abbiamo enunciato e non postulate.
+
+* **Primo Sanitary Check:**
+
+$$
+\frac{[\Gamma,\Delta]\space cont}{\Gamma \space cont}
+$$
+
+Se abbiamo derivato un contesto esteso, anche un pezzo del contesto può essere derivabile (occhio alle dipendenze! non stiamo scrivendo come conclusione $\Delta$ cont perché potrebbe dipendere da $\Gamma$).
+
+* **Secondo Sanitary Check:**
+
+$$\frac{J_1,...,J_n}{J}$$
+
+  è derivabile, significa che $J_1, ..., J_n$ sono derivabili e quindi $J$ è derivabile dalla teoria.
+
+* **Terzo Sanitary Check:**
+
+$$\frac{A = B \space type \space [\Gamma]}{A \space type \space [\Gamma]}\qquad\qquad \frac{A = B \space type \space [\Gamma]}{B \space type \space [\Gamma]}$$
+
+* **Quarto Sanitary Check:**
+
+$$\frac{a\in A \space [\Gamma]}{A \space type \space [\Gamma]}$$
+
+* **Quinto Sanitary Check:**
+
+$$\frac{a = b\in A \space [\Gamma]}{a \in A \space [\Gamma]}\qquad\qquad \frac{a = b\in A \space [\Gamma]}{b \in A \space [\Gamma]}$$
+
+---
+#### Esercizio E1: Regola E-S) $\to$ Regola E-S)$_{dip}$
+Ricordiamo la **Regola di Eliminazione del singoletto**
+  
+$$\text{E-S)}\space \frac{t_1 \in N_1 \space [\Gamma] \quad M(z) \space type \space [\Gamma, z \in N_1]\quad  c\in M(*) \space \space [\Gamma]}{El_{N_1}(t, c) \in M(t)\space \space [\Gamma]}$$
+
+Notiamo che in questa regola:
+  * $t$ è un termine qualsiasi, $t$ sta come metavariabile del tipo $N_1$
+  * $N_1$ è un tipo fissato
+  * $z$ è un termine che serve solo a dire che $M$ è un tipo qualsiasi che può dipendere da $N_1$
+  * $\ast$ è una costante fissa, ma $c$ ed $M$ sono metavariabili.
+
+Quindi possiamo dire che la regola di eliminazione è uno schema di regole, dove al posto di $t$, $M$, $c$ e $\Gamma$ possiamo mettere quello che vogliamo.
+
+Possiamo riscrivere quindi la regola E-S) usando altri termini:
+$$ \frac{t_1 \in N_1 \space [\Sigma] \quad M(\omega) \space type \space [\Sigma, \omega \in N_1]\quad  c\in M(*) \space \space [\Sigma]}{El_{N_1}(t, c) \in M(t)\space \space [\Sigma]}$$
+
+Poniamo $\Sigma = \Gamma, z\in N_1$
+
+$$\begin{matrix}
+     & [\Gamma, z \in N_1] \space cont \\ \hline
+     & \overbrace{M(z) \space type \space [\Gamma, z\in N_1 ]}^{\text{per ipotesi}}\qquad z \in N_1 [\Gamma, z_\in N_1]\\ \hline 
+     & c \in M(\ast) \space [\Gamma] \qquad  [\Gamma, z\in N_1]\space cont\\ \hline
+     & \overbrace{M(z) \space type \space [\Gamma, z \in N_1, \omega \in N_1]}^{\text{per ipotesi}} \quad c \in M(\ast) \space [\Gamma, z\in N_1] \\ \hline
+    \text{F-S)} & [\Gamma, z\in N_1] \space cont \qquad [\Gamma, z\in N_1, \omega \in N_1] \space cont\\ \hline
+     & N_1 \space type \space [\Gamma, z\in N_1]\qquad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1]\\ \hline
+ ind & \overbrace{M(z) \space type\space[\Gamma, z\in N_1]}^{\text{per ipotesi}} \qquad [\Gamma,z\in N_1, \omega\in N_1] \space cont \\ \hline
+ sub & M(z) \space type \space [\Gamma, z\in N_1, \omega \in N_1] \quad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1] \\ \hline
+ & M(\omega)\space type \space [\Gamma, z\in N_1] \\ \hline
+ & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]
+\end{matrix}$$
+
+E-S)$_{dip}$ è derivabile.
+
+#### Altra interpretazione della regola di eliminazione:
+Dalla regola di eliminazione dipendente:
+
+$$\text{E-S)}_\text{Dip}\space \frac{\varphi(\omega) \space prop \space [\Gamma, \omega \in N_1]\quad  c\in \varphi(*) \space \space [\Gamma]}{El_{N_1}(\omega, c) \in \varphi(\omega)\space \space [\Gamma, \omega\in N_1]}$$
+
+La tesi $El_{N_1}(\omega, c) \in \varphi(\omega)\space \space [\Gamma, \omega\in N_1]$ significa inoltre che $\varphi(\omega)$ è vera, quindi la regola di eliminazione può essere riscritta come:
+
+$$\frac{\varphi(\ast) \text{ è vera} \space [\Gamma]}{\varphi(\omega) \text{ è vera}\space [\Gamma, \omega \in N_1]}$$
+
+La regola di eliminazione tiene in se la regola di induzione, ovvero se hai la regola per l'elemento canonico $\ast$ allora la proposizione è vera per ogni elemento di $N_1$
