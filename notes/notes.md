@@ -13,9 +13,9 @@
 
   $$
   \begin{matrix}
-  \text{La logica di Frege} & = & \text{Logica del primo ordine}\\
+  \text{La logica di Frege} & = & \text{Logica del primo ordine} \\
    & & + \\
-   & & \text{predicato di appartenenza} 
+   & & \text{predicato di appartenenza} \\
   \end{matrix}
   $$
 
@@ -29,13 +29,13 @@
   \end{matrix}
   $$
 
-  **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
+  **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv[x|\varphi(x)]$
 
   **Teorema: La teoria di Frege è contraddittoria**
 
   **Proof:** Dall'assioma di comprensione, se consideriamo
 
-  $$y = \{{x|x \notin x\}}\quad \to \quad \varphi(x) = x\notin x$$ 
+  $$y = [x|x \notin x] \quad \to \quad \varphi(x) = x\notin x$$ 
 
   Otteniamo:
 
