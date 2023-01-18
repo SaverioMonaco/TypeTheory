@@ -3,7 +3,7 @@
 * **(~ 1910)** In _Principia Mathematica_ Russel offre con la Teoria dei tipi una soluzione al problema dell'inconsistenza degli insiemi di Frege.
   La teoria degli insiemi di Frege era scritta in un linguaggio $\mathcal{L}$ del primo ordine:
 
-  $$\mathcal{L}: \&, \lor, \to, tt, \perp, \forall x, \exist y$$
+  $$\mathcal{L}: and, \lor, \to, tt, \perp, \forall x, \exist y$$
 
   Inoltre viene aggiunto il simbolo di appartenenza tra insiemi:
 
