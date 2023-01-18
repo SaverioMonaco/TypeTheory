@@ -35,7 +35,7 @@
 
   **Proof:** Dall'assioma di comprensione, se consideriamo
 
-  $$y = \{x|x \notin x\}\quad \to \quad \varphi(x) = x\notin x$$ 
+  $$y = \{{x|x \notin x\}}\quad \to \quad \varphi(x) = x\notin x$$ 
 
   Otteniamo:
 
