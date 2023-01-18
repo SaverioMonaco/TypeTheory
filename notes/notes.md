@@ -1,6 +1,11 @@
 # Appunti di Teoria dei Tipi:
+1. [Introduzione della Teoria dei Tipi](#int)
+2. [Prime regole della teoria dei tipi dipendenti di Martin-Löf](#reglof)
+3. []()
+4. 
+5.
 
-## 1. Introduzione della Teoria dei Tipi
+## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
 #### Parentesi storica:
 * **(~ 1910)** In _Principia Mathematica_ Russel offre con la Teoria dei tipi una soluzione al problema dell'inconsistenza degli insiemi di Frege.
   La teoria degli insiemi di Frege era scritta in un linguaggio $\mathcal{L}$ del primo ordine:
@@ -45,7 +50,7 @@
 
   Se l'insieme $y$, ovvero l'insieme che contiene gli insiemi che non si contengono, contiene se stesso $(x\in y)$, allora l'insieme non contiene se stesso $(\varphi(x) = x\notin x)$, mentre per definizione se l'insieme non contiene se stesso allora contiene se stesso.
 
-## 2. Prime regole della teoria dei tipi dipendenti di Martin Loef
+## 2. Prime regole della teoria dei tipi dipendenti di Martin-Löf <a name="reglof"></a>
 <div style="text-align: right"><span style="color:orange">Lezione 6</span></div>
 
 In questo capitolo inizieremo ad usare una notazione della logica per la derivazione di conclusioni / formulazione di giudizi:
