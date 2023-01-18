@@ -341,15 +341,23 @@ $$ \frac{t_1 \in N_1 \space [\Sigma] \quad M(\omega) \space type \space [\Sigma,
 Poniamo $\Sigma = \Gamma, z\in N_1$
 
 $$\begin{matrix}
-    \space & [\Gamma, z \in N_1] \space cont \\ \hline
-    \space & \overbrace{M(z) \space type \space [\Gamma, z\in N_1 ]}^{\text{per ipotesi}}\qquad z \in N_1 [\Gamma, z_\in N_1]\\ \hline 
-   \space  & c \in M(\ast) \space [\Gamma] \qquad  [\Gamma, z\in N_1]\space cont\\ \hline
-   \space  & \overbrace{M(z) \space type \space [\Gamma, z \in N_1, \omega \in N_1]}^{\text{per ipotesi}} \quad c \in M(\ast) \space [\Gamma, z\in N_1] \\ \hline
+    \space & [\Gamma, z \in N_1] \space cont \\
+    \hline
+    \space & \overbrace{M(z) \space type \space [\Gamma, z\in N_1 ]}^{\text{per ipotesi}}\qquad z \in N_1 [\Gamma, z_\in N_1]\\
+    \hline 
+   \space  & c \in M(\ast) \space [\Gamma] \qquad  [\Gamma, z\in N_1]\space cont\\
+   \hline
+   \space  & \overbrace{M(z) \space type \space [\Gamma, z \in N_1, \omega \in N_1]}^{\text{per ipotesi}} \quad c \in M(\ast) \space [\Gamma, z\in N_1] \\
+   \hline
     \text{F-S)} & [\Gamma, z\in N_1] \space cont \qquad [\Gamma, z\in N_1, \omega \in N_1] \space cont\\ \hline
-   \space  & N_1 \space type \space [\Gamma, z\in N_1]\qquad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1]\\ \hline
- ind & \overbrace{M(z) \space type\space[\Gamma, z\in N_1]}^{\text{per ipotesi}} \qquad [\Gamma,z\in N_1, \omega\in N_1] \space cont \\ \hline
- sub & M(z) \space type \space [\Gamma, z\in N_1, \omega \in N_1] \quad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1] \\ \hline
- \space & M(\omega)\space type \space [\Gamma, z\in N_1] \\ \hline
+   \space  & N_1 \space type \space [\Gamma, z\in N_1]\qquad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1]\\ 
+   \hline
+ ind & \overbrace{M(z) \space type\space[\Gamma, z\in N_1]}^{\text{per ipotesi}} \qquad [\Gamma,z\in N_1, \omega\in N_1] \space cont \\
+ \hline
+ sub & M(z) \space type \space [\Gamma, z\in N_1, \omega \in N_1] \quad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1] \\ 
+ \hline
+ \space & M(\omega)\space type \space [\Gamma, z\in N_1] \\
+ \hline
  \space & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]
 \end{matrix}$$
 
