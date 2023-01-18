@@ -1,3 +1,5 @@
+# Appunti di Teoria dei Tipi:
+
 ## 1. Introduzione della Teoria dei Tipi
 #### Parentesi storica:
 * **(~ 1910)** In _Principia Mathematica_ Russel offre con la Teoria dei tipi una soluzione al problema dell'inconsistenza degli insiemi di Frege.
