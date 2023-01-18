@@ -23,9 +23,9 @@
 
   $$
   \begin{matrix}
-   & \text{Logica classica} \\
-   & +                      \\
-   & \text{Assioma di comprensione} \\
+  \space & \text{Logica classica} \\
+  \space & +                      \\
+  \space & \text{Assioma di comprensione} \\
   \end{matrix}
   $$
 
