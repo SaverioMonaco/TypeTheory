@@ -341,19 +341,19 @@ $$ \frac{t_1 \in N_1 \space [\Sigma] \quad M(\omega) \space type \space [\Sigma,
 Poniamo $\Sigma = \Gamma, z\in N_1$
 
 $$\begin{matrix}
-     & [\Gamma, z \in N_1] \space cont \\ \hline
-     & \overbrace{M(z) \space type \space [\Gamma, z\in N_1 ]}^{\text{per ipotesi}}\qquad z \in N_1 [\Gamma, z_\in N_1]\\ \hline 
-     & c \in M(\ast) \space [\Gamma] \qquad  [\Gamma, z\in N_1]\space cont\\ \hline
-     & \overbrace{M(z) \space type \space [\Gamma, z \in N_1, \omega \in N_1]}^{\text{per ipotesi}} \quad c \in M(\ast) \space [\Gamma, z\in N_1] \\ \hline
+    \space & [\Gamma, z \in N_1] \space cont \\ \hline
+    \space & \overbrace{M(z) \space type \space [\Gamma, z\in N_1 ]}^{\text{per ipotesi}}\qquad z \in N_1 [\Gamma, z_\in N_1]\\ \hline 
+   \space  & c \in M(\ast) \space [\Gamma] \qquad  [\Gamma, z\in N_1]\space cont\\ \hline
+   \space  & \overbrace{M(z) \space type \space [\Gamma, z \in N_1, \omega \in N_1]}^{\text{per ipotesi}} \quad c \in M(\ast) \space [\Gamma, z\in N_1] \\ \hline
     \text{F-S)} & [\Gamma, z\in N_1] \space cont \qquad [\Gamma, z\in N_1, \omega \in N_1] \space cont\\ \hline
-     & N_1 \space type \space [\Gamma, z\in N_1]\qquad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1]\\ \hline
+   \space  & N_1 \space type \space [\Gamma, z\in N_1]\qquad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1]\\ \hline
  ind & \overbrace{M(z) \space type\space[\Gamma, z\in N_1]}^{\text{per ipotesi}} \qquad [\Gamma,z\in N_1, \omega\in N_1] \space cont \\ \hline
  sub & M(z) \space type \space [\Gamma, z\in N_1, \omega \in N_1] \quad \omega\in N_1 \space [\Gamma, z\in N_1, \omega \in N_1] \\ \hline
- & M(\omega)\space type \space [\Gamma, z\in N_1] \\ \hline
- & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]
+ \space & M(\omega)\space type \space [\Gamma, z\in N_1] \\ \hline
+ \space & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]
 \end{matrix}$$
 
-E-S)$_{dip}$ è derivabile.
+$\text{E-S)}_{dip}$ è derivabile.
 
 #### Altra interpretazione della regola di eliminazione:
 Dalla regola di eliminazione dipendente:
@@ -365,3 +365,32 @@ La tesi $El_{N_1}(\omega, c) \in \varphi(\omega)\space \space [\Gamma, \omega\in
 $$\frac{\varphi(\ast) \text{ è vera} \space [\Gamma]}{\varphi(\omega) \text{ è vera}\space [\Gamma, \omega \in N_1]}$$
 
 La regola di eliminazione tiene in se la regola di induzione, ovvero se hai la regola per l'elemento canonico $\ast$ allora la proposizione è vera per ogni elemento di $N_1$
+
+---
+  <div style="text-align: right"><span style="color:orange">Lezione 10</span></div>
+
+## 6. Schema generale di produzione di regole definenti un tipo e i suoi termini 
+
+1. Si danno le regole di formazione del tipo K
+
+  $$\frac{[\Gamma] \space cont}{K \space type \space [\Gamma]}$$
+
+2. Si danno le regole di introduzione dei suoi elementi canonici
+
+  $$\frac{[\Gamma]\space cont}{\ast \in K \space [\Gamma]}$$
+
+3. Si danno le regole di Eliminazione definienti un costruttore $El_K$ che a partire da elementi di $K$ ha valori in un tipo $M(z) \space type \space [\Gamma, z\in K]$ avendo come ipotesi/premessa che siano dati degli elementi in $M(z)$ sui valori canonici di K
+
+4. Si danno le regole di conversione che stabiliscono che gli eliminatori in (3) sono di fatto definiti per ricorsione a partire dalle ipotesi appena dette.
+
+5. Si danno le regole che stabiliscono che i costruttori di $K$ (in (2) e in (3)) conservano le uguaglianze definizionali dei termini da cui dipendono.
+
+$$\frac{a_1, ..., a_n \in A}{costruttorre(a_1,...,a_n)\in B}$$
+
+Il costruttore deve osservare la seguente regola:
+
+$$\frac{\text{se }\quad a_1 = b_1 \in A_1, ..., a_n = b_n \in A_n}{cost(a_1,...,a_n) = cost(b_1, ..., b_n)}$$
+
+Quindi vogliamo la seguente regola:
+
+$$\frac{t_1 = t_2 \in N_1 \space [\Gamma] \quad c_1=c_2 \in M(\ast)\space [\Gamma]}{El_{N1}(t_1, c_1)= El_{N1}(t_2, c_2) \in M(t_1)\space [\Gamma]}$$
