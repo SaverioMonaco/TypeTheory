@@ -13,8 +13,8 @@
 
   $$
   \begin{matrix}
-  \text{La logica di Frege} &=& \text{Logica del primo ordine}\\
-   &&+&\\
+  \text{La logica di Frege} & = & \text{Logica del primo ordine}\\
+   & & + \\
    & & \text{predicato di appartenenza} 
   \end{matrix}
   $$
