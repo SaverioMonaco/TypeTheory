@@ -25,7 +25,7 @@
   \begin{matrix}
    & \text{Logica classica} \\
    & +                      \\
-   & \text{Assioma di comprensione}
+   & \text{Assioma di comprensione} \\
   \end{matrix}
   $$
 
