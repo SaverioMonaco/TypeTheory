@@ -496,8 +496,8 @@ $$
 ---
 ---
 # Esercizi:
-0. [$2\in Nat\space [\space]$](#duenat)
-1. [$z+2\in Nat \space [z\in Nat]$](#zpiuduenat)
+0. [ $2\in Nat\space [\space]$ ](#duenat)
+1. [ $z+2\in Nat \space [z\in Nat]$ ](#zpiuduenat)
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
@@ -573,6 +573,6 @@ Abbiamo ottenuto il nostro eliminatore, imponiamo il comportamento sull'elemento
 
 $$El_{Nat}(z,2,(x,y).succ(y))[z/0] = El_{Nat}(0,2,(x,y).succ(y))\to_1 2$$
 
-Vediamo cosa succede ad 1 e a 2:
+Vediamo cosa succede ad 1:
 
 1. $$El_{Nat}(succ(0),2,(x,y).succ(y))\to_1 succ(\underbrace{El_{Nat}(0,2,(x,y).succ(y))}_{2}) = 3$$
