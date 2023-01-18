@@ -19,7 +19,7 @@
   ``
   Logica classica + Assioma di comprensione
   `` 
-  
+
   **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv[x|\varphi(x)]$
 
   **Teorema: La teoria di Frege è contraddittoria**
@@ -41,7 +41,7 @@
   <span style="color:green"><li>L'insieme di tutto ciò che non è una mela, l'insieme di tutto ciò che non è una mela non è una mela e può essere considerato come elemento appartenente a se stesso</li>)</span>
   </ul>
 
-  Se l'insieme $y$, ovvero l'insieme che contiene gli insiemi che non si contengono, contiene se stesso ($x\in y$), allora l'insieme non contiene se stesso ($\varphi(x) = x\notin x$), mentre per definizione se l'insieme non contiene se stesso allora contiene se stesso.
+  Se l'insieme $y$, ovvero l'insieme che contiene gli insiemi che non si contengono, contiene se stesso $(x\in y)$, allora l'insieme non contiene se stesso $(\varphi(x) = x\notin x)$, mentre per definizione se l'insieme non contiene se stesso allora contiene se stesso.
 
 ## 2. Prime regole della teoria dei tipi dipendenti di Martin Loef
 <div style="text-align: right"><span style="color:orange">Lezione 6</span></div>
