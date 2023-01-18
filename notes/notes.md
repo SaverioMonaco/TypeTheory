@@ -1,5 +1,53 @@
 ## 1. Introduzione della Teoria dei Tipi
-niente
+#### Parentesi storica:
+* **(~ 1910)** In _Principia Mathematica_ Russel offre con la Teoria dei tipi una soluzione al problema dell'inconsistenza degli insiemi di Frege.
+  La teoria degli insiemi di Frege era scritta in un linguaggio $\mathcal{L}$ del primo ordine:
+
+  $$\mathcal{L}: \&, \lor, \to, tt, \perp, \forall x, \exist y$$
+
+  Inoltre viene aggiunto il simbolo di appartenenza tra insiemi:
+
+  $$1 \in Nat $$
+
+  Dove 1 è un insieme singoletto (avente solo un elemento) e Nat è l'insieme dei naturali
+
+  $$\begin{matrix}
+  \text{La logica di Frege} &=& \text{Logica del primo ordine}\\
+   &&+&\\
+   & & \text{predicato di appartenenza} 
+  \end{matrix}$$
+
+  Come assiomi ha messo le regole della: 
+
+  $$\begin{matrix}
+  &\text{Logica classica}\\
+  &+ \\
+  &\text{Assioma di comprensione}
+  \end{matrix}$$
+
+  **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exist y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
+
+  **Teorema: La teoria di Frege è contraddittoria**
+
+  **Proof:** Dall'assioma di comprensione, se consideriamo
+
+  $$y = \{x|x \notin x\}\quad \to \quad \varphi(x) = x\notin x$$ 
+
+  Otteniamo:
+
+  $$\exist y \forall x \space(x\in y \leftrightarrow x \notin x)$$
+
+  $y$ è l'insieme che contiene esattamente gli insiemi che non contengono se stessi.
+
+  <span style="color:green">(Come fa un insieme a contenere o non contenere se stesso?
+  Considera questi due esempi:</span>
+  <ul>
+  <span style="color:green"><li>L'insieme delle mele, ogni elemento è una mela, l'insieme delle mele non è un elemento dell'insieme delle mele, quindi non contiene se stesso</li></span>
+  <span style="color:green"><li>L'insieme di tutto ciò che non è una mela, l'insieme di tutto ciò che non è una mela non è una mela e può essere considerato come elemento appartenente a se stesso</li>)</span>
+  </ul>
+
+  Se l'insieme $y$, ovvero l'insieme che contiene gli insiemi che non si contengono, contiene se stesso ($x\in y$), allora l'insieme non contiene se stesso ($\varphi(x) = x\notin x$), mentre per definizione se l'insieme non contiene se stesso allora contiene se stesso.
+
 ## 2. Prime regole della teoria dei tipi dipendenti di Martin Loef
 <div style="text-align: right"><span style="color:orange">Lezione 6</span></div>
 
