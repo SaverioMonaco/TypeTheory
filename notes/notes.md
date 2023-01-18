@@ -358,7 +358,7 @@ $$\begin{matrix}
  \hline
  \space & M(\omega)\space type \space [\Gamma, z\in N_1] \\
  \hline
- \space & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1]
+ \space & El_{N_1}(z, c) \in M(z)\space \space [\Gamma, z\in N_1] \\
 \end{matrix}$$
 
 $\text{E-S)}_{dip}$ è derivabile.
