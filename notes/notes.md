@@ -11,19 +11,23 @@
 
   Dove 1 è un insieme singoletto (avente solo un elemento) e Nat è l'insieme dei naturali
 
-  $$\begin{matrix}
+  $$
+  \begin{matrix}
   \text{La logica di Frege} &=& \text{Logica del primo ordine}\\
    &&+&\\
    & & \text{predicato di appartenenza} 
-  \end{matrix}$$
+  \end{matrix}
+  $$
 
   Come assiomi ha messo le regole della: 
 
-  $$\begin{matrix}
+  $$
+  \begin{matrix}
    & \text{Logica classica} \\
    & +                      \\
    & \text{Assioma di comprensione}
-  \end{matrix}$$
+  \end{matrix}
+  $$
 
   **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
 
