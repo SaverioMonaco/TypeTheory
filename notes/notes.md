@@ -3,7 +3,7 @@
 * **(~ 1910)** In _Principia Mathematica_ Russel offre con la Teoria dei tipi una soluzione al problema dell'inconsistenza degli insiemi di Frege.
   La teoria degli insiemi di Frege era scritta in un linguaggio $\mathcal{L}$ del primo ordine:
 
-  $$\mathcal{L}: and, \lor, \to, tt, \perp, \forall x, \exist y$$
+  $$\mathcal{L}: and, \lor, \to, tt, \perp, \forall x, \exists y$$
 
   Inoltre viene aggiunto il simbolo di appartenenza tra insiemi:
 
@@ -25,7 +25,7 @@
   &\text{Assioma di comprensione}
   \end{matrix}$$
 
-  **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exist y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
+  **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
 
   **Teorema: La teoria di Frege è contraddittoria**
 
@@ -35,7 +35,7 @@
 
   Otteniamo:
 
-  $$\exist y \forall x \space(x\in y \leftrightarrow x \notin x)$$
+  $$\exists y \forall x \space(x\in y \leftrightarrow x \notin x)$$
 
   $y$ è l'insieme che contiene esattamente gli insiemi che non contengono se stessi.
 
