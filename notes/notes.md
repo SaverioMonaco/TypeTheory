@@ -496,8 +496,8 @@ $$
 ---
 ---
 # Esercizi:
-0. [ $2\in Nat\space [\space]$ ](#duenat)
-1. [ $z+2\in Nat \space [z\in Nat]$ ](#zpiuduenat)
+0. [Due è un numero naturale](#duenat)
+1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
