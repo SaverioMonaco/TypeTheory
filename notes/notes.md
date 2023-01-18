@@ -8,7 +8,7 @@
 4. [Regole (principali) del tipo singoletto](#regsin)
 5. [Altre regole strutturali derivabili](#regdev)
 6. [Schema generale di produzione di regole definenti un tipo e i suoi termini](#protip)
-
+7. [Perché la teoria dei tipi può essere pensata come un linguaggio di programmazione funzionale?](#tipcod)
 ---
 
 ## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
@@ -420,4 +420,159 @@ $$\frac{t_1 = t_2 \in N_1 \space [\Gamma] \quad c_1=c_2 \in M(\ast)\space [\Gamm
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 11</span></div>
 
-## 7. 
+## 7. Perché la teoria dei tipi può essere pensata come un linguaggio di programmazione funzionale? <a name="tipcod"></a>
+_"L'ugualianza definizionale tra dermini della teoria dei tipi (di Martin-Loef) è computabile"_
+
+Ovvero esiste un programma/algoritmo tale che:
+
+$$H \space : \space Giudizi \to \lbrace 0,1\rbrace$$
+
+$$H(J)=\begin{cases}1 & \text{sse J è derivaible}\\ 0 & \text{sse J NON è derivabile}\end{cases}$$
+
+Inoltre $J$ può essere:
+* $A \space type \space [\Gamma]$
+* $A = B \space type \space [\Gamma]$
+* $a\in A \space [\Gamma]$
+* $a = b \in A \space [\Gamma]$
+* $[\Gamma]\space cont$
+
+Quando ci interfacciamo tramite la teoria dei tipi con un proof assistant, il proof assistant ci dirà se un giudizio formulato come nella lista sopra sarà corretto oppure no.
+
+**Nota**: Questa proprietà vale per teorie dei tipi dette "intensionali" o "computabili". Esempio: COQ, mentre per la HOTT non si sa ancora.
+
+...
+
+---
+  <div style="text-align: right"><span style="color:orange">Lezione 12</span></div>
+
+## 8. Regole del tipo dei numeri naturali <a name="tipcod"></a>
+1. **Regola di formazione del tipo numeri naturali**
+
+$$\text{F-Nat)}\space\frac{\Gamma\space cont}{Nat\space type\space [\Gamma]}$$
+
+2. **Regola di introduzione dei naturali**
+
+$$\text{I-Nat)}\space\frac{\Gamma\space cont}{0 \in Nat\space [\Gamma]}\qquad \text{I-Nat2)}\space\frac{m \in Nat \space [\Gamma]}{succ(m) \in Nat\space [\Gamma]}$$
+
+3. **Regola di eliminazione dei naturali (ricorsione dei naturali)**
+
+**Def: Primitiva ricorsione** Se vogliamo definire un ricorsore $ rec: Nat^n \times Nat \to Nat$ dati:
+- $g_0$ funzione $g_0 : Nat^m \to Nat$  
+- $g_1$ funzione $g_1 : Nat^n \times Nat \times Nat\to Nat$ 
+
+$$\begin{cases}
+rec(n_1, n_m, 0)&:=g_0(n_1,n_m) \\
+rec(n_1, n_m, k+1)&:=g_1(n_1, n_m, rec(n_1, n_m, k))
+\end{cases}$$
+
+Quindi la regola di eliminazione dei naturali sarà:
+
+$$\frac{t\in Nat\space [\Gamma]\quad M(z) \space type \space [\Gamma, z\in Nat]\quad c\in M(0) \space [\Gamma]\quad e(x,y) \in M(succ(x))\space [\Gamma, x\in Nat, y\in M(x)]}{El_{Nat}(t, c, e) \in M(t)\space [\Gamma]} \quad \text{E-Nat)}$$
+
+* $t$ rappresenta l'indice della ricorsione;
+* $M$ è la funzione che ci porta dai naturali al valore;
+* $c$ è il valore che il ricorsore assume sullo 0;
+* $e$ ci serve per fare il passo successivo, x rappresenta il passo a cui siamo arrivati, e y il valore a cui siamo.
+
+4. **Regola di Conversione**
+
+   Questa regola indica il comportamento della ricorsione al numero 0 (primo termine della ricorsione)
+
+$$\frac{M(z) \space type \space [\Gamma, z\in Nat]\quad c \in M(0)\space [\Gamma]\quad e(x,y)\in M(succ(x))\space [\Gamma, x \in Nat, y \in M(x)]}{El_{Nat}(0,c,e) = c \in M(0)\space [\Gamma]}\space {C_1\text{-S)}}
+$$
+
+5. **Seconda Regola di Conversione**
+    
+    Questa regola indica il comportamento della ricorsione quando passiamo da $m$ a $succ(m)$ $(m\to m+1)$
+$$\frac{m \in Nat \space [\Gamma] \quad M(z) \space type \space [\Gamma, z\in Nat]\quad c \in M(0)\space [\Gamma]\quad e(x,y)\in M(succ(x))\space [\Gamma, x \in Nat, y \in M(x)]}{El_{Nat}(succ(m),c,e) = e(m, El_{Nat}(m,c,e)) \in M(succ(m))\space [\Gamma]}\space {C_2\text{-S)}}
+$$
+
+---
+  <div style="text-align: right"><span style="color:orange">Lezione 13</span></div>
+
+## 9. Regole del tipo dei numeri naturali
+
+---
+---
+---
+# Esercizi:
+0. [$2\in Nat\space [\space]$](#duenat)
+1. [$z+2\in Nat \space [z\in Nat]$](#zpiuduenat)
+---
+## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
+Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
+
+Useremo prima la regola di introduzione dei naturali per introdurre 0 come prova di un numero naturale: $0\in Nat\space [\space]$.
+
+Dopodiché useremo due volte la seconda regola di introduzione dei numeri naturali che dice che se un numero è naturale, allora il suo successivo è un numero naturale.
+
+Schematicamente:
+
+$$
+\begin{matrix}
+ \text{I-Nat)}  & [\space] \\ 
+ \hline
+ \text{I-Nat2)} & 0 \in Nat \space[\space] \\
+ \hline
+ \text{I-Nat2)} & succ(0) \in Nat \space [\space] \\
+ \hline 
+                & \underbrace{succ(succ(0))}_{2} \in Nat \space [\space]
+\end{matrix}
+$$
+
+## E1: $z+2\in Nat \space [z\in Nat]$ <a name="zpiuduenat"></a>
+Vogliamo dimostrare che dato un $z$ appartenente ai naturali (contesto), $z+2$ appartiene ai naturali.
+
+Per dimostrare ciò ricordiamo le seguenti regole di riduzione:
+
+ * R1: 
+
+     $$\frac{t_1 \to t_2}{El_{Nat}(t_1, c,e)\to El_{Nat}(t_2, c,e)}$$ 
+
+ * R2: 
+
+     $$\frac{c_1\to c_2}{El_{Nat}(t, c_1,e)\to El_{Nat}(t, c_2,e)}$$
+
+ * R3: 
+
+     $$\frac{t_1\to t_2}{succ(t_1)\to succ(t_2)}$$
+
+Ricordiamo inoltre le regole di conversione del tipo dei numeri naturali:
+
+  * C1: 
+
+     $$El_{Nat}(0,c,e)\to_1 c$$
+  
+  * C2:
+    
+     $$El_{Nat}(succ(m),c,e)\to_1 e(m,El_{Nat}(m,c,e))$$
+
+  
+Vogliamo costruire l'eliminatore adatto usando la regola di eliminazione dipendente dei naturali:
+
+$$E\text{-}{Nat})_ {dip}\quad \frac{M(z)\space type \space [\Gamma, z\in Nat]\quad c \in M(0) \quad e(x,y)\in M(succ(x)) \space [x\in Nat, y \in M(x)]}{El(z,c,e)\in M(z) \space [\Gamma, z\in Nat]}$$
+
+Però vogliamo qualcosa del tipo:
+
+$$\frac{?}{El_{Nat}(z,2,?)\in Nat \space [z\in Nat]}$$
+
+Da E0 possiamo scrivere $2\in Nat \space [\space]$ come ipotesi:
+
+$$\frac{2\in Nat \space [\space] \quad ?}{El_{Nat}(z,2,?)\in Nat \space [z\in Nat]}$$
+
+Ci serve la funzione $e$ che ci dice il comportamento della ricorsione:
+
+$$\begin{matrix}
+e &= (x,y).succ(y) \leftarrow \text{Nozione del $\lambda$ calcolo}\\
+&=succ(y) \in Nat \space [x\in Nat, y \in Nat]\space\space\space\space\space\space\space
+\end{matrix}$$
+
+$$\frac{2\in Nat \space [\space] \quad succ(y) \in Nat}{El_{Nat}(z,2,(x,y).succ(y))\in Nat \space [z\in Nat]}$$
+
+Abbiamo ottenuto il nostro eliminatore, imponiamo il comportamento sull'elemento canonico tramite la regola di conversione:
+
+$$El_{Nat}(z,2,(x,y).succ(y))[z/0] = El_{Nat}(0,2,(x,y).succ(y))\to_1 2$$
+
+Vediamo cosa succede ad 1 e a 2:
+
+1. $$El_{Nat}(succ(0),2,(x,y).succ(y))\to_1 succ(\underbrace{El_{Nat}(0,2,(x,y).succ(y))}_{2}) = 3$$
