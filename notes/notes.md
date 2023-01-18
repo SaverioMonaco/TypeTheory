@@ -20,9 +20,9 @@
   Come assiomi ha messo le regole della: 
 
   $$\begin{matrix}
-  &\text{Logica classica}\\
-  &+ \\
-  &\text{Assioma di comprensione}
+   & \text{Logica classica} \\
+   & +                      \\
+   & \text{Assioma di comprensione}
   \end{matrix}$$
 
   **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv\{x|\varphi(x)\}$
