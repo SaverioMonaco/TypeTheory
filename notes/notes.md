@@ -11,16 +11,15 @@
 
   Dove 1 è un insieme singoletto (avente solo un elemento) e Nat è l'insieme dei naturali
 
-  $$
-  \text{La logica di Frege} = \text{Logica del primo ordine}  +  \text{predicato di appartenenza}
-  $$
+  `La logica di Frege = Logica del primo ordine  +  predicato di appartenenza
+  `
 
   Come assiomi ha messo le regole della: 
 
-  $$
-  \text{Logica classica} + \text{Assioma di comprensione}
-  $$
-
+  ``
+  Logica classica + Assioma di comprensione
+  `` 
+  
   **Assioma di comprensione**: Dato $\varphi(x)$ formula, $\exists y \forall x (x\in y \leftrightarrow\varphi(x))$ s.t. $y\equiv[x|\varphi(x)]$
 
   **Teorema: La teoria di Frege è contraddittoria**
