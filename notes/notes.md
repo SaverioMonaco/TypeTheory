@@ -1,9 +1,15 @@
 # Appunti di Teoria dei Tipi:
+
+---
+
 1. [Introduzione della Teoria dei Tipi](#int)
 2. [Prime regole della teoria dei tipi dipendenti di Martin-Löf](#reglof)
-3. []()
-4. 
-5.
+3. [Regole strutturali](#regstru)
+4. [Regole (principali) del tipo singoletto](#regsin)
+5. [Altre regole strutturali derivabili](#regdev)
+6. [Schema generale di produzione di regole definenti un tipo e i suoi termini](#protip)
+
+---
 
 ## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
 #### Parentesi storica:
@@ -147,7 +153,7 @@ _"Se M(z) è un tipo sotto contesto Gamma e z in N1, e c appartiene ad M(*) sott
 In questa regola cominciamo a mettere un'uguaglianza.
 
 ---
-## 3. Regole strutturali
+## 3. Regole strutturali <a name="regstru"></a>
   <div style="text-align: right"><span style="color:orange">Lezione 7</span></div>
 
 **Definizione:** Derivazione = albero ($\pi$) i cui nodi sono dati da regole di inferenza della forma:
@@ -227,7 +233,7 @@ Prima abbiamo definito Gamma e poi Delta.
 Le regole di scambio permettono di scambiare l'ordine dei due sotto-contesti. Ovviamente questo può essere fatto se il secondo contesto non dipende da tipi del primo contesto.
 
 ---
-## 4. Regole (principali) del tipo singoletto
+## 4. Regole (principali) del tipo singoletto <a name="regsin"></a>
   <div style="text-align: right"><span style="color:orange">Lezione 8</span></div>
 Come già accennato, il singoletto è il tipo più semplice, e le sue regole saranno paradigmatiche per gli altri tipi.
 
@@ -299,7 +305,7 @@ Credo che la risposta stia nel fatto di uguaglianza definizionale vs uguaglianza
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 9</span></div>
 
-## 5. Altre regole strutturali derivabili
+## 5. Altre regole strutturali derivabili <a name="regdev"></a>
 Aggiungiamo altre regole strutturali (derivabili) molto utili per semplificare le future dimostrazioni. Sono regole derivabili, quindi possono essere ottenute dalla teoria che abbiamo enunciato e non postulate.
 
 * **Primo Sanitary Check:**
@@ -385,7 +391,7 @@ La regola di eliminazione tiene in se la regola di induzione, ovvero se hai la r
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 10</span></div>
 
-## 6. Schema generale di produzione di regole definenti un tipo e i suoi termini 
+## 6. Schema generale di produzione di regole definenti un tipo e i suoi termini  <a name="protip"></a>
 
 1. Si danno le regole di formazione del tipo K
 
@@ -410,3 +416,8 @@ $$\frac{\text{se }\quad a_1 = b_1 \in A_1, ..., a_n = b_n \in A_n}{cost(a_1,...,
 Quindi vogliamo la seguente regola:
 
 $$\frac{t_1 = t_2 \in N_1 \space [\Gamma] \quad c_1=c_2 \in M(\ast)\space [\Gamma]}{El_{N1}(t_1, c_1)= El_{N1}(t_2, c_2) \in M(t_1)\space [\Gamma]}$$
+
+---
+  <div style="text-align: right"><span style="color:orange">Lezione 11</span></div>
+
+## 7. 
