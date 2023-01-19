@@ -12,7 +12,7 @@
 8.  [Regole del tipo dei numeri naturali](#regnat)
 9.  [Somma tra numeri naturali](#sommanat)
 10. [Tipo delle liste di un tipo](#liste)
-
+11. [Somma disgiunta](#somdis)
 * [Esercizi](#exs)
 ---
 
@@ -679,7 +679,65 @@ S \in list(A)\space [\Gamma] \quad a \in A \space [\Gamma]\\
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 15</span></div>
 
-## 11. todo<a name=""></a>
+## 11. Somma disgiunta (disjoint-sum type)<a name="somdis"></a>
+La somma disgiunta è un tipo induttivo come quelli già visti: $N_1$ (singoletto), $Nat$ (naturali), $list(A)$ lista.
+
+Piccolo spoiler, questo tipo ci servirà a costruire gli insiemi finiti a partire dal tipo singoletto:
+
+$$Ex: \quad N_1 + N_1 \to \space type \space Bool$$
+
+Prima di introdurre le regole relative al tipo, introduciamo brevemente la _somma disgiunta_.
+
+> Da [__Wikipedia__](https://en.wikipedia.org/wiki/Disjoint_union): 
+Considera due set:
+
+$$\begin{cases}
+  A_0 = \lbrace 5,6,7 \rbrace \\
+  A_1 = \lbrace 5,6   \rbrace
+\end{cases}$$
+  
+Per creare il set somma disgiunta, indiciamo gli elementi dei due set in base al set di partenza:
+
+$$\begin{cases}
+  A_0^\ast = \lbrace (5,0),(6,0),(7,0) \rbrace \\
+  A_1^\ast = \lbrace (5,1),(6,1)   \rbrace
+\end{cases}$$
+
+La somma disgiunta dei due set $A_0$ e $A_1$ è l'unione dei due set indiaicati: 
+
+$$A_0 \sqcup A_1 = A_0^\ast \sqcup A_1^\ast = \lbrace (5,0),(6,0),(7,0), (5,1),(6,1)  \rbrace$$
+
+<div><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/PolygonsSetDisjointUnion.svg"
+     alt="Wikipedia - Disjoint Sum"
+     style="float: left; margin-right: 10px; background-color: white" /></div>
+
+
+### Regole di Formazione
+
+* **Regola di formazione**
+
+$$\text{F-+)}\quad \frac{B \space type \space [\Gamma]\quad C \space type \space [\Gamma]}{B+C \space type \space [\Gamma]}$$
+
+### Regole di introduzione
+
+* **Prima regola di introduzione**
+
+$$\text{I$_1$-+)}\quad \frac{b \in B \space [\Gamma]\quad B+C \space type \space [\Gamma]}{inl(b) \in B+C \space [\Gamma]}$$
+
+* **Seconda regola di introduzione**
+
+$$\text{I$_2$-+)}\quad \frac{
+  c \in C \space [\Gamma]\quad B+C \space type \space [\Gamma]}{inr(c) \in B+C \space [\Gamma]}$$
+
+### Regole di uguaglianza
+* **Regola di uguaglianza**
+
+$$\text{eq-F-+)}\quad\frac{B_1 = B_2 \space type \space [\Gamma]\quad C_1 = C_2 \space type \space [\Gamma]}{B_1 + C_1 = B_2 + C_2\space type \space [\Gamma]}$$
+
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 16</span></div>
+
+## 12. <a name=""></a>
 
 
 
