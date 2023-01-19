@@ -486,7 +486,7 @@ $$
 5. **Seconda Regola di Conversione**
     
     Questa regola indica il comportamento della ricorsione quando passiamo da $m$ a $succ(m)$ $(m\to m+1)$
-    
+
 $$\frac{m \in Nat \space [\Gamma] \quad M(z) \space type \space [\Gamma, z\in Nat]\quad c \in M(0)\space [\Gamma]\quad e(x,y)\in M(succ(x))\space [\Gamma, x \in Nat, y \in M(x)]}{El_{Nat}(succ(m),c,e) = e(m, El_{Nat}(m,c,e)) \in M(succ(m))\space [\Gamma]}\space {C_2\text{-S)}}
 $$
 
@@ -523,7 +523,37 @@ Ovvero  $\omega + 1 = succ(\omega)$
 
 > _"L'uguaglianza definizionale tra numeri naturali in teoria dei tipi di Martin-Loef (con le regole date) **NON** è l'uguaglianza aritmetica in matematica."_
 
----
+Abbiamo quindi creato una forma di somma che chiameremo $+_1$, quindi abbiamo creato un programma che calcosa:
+
+$$\omega +_1 z  = El_{Nat}(z,\omega, (x,y).succ(y))$$
+
+Non è l'unico programa, avremmo potuto creare quello che applica la somma al secondo termine $\omega + z \to z + \omega$, ma avrebbe coinvolto scambio di variabili etc.
+
+> Cosa succede se io al posto di $\omega$ metto 0?
+
+$$\omega +_1 z [w/0] := El_{Nat}(0,z,(x,y).succ(y))$$
+
+Questa è una brutta notizia, perché $\omega +_1 z [w/0] := El_{Nat}(0,z,(x,y).succ(y))$ è in forma normale, non si riesce a ridurre a nulla perché è già ridotto. Quindi 
+
+$$0+_1 z \quad\text{ è già un valore}$$
+
+Mentre
+
+$$\omega +_1 0 \to_1 \omega \quad \text{ per la regola di conversione}$$
+
+Quindi **NON** si deriva che:
+
+$$0 +_1 z = z \in Nat \space [z\in Nat]$$
+
+Mentre 
+
+$$ \omega +_1 0 = \omega \in Nat \space [\omega \in Nat]$$
+
+Non esiste nessuna strategia deterministica per ridurre $0+z$ a $z$
+
+> La relazione di uguaglianza definizionale in Nat con variabili **NON** è in generale la relazione di uguaglianza aritmetica.
+
+
 ---
 ---
 # Esercizi:
