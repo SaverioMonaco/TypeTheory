@@ -1,3 +1,5 @@
+(ITALIANO: Note del corso di Teoria dei Tipi: [qui](./notes/notes.md))
+
 # Agda Tutorials:
 0. [Commands](#commands)
 1. [Types and Functions](#sets&func)
