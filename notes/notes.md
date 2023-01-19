@@ -486,6 +486,7 @@ $$
 5. **Seconda Regola di Conversione**
     
     Questa regola indica il comportamento della ricorsione quando passiamo da $m$ a $succ(m)$ $(m\to m+1)$
+    
 $$\frac{m \in Nat \space [\Gamma] \quad M(z) \space type \space [\Gamma, z\in Nat]\quad c \in M(0)\space [\Gamma]\quad e(x,y)\in M(succ(x))\space [\Gamma, x \in Nat, y \in M(x)]}{El_{Nat}(succ(m),c,e) = e(m, El_{Nat}(m,c,e)) \in M(succ(m))\space [\Gamma]}\space {C_2\text{-S)}}
 $$
 
