@@ -9,6 +9,8 @@
 5. [Altre regole strutturali derivabili](#regdev)
 6. [Schema generale di produzione di regole definenti un tipo e i suoi termini](#protip)
 7. [Perché la teoria dei tipi può essere pensata come un linguaggio di programmazione funzionale?](#tipcod)
+8. [Regole del tipo dei numeri naturali](#regnat)
+9. [Somma tra numeri naturali](#sommanat)
 ---
 
 ## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
@@ -445,7 +447,7 @@ Quando ci interfacciamo tramite la teoria dei tipi con un proof assistant, il pr
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 12</span></div>
 
-## 8. Regole del tipo dei numeri naturali <a name="tipcod"></a>
+## 8. Regole del tipo dei numeri naturali <a name="regnat"></a>
 1. **Regola di formazione del tipo numeri naturali**
 
 $$\text{F-Nat)}\space\frac{\Gamma\space cont}{Nat\space type\space [\Gamma]}$$
@@ -490,7 +492,35 @@ $$
 ---
   <div style="text-align: right"><span style="color:orange">Lezione 13</span></div>
 
-## 9. Regole del tipo dei numeri naturali
+## 9. Somma tra numeri naturali <a name="sommanat"></a>
+
+Quello che vogliamo fare in questa sezione è scrivere l'operatore '+' come un eliminatore:
+
+$$w + z \in Nat\space \space (w \in Nat, z\in Nat)$$
+
+In [E2](#elsomma) vi è il procedimento su come ottenere la somma come eliminatore. Il risultato è:
+
+$$\text{E-Nat}_{dip})\quad \frac{\begin{matrix}Nat \space type \space [\omega\in Nat, z\in Nat]\\ 
+\omega \in Nat \space [\omega \in Nat]\\ 
+succ(y)\in Nat \space[\omega\in Nat, x \in Nat, y \in Nat]\end{matrix}}{El_{Nat}(z,\omega,(x,y).succ(y))\in Nat\space [\omega\in Nat, z\in Nat]}$$
+
+Verifichiamo i valori della somma:
+
+Per la regola di converisone abbiamo che:
+
+$$El_{Nat}(0,\omega, (x,y).succ(y))\to_1 \omega$$
+
+Ovvero $\omega + 0 = \omega$.
+
+Per $succ(0)$ abbiamo invece:
+
+$$El_{Nat}(succ(0), \omega, (x,y).succ(y))\to_1$$
+
+$$\to_1 succ(El_{Nat}(0,\omega,(x,y).succ(y)))\to_1 succ(\omega)\in Nat$$
+
+Ovvero  $\omega + 1 = succ(\omega)$
+
+==L'uguaglianza definizionale tra numeri naturali in teoria dei tipi di Martin-Loef (con le regole date) **NON** è l'uguaglianza aritmetica in matematica.==
 
 ---
 ---
@@ -498,6 +528,7 @@ $$
 # Esercizi:
 0. [Due è un numero naturale](#duenat)
 1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
+2. [Eliminatore della somma tra naturali](#elsomma)
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
@@ -576,3 +607,52 @@ $$El_{Nat}(z,2,(x,y).succ(y))[z/0] = El_{Nat}(0,2,(x,y).succ(y))\to_1 2$$
 Vediamo cosa succede ad 1:
 
 1. $$El_{Nat}(succ(0),2,(x,y).succ(y))\to_1 succ(\underbrace{El_{Nat}(0,2,(x,y).succ(y))}_{2}) = 3$$
+
+## E2: Somma tra naturali <a name="elsomma"></a>
+
+Ricordiamo ancora la regola di eliminazione dei naturali:
+
+$$E\text{-}{Nat})_ {dip}\quad \frac{M(z)\space type \space [\Gamma, z\in Nat]\quad c \in M(0) \quad e(x,y)\in M(succ(x)) \space [x\in Nat, y \in M(x)]}{El_{Nat}(z,c,e)\in M(z) \space [\Gamma, z\in Nat]}$$
+
+Che vogliamo adattare alla somma.
+
+Il risultato è un elemento dei numeri naturali $El_{Nat}(z,c,e)\in Nat [\Gamma, z \in Nat]$. Quindi nella ipotesi stessa inseriremo in $M(z)$ the type $Nat$:
+
+$$E\text{-}{Nat})_ {dip}\quad \frac{Nat\space type \space [\Gamma, z\in Nat]\quad c \in M(0) \quad e(x,y)\in M(succ(x)) \space [x\in Nat, y \in M(x)]}{El_{Nat}(z,c,e)\in Nat \space [\Gamma, z\in Nat]}$$
+
+Per la regola di conversione, possiamo ottenere c. Poiché $\omega + 0 = \omega$, allora $c = \omega$:
+
+$$E\text{-}{Nat})_ {dip}\quad \frac{\begin{matrix}
+Nat\space type \space [\omega\in Nat, z\in Nat]\\
+\omega \in Nat\space[\omega \in Nat]\\
+e(x,y)\in M(succ(x)) \space [x\in Nat, y \in M(x)]
+\end{matrix}}{El_{Nat}(z,\omega,e)\in Nat \space [\omega \in Nat, z\in Nat]}$$
+
+Rimane solo la $e$. Per $z=0$ abbiamo:
+
+$$\omega + 0 = \omega$$
+ 
+Per $z=succ(m)$ abbiamo:
+
+$$\omega + succ(m) = succ(\underbrace{\omega + m}_{y})$$
+
+$$E\text{-}{Nat})_ {dip}\quad \frac{\begin{matrix}Nat\space type \space [\omega\in Nat, z\in Nat]\\
+\omega \in Nat\space[\omega \in Nat]\\ 
+succ(y) \in Nat \space [\omega\in Nat, x \in Nat, y \in Nat]
+\end{matrix}}{El_{Nat}(z,\omega,(x,y).succ(y))\in Nat \space [\omega \in Nat, z\in Nat]}$$
+
+Verifichiamo i valori della somma:
+
+Per la regola di converisone abbiamo che:
+
+$$El_{Nat}(0,\omega, (x,y).succ(y))\to_1 \omega$$
+
+Ovvero $\omega + 0 = \omega$.
+
+Per $succ(0)$ abbiamo invece:
+
+$$El_{Nat}(succ(0), \omega, (x,y).succ(y))\to_1$$
+
+$$\to_1 succ(El_{Nat}(0,\omega,(x,y).succ(y)))\to_1 succ(\omega)\in Nat$$
+
+Ovvero  $\omega + 1 = succ(\omega)$
