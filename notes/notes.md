@@ -684,11 +684,13 @@ La somma disgiunta è un tipo induttivo come quelli già visti: $N_1$ (singolett
 
 Piccolo spoiler, questo tipo ci servirà a costruire gli insiemi finiti a partire dal tipo singoletto:
 
-$$Ex: \quad N_1 + N_1 \to \space type \space Bool$$
+Si può dimostrare ([EX4](#exbool)) la seguente relazione:
+$$N_1 + N_1 \to \space type \space Bool$$
 
 Prima di introdurre le regole relative al tipo, introduciamo brevemente la _somma disgiunta_.
 
-> Da [__Wikipedia__](https://en.wikipedia.org/wiki/Disjoint_union): 
+> Da [__Wikipedia__](https://en.wikipedia.org/wiki/Disjoint_union): Spiegazione della somma disgiunta
+> 
 Considera due set:
 
 $$\begin{cases}
@@ -707,7 +709,10 @@ La somma disgiunta dei due set $A_0$ e $A_1$ è l'unione dei due set indiaicati:
 
 $$A_0 \sqcup A_1 = A_0^\ast \sqcup A_1^\ast = \lbrace (5,0),(6,0),(7,0), (5,1),(6,1)  \rbrace$$
 
-![Disjointsum](./imgs/disjointsum.png =250x)
+Le funzioni $inl(a)$ e $inr(a)$ che verranno introdotte nelle regole del tipo, servono a trasformare l'elemento da $A$ in $A^\ast$
+
+> $\space$
+
 
 ### Regole di Formazione
 
@@ -726,11 +731,66 @@ $$\text{I$_1$-+)}\quad \frac{b \in B \space [\Gamma]\quad B+C \space type \space
 $$\text{I$_2$-+)}\quad \frac{
   c \in C \space [\Gamma]\quad B+C \space type \space [\Gamma]}{inr(c) \in B+C \space [\Gamma]}$$
 
+Ovviamente per come sono costruiti i due tipi sopra, solo $inr(c)$ ed $inl(b)$ fanno parte del tipo somma disgiunta $B+C$, nel caso degenere invece in cui si ha $A+A$ non importa come mettiamo il termine $a$, $inr(a)$ ed $inl(a)$ sono entrambi $\in A+A$, questo implica che:
+
+$$A + A\quad \text{non è isomorfo ad}\quad A$$
+
 ### Regole di uguaglianza
 * **Regola di uguaglianza**
 
 $$\text{eq-F-+)}\quad\frac{B_1 = B_2 \space type \space [\Gamma]\quad C_1 = C_2 \space type \space [\Gamma]}{B_1 + C_1 = B_2 + C_2\space type \space [\Gamma]}$$
 
+### Regole di eliminazione 
+
+$$\text{E-+)}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma, z\in B+C]\qquad t \in B+C \space [\Gamma]\\
+e_B(x_1)\in M(inl(x)) \space [\Gamma, x_1\in B] \quad e_C(x_2)\in M(inr(x_2))\space [\Gamma, x_2 \in C]
+\end{matrix}}{El_+(t, e_B, e_C)\in M(t)\space [\Gamma]} $$
+
+Dove $e_B$ ed $e_C$ indicano rispettivamente cosa succede se l'elemento viene inserito da sinistra o da destra.
+
+Come sempre inseriamo la regola variante più pratica:
+
+$$\text{E-+)}_{dip}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma, z\in B+C]\\
+e_B(x_1)\in M(inl(x)) \space [\Gamma, x_1\in B] \quad e_C(x_2)\in M(inr(x_2))\space [\Gamma, x_2 \in C]
+\end{matrix}}{El_+(z, e_B, e_C)\in M(z)\space [\Gamma, z \in B+C]} $$
+
+### Regole di conversione
+Le regole sono due, perché dobbiamo coprire i casi in cui l'elemento provenga da sinistra o da destra.
+
+* **Regola di Conversione per elemento da sinistra**
+  
+$$\text{C1)}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma, z\in B+C] \quad b \in B \space [\Gamma]\\
+e_B(x_1)\in M(inl(x)) \space [\Gamma, x_1\in B] \quad e_C(x_2)\in M(inr(x_2))\space [\Gamma, x_2 \in C]
+\end{matrix}}{El_+(inj(b), e_B, e_C)=e_B(b)\in M(inl(b))\space [\Gamma]}$$
+
+* **Regola di Conversione per elemento da destra**
+  
+$$\text{C2)}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma, z\in B+C] \quad c \in C \space [\Gamma]\\
+e_B(x_1)\in M(inl(x)) \space [\Gamma, x_1\in B] \quad e_C(x_2)\in M(inr(x_2))\space [\Gamma, x_2 \in C]
+\end{matrix}}{El_+(inj(b), e_B, e_C)=e_C(c)\in M(inr(c))\space [\Gamma]}$$
+
+
+Possiamo interpretare la formula di relazione del tipo somma disgiunta come un OR logico (a sinistra):
+
+$$\text{E-+)}_{dip}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma, z\in B+C]\\
+e_B(x_1)\in M(inl(x)) \space [\Gamma, x_1\in B] \quad e_C(x_2)\in M(inr(x_2))\space [\Gamma, x_2 \in C]
+\end{matrix}}{El_+(z, e_B, e_C)\in M(z)\space [\Gamma, z \in B+C]} $$
+
+$$\downarrow$$
+
+$$\frac{\begin{matrix}
+\xi \space prop \space [\Gamma]\\
+\xi \text{ è vero} \space [\Gamma, \beta \text{ è vero}] \quad \xi \text{ è vero} \space [\Gamma, \gamma \text{ è vero}]
+\end{matrix}}{\xi \text{ è vero} \space [\Gamma, \beta\lor \gamma \text{ è vero}]} $$
+
+$$\downarrow$$
+
+$$\frac{\beta\space prop \space [\Gamma] \qquad \gamma \space prop \space [\Gamma]}{\beta \lor\gamma \space prop\space [\Gamma]}$$
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 16</span></div>
 
@@ -803,6 +863,7 @@ $$\text{eq-F-+)}\quad\frac{B_1 = B_2 \space type \space [\Gamma]\quad C_1 = C_2 
 1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
 2. [Eliminatore della somma tra naturali](#elsomma)
 3. [Lunghezza di una lista di naturali](#exlh)
+4. [Il tipo `Bool` è la somma digiunta di due tipi singoletto](#exbool)
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
@@ -972,4 +1033,16 @@ $$El_{list}(nil, 0, (x,w,y).succ(y))\to_1 0$$
 Mentre per $z = cons(nil, a)\space \space a \in A$
 
 $$El_{list}(cons(nil,a),0,(x,w,y).succ(y))\to_1$$
-$$\to_1 succ(El_{list}(nil,0,(x,w,y).succ(y)))\to_1 succ(0) \equiv 1
+$$\to_1 succ(El_{list}(nil,0,(x,w,y).succ(y)))\to_1 succ(0) \equiv 1$$
+
+## E4: Il tipo `Bool` è la somma digiunta di due tipi singoletto <a name="exbool"></a>
+Prendiamo un generico singoletto $N_1$ ed il suo elemento canonico $\ast$.
+
+Allora possiamo definire i valori `true` e `false` tramite l'inserimento a sinistra e destra:
+
+$$\ast \in N_1 \space \to \begin{cases}
+inl(\ast) &:= true\\
+inr(\ast) &:= false
+\end{cases}$$
+
+Quindi $N_1 + N_1$ è isomorfo a $Bool$
