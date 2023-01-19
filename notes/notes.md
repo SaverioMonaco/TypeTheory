@@ -1,4 +1,4 @@
-# Appunti di Teoria dei Tipi:
+# Appunti di Teoria dei Tipi: <a name="su"></a>
 
 ---
 
@@ -742,6 +742,7 @@ S \in list(A)\space [\Gamma] \quad a \in A \space [\Gamma]\\
 
 ---
 ---
+[Torna su](#su)
 # Esercizi: <a name="exs"></a>
 0. [Due è un numero naturale](#duenat)
 1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
