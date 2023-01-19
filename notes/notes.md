@@ -2,15 +2,16 @@
 
 ---
 
-1. [Introduzione della Teoria dei Tipi](#int)
-2. [Prime regole della teoria dei tipi dipendenti di Martin-Löf](#reglof)
-3. [Regole strutturali](#regstru)
-4. [Regole (principali) del tipo singoletto](#regsin)
-5. [Altre regole strutturali derivabili](#regdev)
-6. [Schema generale di produzione di regole definenti un tipo e i suoi termini](#protip)
-7. [Perché la teoria dei tipi può essere pensata come un linguaggio di programmazione funzionale?](#tipcod)
-8. [Regole del tipo dei numeri naturali](#regnat)
-9. [Somma tra numeri naturali](#sommanat)
+1.  [Introduzione della Teoria dei Tipi](#int)
+2.  [Prime regole della teoria dei tipi dipendenti di Martin-Löf](#reglof)
+3.  [Regole strutturali](#regstru)
+4.  [Regole (principali) del tipo singoletto](#regsin)
+5.  [Altre regole strutturali derivabili](#regdev)
+6.  [Schema generale di produzione di regole definenti un tipo e i suoi termini](#protip)
+7.  [Perché la teoria dei tipi può essere pensata come un linguaggio di programmazione funzionale?](#tipcod)
+8.  [Regole del tipo dei numeri naturali](#regnat)
+9.  [Somma tra numeri naturali](#sommanat)
+10. [Tipo delle liste di un tipo](#liste)
 ---
 
 ## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
@@ -553,6 +554,189 @@ Non esiste nessuna strategia deterministica per ridurre $0+z$ a $z$
 
 > La relazione di uguaglianza definizionale in Nat con variabili **NON** è in generale la relazione di uguaglianza aritmetica.
 
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 14</span></div>
+
+## 10. Tipo delle liste di un tipo <a name="liste"></a>
+
+### Regole di formazione
+* **Regola di formazione delle lise**
+
+$$\text{F-List)}\quad \frac{A \space type \space [\Gamma]}{list(A) \space type \space [\Gamma]}$$
+
+* **Regola di uguaglianza tra tipi**
+
+$$\text{Eq-list}\quad \frac{A_1 = A_2 \space type \space [\Gamma]}{list(A_1)=list(A_2)\space type \space[\Gamma]}$$
+
+Prima volta che utilizziamo il giudizio di uguaglianza tra tipi, abbiamo bisogno di scrivere il fatto che le liste preservano l'uguaglianza tra tipi. Questo ci servirà nel caso in cui $A_1$ e $A_2$ sono dei tipi dipendenti.
+
+### Regole di introduzione
+
+* **Regola di introduzione della lista vuota**
+
+  Per introdurre la lista vuota, non possiamo mettere come ipotesi "$[\Gamma] \space cont$" non è sufficiente perché il tipo $A$ potrebbe essere mal-formato, ovvero non tipato. E' una sottigliezza.
+
+$$\text{$I_1$-list)}\quad \frac{list(A) \space type \space [\Gamma]}{nil \in list(A)\space [\Gamma]}$$
+
+* **Regola di estensione della lista**
+
+   $$\text{$I_2$-list)}\quad\frac{S \in list(A)\space [\Gamma]\quad a\in A\space [\Gamma]}{\underbrace{cons}_{\text{constructor}}(S,a) \in list(A)\space [\Gamma]}$$
+
+   $cons(S,a)$ corrisponde alla lista S con a appendato.
+
+* **Regola di uguaglianza delle liste**
+
+   $$\text{eq-$I_2$-list)}\quad\frac{S_1 = S_2 \in list(A)\space [\Gamma]\quad a_1 = a_2 \in A\space [\Gamma]}{cons(s_1,a_1)= cons(s_2,a_2) \in list(A)\space [\Gamma]}$$
+
+**Nota**: non mettiamo una regola di uguaglianza delle liste vuote perché $nil$ è una costante ed è uguale a se stessa per la riflessività della uguaglianza.
+
+### Regole di riduzione
+Prima di introdurre le regole di riduzione ed eliminazione, notiamo che esiste una relazione insiemistica tra i numeri naturali e le liste di singoletti:
+
+$$\begin{matrix}
+& Nat & \longleftrightarrow & List(N_1) \\
+\hline
+h\space type\space list(N_1) & lenght(h) & \longleftrightarrow & h \\
+& 0 & \longleftrightarrow & nil\\
+& & \vdots & \\
+& 5 & \longleftrightarrow & [\ast,\ast,\ast,\ast,\ast]\\
+& & \vdots & \\
+\end{matrix}$$
+
+* **Regole di riduzione**
+
+$$\frac{s_1\to_1 s_2}{cons(s_1,a)\to_1 cons(s_2,a)}\qquad \frac{a_1\to a_2}{cons(s,a_1)\to_1 cons(s,a_2)}$$
+
+Notiamo che se abbiamo una lista del tipo singoletto $N_1$
+
+$$\begin{cases}
+cons(nil, \ast) \equiv [\ast]\\
+cons(nil, x) \space \space x \in N_1
+\end{cases}$$
+
+Entrambe sono forme normali e non avremo modo per dire che sono uguali (definizionalmente).
+
+### Regole di eliminazione
+
+* **Prima regola di eliminazione**
+
+  $$\text{E-list)}\quad\frac{\begin{matrix}
+  M(z) \space type \space [\Gamma,z\in list(A)]\quad t\in list(A)\space [\Gamma] \quad c \in M(nil)\space [\Gamma]\\
+  e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+  \end{matrix}}{El_{list}(t, c, (x,w,y).e(x,w,y)) \in M(t) \space [\Gamma]}$$
+
+  Come al solito, per motivi pratici conviene usare la forma dipendente: 
+
+  $$\text{E-list)}_{dip}\quad\frac{\begin{matrix} M(z) \space type \space [\Gamma,z\in list(A)]\quad c \in M(nil)\space [\Gamma]\\
+  e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+  \end{matrix}}{El_{list}(z, c, (x,w,y).e(x,w,y)) \in M(z) \space [\Gamma, z\in list(A)]}$$
+
+  Dove $M(z)$ è una meta-variabile per un tipo qualsiasi, come meta-variabile potrei usare anche la lettera $D$:
+
+  $$\text{E-list)}_{dip}\quad\frac{\begin{matrix} D \space type \space [\Gamma,z\in list(A)]\quad c \in D[z/nil]\space [\Gamma]\\
+  e(x,w,y) \in D[z/cons(x,w)]\space [\Gamma, x\in list(A), w \in A, y \in D[z/x]]
+  \end{matrix}}{El_{list}(z, c, e) \in D \space [\Gamma, z\in list(A)]}$$
+
+* **Regola di uguaglianza dell'eliminatore**
+
+  $$\text{Eq-E-list)}_{dip}\quad\frac{\begin{matrix} t_1 = t_2 \in list(A) \space [\Gamma] \quad c_1 = c_2 \in M(nil) \space [\Gamma]\\
+  e_1(x,w,y) = e_2(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+  \end{matrix}}{El_{list}(t_1, c_1, e_1) = El_{list}(t_2, c_2, e_2) \in M(t_1)\space [\Gamma]}$$
+
+  Dove $M(t_1)= M(t_2)$ per le regole di costruzione quindi nella tesi avremmo anche potuto scrivere $M(t_2)$.
+
+* **Regole di riduzione dell'eliminatore**
+
+  $$\frac{t_1\to_1 t_2}{El_{list}(t_1,c,e)\to_1 El_{list}(t_2, c,e)}\qquad\frac{c_1\to_1 c_2}{El_{list}(t,c_1,e)\to_1 El_{list}(t,c_2,e)}$$
+
+  (Assioma)
+
+  $$El_{list}(nil,c,e)\to_1 c$$
+
+* **Regole di conversione**
+
+  1.
+
+    $$C_1\text{-list})\qquad \frac{\begin{matrix}
+    M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
+    e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+    \end{matrix}}{El_{list}(nil,c,e)=c \in M(nil)\space [\Gamma]}$$
+
+  2. 
+
+    $$C_2\text{-list})\qquad \frac{\begin{matrix}
+    M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
+    S \in list(A)\space [\Gamma] \quad a \in A \space [\Gamma]\\
+    \overbrace{e(x,w,y)}^{h} \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+    \end{matrix}}{El_{list}(cons(S,a),c,e)=\underbrace{e(s,a,El_{list}(s,c,e))}_{h[x/s, w/a, y/El_{list}(s,c,e)]} \in M(cons(s,a))\space [\Gamma]}$$
+
+    * $\beta$-riduzione associata a $C_2$:
+
+      $$El_{list}(cons(s,a),c,e)\to_1 e(s,a,El_{list}(s,c,e))$$ 
+
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 15</span></div>
+
+## 11. todo<a name=""></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 ---
@@ -560,6 +744,7 @@ Non esiste nessuna strategia deterministica per ridurre $0+z$ a $z$
 0. [Due è un numero naturale](#duenat)
 1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
 2. [Eliminatore della somma tra naturali](#elsomma)
+3. [Lunghezza di una lista di naturali](#exlh)
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
@@ -687,3 +872,5 @@ $$El_{Nat}(succ(0), \omega, (x,y).succ(y))\to_1$$
 $$\to_1 succ(El_{Nat}(0,\omega,(x,y).succ(y)))\to_1 succ(\omega)\in Nat$$
 
 Ovvero  $\omega + 1 = succ(\omega)$
+
+## E3: Definire tramite deliminatore delle liste: $lh(z)\in Nat \space [z\in list(Nat)]$ <a name="exlh"></a>
