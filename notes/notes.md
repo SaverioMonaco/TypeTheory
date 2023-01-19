@@ -876,3 +876,44 @@ $$\to_1 succ(El_{Nat}(0,\omega,(x,y).succ(y)))\to_1 succ(\omega)\in Nat$$
 Ovvero  $\omega + 1 = succ(\omega)$
 
 ## E3: Definire tramite deliminatore delle liste: $lh(z)\in Nat \space [z\in list(Nat)]$ <a name="exlh"></a>
+
+Come sempre, partiamo dalla definizione $\text{E-list)}_{dip}$
+
+$$\text{E-list)}_{dip}\quad\frac{\begin{matrix} M(z) \space type \space [\Gamma,z\in list(A)]\quad c \in M(nil)\space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(z, c, (x,w,y).e(x,w,y)) \in M(z) \space [\Gamma, z\in list(A)]}$$
+
+L'eliminatore è un programma che prende una lista di naturali: $z, \space z\in list(Nat)$ che produce in output la _lunghezza della lista_ il quale è un termine intero: $lh(z)\in Nat$.
+
+Quindi $M(z) \equiv Nat\space$ e $\space list(A)\equiv list(Nat)$
+
+$$\frac{\begin{matrix} Nat \space type \space [\Gamma,z\in list(Nat)]\quad c \in M(nil)\space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(z, c, (x,w,y).e(x,w,y)) \in Nat \space [\Gamma, z\in list(Nat)]}$$
+
+Per quanto riguarda l'elemento $c$, questo coincide col primo elemento della ricorsione, $0\equiv c \in Nat$
+
+$$\frac{\begin{matrix} Nat \space type \space [\Gamma,z\in list(Nat)]\quad 0 \in Nat\space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(z, 0, (x,w,y).e(x,w,y)) \in Nat \space [\Gamma, 0\in Nat, z\in list(Nat)]}$$
+
+Per quanto riguarda la funzione $e$, notiamo che:
+
+$$lh(cons(S,a)) = succ(lh(S))$$
+
+Ovvero, la lunghezza di una lista + un elemento equivale alla lunghezza della lista + 1
+
+$$\frac{\begin{matrix} Nat \space type \space [z\in list(Nat)]\quad 0 \in Nat\space [\space]\\
+succ(y) \in Nat \space [x\in list(Nat), w \in Nat, y \in Nat]
+\end{matrix}}{El_{list}(z, 0, (x,w,y).succ(y)) \in Nat \space [0\in Nat, z\in list(Nat)]}$$
+
+(Per completezza, bisognerebbe derivare anche ogni ipotesi)
+
+Per la regola di conversione abbiamo:
+
+$$El_{list}(nil, 0, (x,w,y).succ(y))\to_1 0$$
+
+Mentre per $z = cons(nil, a)\space \space a \in A$
+
+$$El_{list}(cons(nil,a),0,(x,w,y).succ(y))\to_1$$
+$$\to_1 succ(El_{list}(nil,0,(x,w,y).succ(y)))\to_1 succ(0) \equiv 1
