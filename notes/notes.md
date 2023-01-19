@@ -659,22 +659,22 @@ $$El_{list}(nil,c,e)\to_1 c$$
 
   1.
 
-    $$C_1\text{-list})\qquad \frac{\begin{matrix}
-    M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
-    e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
-    \end{matrix}}{El_{list}(nil,c,e)=c \in M(nil)\space [\Gamma]}$$
+$$C_1\text{-list})\qquad \frac{\begin{matrix}
+M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(nil,c,e)=c \in M(nil)\space [\Gamma]}$$
 
   2. 
 
-    $$C_2\text{-list})\qquad \frac{\begin{matrix}
-    M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
-    S \in list(A)\space [\Gamma] \quad a \in A \space [\Gamma]\\
-    \overbrace{e(x,w,y)}^{h} \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
-    \end{matrix}}{El_{list}(cons(S,a),c,e)=\underbrace{e(s,a,El_{list}(s,c,e))}_{h[x/s, w/a, y/El_{list}(s,c,e)]} \in M(cons(s,a))\space [\Gamma]}$$
+$$C_2\text{-list})\qquad \frac{\begin{matrix}
+M(z) \space type \space [\Gamma,z\in list(A)] \quad c\in M(nil) \space [\Gamma]\\
+S \in list(A)\space [\Gamma] \quad a \in A \space [\Gamma]\\
+\overbrace{e(x,w,y)}^{h} \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(cons(S,a),c,e)=\underbrace{e(s,a,El_{list}(s,c,e))}_{h[x/s, w/a, y/El_{list}(s,c,e)]} \in M(cons(s,a))\space [\Gamma]}$$
 
-    * $\beta$-riduzione associata a $C_2$:
+  * $\beta$-riduzione associata a $C_2$:
 
-      $$El_{list}(cons(s,a),c,e)\to_1 e(s,a,El_{list}(s,c,e))$$ 
+    $$El_{list}(cons(s,a),c,e)\to_1 e(s,a,El_{list}(s,c,e))$$ 
 
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 15</span></div>
