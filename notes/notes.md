@@ -520,7 +520,7 @@ $$\to_1 succ(El_{Nat}(0,\omega,(x,y).succ(y)))\to_1 succ(\omega)\in Nat$$
 
 Ovvero  $\omega + 1 = succ(\omega)$
 
-==L'uguaglianza definizionale tra numeri naturali in teoria dei tipi di Martin-Loef (con le regole date) **NON** è l'uguaglianza aritmetica in matematica.==
+> _"L'uguaglianza definizionale tra numeri naturali in teoria dei tipi di Martin-Loef (con le regole date) **NON** è l'uguaglianza aritmetica in matematica."_
 
 ---
 ---
