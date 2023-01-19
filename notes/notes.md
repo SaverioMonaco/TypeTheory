@@ -641,19 +641,19 @@ e(x,w,y) \in D[z/cons(x,w)]\space [\Gamma, x\in list(A), w \in A, y \in D[z/x]]
 
 * **Regola di uguaglianza dell'eliminatore**
 
-  $$\text{Eq-E-list)}_{dip}\quad\frac{\begin{matrix} t_1 = t_2 \in list(A) \space [\Gamma] \quad c_1 = c_2 \in M(nil) \space [\Gamma]\\
-  e_1(x,w,y) = e_2(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
-  \end{matrix}}{El_{list}(t_1, c_1, e_1) = El_{list}(t_2, c_2, e_2) \in M(t_1)\space [\Gamma]}$$
+$$\text{Eq-E-list)}_{dip}\quad\frac{\begin{matrix} t_1 = t_2 \in list(A) \space [\Gamma] \quad c_1 = c_2 \in M(nil) \space [\Gamma]\\
+e_1(x,w,y) = e_2(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(t_1, c_1, e_1) = El_{list}(t_2, c_2, e_2) \in M(t_1)\space [\Gamma]}$$
 
-  Dove $M(t_1)= M(t_2)$ per le regole di costruzione quindi nella tesi avremmo anche potuto scrivere $M(t_2)$.
+Dove $M(t_1)= M(t_2)$ per le regole di costruzione quindi nella tesi avremmo anche potuto scrivere $M(t_2)$.
 
 * **Regole di riduzione dell'eliminatore**
 
-  $$\frac{t_1\to_1 t_2}{El_{list}(t_1,c,e)\to_1 El_{list}(t_2, c,e)}\qquad\frac{c_1\to_1 c_2}{El_{list}(t,c_1,e)\to_1 El_{list}(t,c_2,e)}$$
+$$\frac{t_1\to_1 t_2}{El_{list}(t_1,c,e)\to_1 El_{list}(t_2, c,e)}\qquad\frac{c_1\to_1 c_2}{El_{list}(t,c_1,e)\to_1 El_{list}(t,c_2,e)}$$
 
-  (Assioma)
+(Assioma)
 
-  $$El_{list}(nil,c,e)\to_1 c$$
+$$El_{list}(nil,c,e)\to_1 c$$
 
 * **Regole di conversione**
 
