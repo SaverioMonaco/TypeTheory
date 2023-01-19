@@ -707,9 +707,9 @@ La somma disgiunta dei due set $A_0$ e $A_1$ è l'unione dei due set indiaicati:
 
 $$A_0 \sqcup A_1 = A_0^\ast \sqcup A_1^\ast = \lbrace (5,0),(6,0),(7,0), (5,1),(6,1)  \rbrace$$
 
-<div><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/PolygonsSetDisjointUnion.svg"
+<div style="background-color: white"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/PolygonsSetDisjointUnion.svg"
      alt="Wikipedia - Disjoint Sum"
-     style="float: left; margin-right: 10px; background-color: white" /></div>
+     style="float: left; margin-right: 10px;" /></div>
 
 
 ### Regole di Formazione
