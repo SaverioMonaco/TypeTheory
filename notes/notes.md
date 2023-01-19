@@ -12,6 +12,8 @@
 8.  [Regole del tipo dei numeri naturali](#regnat)
 9.  [Somma tra numeri naturali](#sommanat)
 10. [Tipo delle liste di un tipo](#liste)
+
+* [Esercizi](#exs)
 ---
 
 ## 1. Introduzione della Teoria dei Tipi <a name="int"></a>
@@ -740,7 +742,7 @@ Entrambe sono forme normali e non avremo modo per dire che sono uguali (definizi
 
 ---
 ---
-# Esercizi:
+# Esercizi: <a name="exs"></a>
 0. [Due è un numero naturale](#duenat)
 1. [z+2 è un numero naturale se z è un numero naturale](#zpiuduenat)
 2. [Eliminatore della somma tra naturali](#elsomma)
