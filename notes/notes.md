@@ -622,22 +622,22 @@ Entrambe sono forme normali e non avremo modo per dire che sono uguali (definizi
 
 * **Prima regola di eliminazione**
 
-  $$\text{E-list)}\quad\frac{\begin{matrix}
-  M(z) \space type \space [\Gamma,z\in list(A)]\quad t\in list(A)\space [\Gamma] \quad c \in M(nil)\space [\Gamma]\\
-  e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
-  \end{matrix}}{El_{list}(t, c, (x,w,y).e(x,w,y)) \in M(t) \space [\Gamma]}$$
+$$\text{E-list)}\quad\frac{\begin{matrix}
+M(z) \space type \space [\Gamma,z\in list(A)]\quad t\in list(A)\space [\Gamma] \quad c \in M(nil)\space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(t, c, (x,w,y).e(x,w,y)) \in M(t) \space [\Gamma]}$$
 
-  Come al solito, per motivi pratici conviene usare la forma dipendente: 
+Come al solito, per motivi pratici conviene usare la forma dipendente: 
 
-  $$\text{E-list)}_{dip}\quad\frac{\begin{matrix} M(z) \space type \space [\Gamma,z\in list(A)]\quad c \in M(nil)\space [\Gamma]\\
-  e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
-  \end{matrix}}{El_{list}(z, c, (x,w,y).e(x,w,y)) \in M(z) \space [\Gamma, z\in list(A)]}$$
+$$\text{E-list)}_{dip}\quad\frac{\begin{matrix} M(z) \space type \space [\Gamma,z\in list(A)]\quad c \in M(nil)\space [\Gamma]\\
+e(x,w,y) \in M(cons(x,w)) \space [\Gamma, x\in list(A), w \in A, y \in M(x)]
+\end{matrix}}{El_{list}(z, c, (x,w,y).e(x,w,y)) \in M(z) \space [\Gamma, z\in list(A)]}$$
 
-  Dove $M(z)$ è una meta-variabile per un tipo qualsiasi, come meta-variabile potrei usare anche la lettera $D$:
+Dove $M(z)$ è una meta-variabile per un tipo qualsiasi, come meta-variabile potrei usare anche la lettera $D$:
 
-  $$\text{E-list)}_{dip}\quad\frac{\begin{matrix} D \space type \space [\Gamma,z\in list(A)]\quad c \in D[z/nil]\space [\Gamma]\\
-  e(x,w,y) \in D[z/cons(x,w)]\space [\Gamma, x\in list(A), w \in A, y \in D[z/x]]
-  \end{matrix}}{El_{list}(z, c, e) \in D \space [\Gamma, z\in list(A)]}$$
+$$\text{E-list)}_{dip}\quad\frac{\begin{matrix} D \space type \space [\Gamma,z\in list(A)]\quad c \in D[z/nil]\space [\Gamma]\\
+e(x,w,y) \in D[z/cons(x,w)]\space [\Gamma, x\in list(A), w \in A, y \in D[z/x]]
+\end{matrix}}{El_{list}(z, c, e) \in D \space [\Gamma, z\in list(A)]}$$
 
 * **Regola di uguaglianza dell'eliminatore**
 
