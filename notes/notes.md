@@ -1046,3 +1046,6 @@ inr(\ast) &:= false
 \end{cases}$$
 
 Quindi $N_1 + N_1$ è isomorfo a $Bool$
+
+---
+[Torna su](#exs)
