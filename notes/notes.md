@@ -830,7 +830,9 @@ M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1
 a \in A \space [\Gamma]\quad b \in A \space [\Gamma] \\
 t \in Id (A,a,b)\space [\Gamma]\\
 e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
-\end{matrix}}{El_{Id}(t,(x).e(x))\in M(a,b,t)\space [\Gamma]}\\[1cm]$$
+\end{matrix}}{El_{Id}(t,(x).e(x))\in M(a,b,t)\space [\Gamma]}$$
+
+$\space$
 
 $$\text{E-Id)}_{dip}\quad \frac{\begin{matrix}
 M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1,z_2)]\\
