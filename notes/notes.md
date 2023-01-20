@@ -885,7 +885,7 @@ Questo tipo (induttivo) è un _"potenziamento (indiciato) espressivo"_ del tipo 
 
 $\dot{\cup}$ è il simbolo di unione disgiunta,
 
-Dal punto di vista set-teoretico : rappresenta l'unione disgiunta di una famiglia di insiemi:
+Dal punto di vista set-teoretico la somma indiciata forte rappresenta l'unione disgiunta di una famiglia di insiemi:
 
 $$\dot{\cup}_{x\in B \space set}C(x) := \lbrace(b,c) \quad b\in B \space and \space c\in C(b)\rbrace$$
 
