@@ -792,6 +792,7 @@ $$\frac{\begin{matrix}
 $$\downarrow$$
 
 $$\frac{\beta\space prop \space [\Gamma] \qquad \gamma \space prop \space [\Gamma]}{\beta \lor\gamma \space prop\space [\Gamma]}$$
+
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 16</span></div>
 
@@ -839,6 +840,11 @@ e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
 ### Regola di conversione
 
 $$\text{C-Id)}\quad \frac{a\in A\space [\Gamma]\quad e(x) \in M(x,x,id(x))\space [\Gamma, x\in A]}{El_{Id}(id(a),(x).e(x)) = e(a) \in M(a,a,id(a))\space [\Gamma]}$$
+
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 17</span></div>
+
+## 13. <a name=""></a>
 
 
 
