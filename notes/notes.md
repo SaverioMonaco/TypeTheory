@@ -843,6 +843,38 @@ e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
 
 $$\text{C-Id)}\quad \frac{a\in A\space [\Gamma]\quad e(x) \in M(x,x,id(x))\space [\Gamma, x\in A]}{El_{Id}(id(a),(x).e(x)) = e(a) \in M(a,a,id(a))\space [\Gamma]}$$
 
+### Lemma
+
+E' derivabile la seguente proprietà:
+
+$$\frac{a=b\in A\space [\Gamma]}{id(a)\in Id(A,a,b)}$$
+
+Ovvero il tipo uguaglianza proposizionale rende uguali termini che sono uguali definizionalmente, in generale il viceversa **NON** vale
+
+$$p\in Id(A,a,b) \qquad\begin{matrix}\longrightarrow\\ \leftarrow NO\end{matrix}\qquad a=b\in A\space [\Gamma] $$
+
+**Dimostrazione:**
+
+Sappiamo che:
+
+$$\frac{\begin{matrix}a=b\in A\space [\Gamma] \\
+\hline
+a\in A\space [\Gamma]\end{matrix}}{id(a)\in Id(A,a,a)\space[\Gamma]}$$
+
+Inoltre dalle regole di del tipo abbiamo:
+
+$$\frac{\begin{matrix}a\in A \space [\Gamma]\\
+\hline 
+A \space type \space [\Gamma]\end{matrix}}{A = A \space type \space [\Gamma]}$$
+
+Inoltre sempre dall'ipotesi $a\in A\space [\Gamma]$ e usando l'ipotesi $a=b\in A\space [\Gamma]$ abbiamo:
+
+$$\frac{a\in A \space [\Gamma]\quad a=b\in A \space [\Gamma]}{Id(A,a,a)=Id(A,a,b) \space type \space [\Gamma]}$$
+
+Combinando il tutto otteniamo
+
+$$\frac{id(a)\in Id(A,a,a) \space [\Gamma]\quad Id(A,a,a)=Id(A,a,b) \space type \space [\Gamma]}{id(a)\in Id(A,a,b)\space [\Gamma]}$$
+
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 17</span></div>
 
@@ -910,6 +942,9 @@ $$\text{C-Id)}\quad \frac{a\in A\space [\Gamma]\quad e(x) \in M(x,x,id(x))\space
 2. [Eliminatore della somma tra naturali](#elsomma)
 3. [Lunghezza di una lista di naturali](#exlh)
 4. [Il tipo `Bool` è la somma digiunta di due tipi singoletto](#exbool)
+5. [Simmetria dell'uguaglianza](#exidsymm)
+6. [Successore conserva l'uguaglianza proposizionale](#exsuccid)
+   
 ---
 ## E0: $2\in Nat\space [\space]$ <a name="duenat"></a>
 Vogliamo dimostrare che 2 appartiene ai naturali (con contesto vuoto, non ci serve).
@@ -1092,6 +1127,68 @@ inr(\ast) &:= false
 \end{cases}$$
 
 Quindi $N_1 + N_1$ è isomorfo a $Bool$
+
+## E5: Simmetria dell'uguaglianza <a name="exidsymm"></a>
+In questo esercizio useremo l'eliminatore del tipo Uguaglianza proposizionale. Questo esercizio si risolve in maniera leggermente diversa, considerando il concetto di _"prova/testimone"_.
+
+In particolare, in questo esercizi, l'obiettivo è trovare una funzione:
+
+$$h_1(z_1,z_2,z_3)\in Id(A,z_2,z_1) \space[\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1, z_2)]$$
+
+Che cosa vuol dire?
+
+Vuol dire che vogliamo trovare un qualcosa $h_1$ che appartenga al tipo $Id(A,z_2,z_1)$, ovvero, vogliamo trovare un elemento di un tipo, se l'elemento appartiene al tipo, e se il tipo è abitato, vuol dire che è proposizionalmente vero.
+
+Quindi, vogliamo trovare una prova $(h_1)$ che $z_2=z_1$ in $A$ sotto il contesto che $z_1=z_2$ è vero $z_3\in Id(A,z_1,z_2)$
+
+Iniziamo con la dimostrazione: la regola di eliminazione dipendente è:
+
+$$\text{E-Id)}_{dip}\quad \frac{\begin{matrix}
+M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1,z_2)]\\
+e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
+\end{matrix}}{El_{Id}(t,(x).e(x))\in M(a,b,t) \space [\Gamma, z_1\in A, z_2 \in A, z_3\in Id(A,z_1,z_2)]}$$
+
+E come detto, la conclusione del giudizio è:
+
+$$\frac{?}{h_1(z_1,z_2,z_3)\in Id(A,z_2,z_1)\space [\Gamma,z_1\in A,z_2\in A, z_3\in Id(A,z_1,z_2)]}$$
+
+Comparando le due regole otteniamo:
+
+$$M(z_1,z_2,z_3)=Id(A,z_2,z_1)$$
+
+$$\frac{\begin{matrix}
+Id(A,z_2,z_1)\space type \space [\Gamma, z_1\in A,z_2\in A, _3 \in Id(A,z_1,z_2)]\\
+? \in Id(A,x,x) \space [\Gamma, x\in A]
+\end{matrix}}{h_1(z_1,z_2,z_3)\in Id(A,z_2,z_1)\space [\Gamma,z_1\in A,z_2\in A, z_3\in Id(A,z_1,z_2)]}$$
+
+In "?" abbiamo bisogno di una prova di $Id(A,x,x)$ che è $id(x)$ per le regole di introduzione:
+
+$$\frac{\begin{matrix}
+Id(A,z_2,z_1)\space type \space [\Gamma, z_1\in A,z_2\in A, _3 \in Id(A,z_1,z_2)]\\
+id(x) \in Id(A,x,x) \space [\Gamma, x\in A]
+\end{matrix}}{h_1(z_1,z_2,z_3)\in Id(A,z_2,z_1)\space [\Gamma,z_1\in A,z_2\in A, z_3\in Id(A,z_1,z_2)]}$$
+
+## E6: Successore conserva l'uguaglianza proposizionale <a name="exsuccid"></a>
+Analogamente all'esercizio precedente possiamo dimostrare tramite la stessa regola che il successore conserva l'uguaglianza proposizionale, ovvero la conclusione sarà:
+
+$$h_2(z_1,z_2,z_3)\in Id(Nat, succ(z_1),succ(z_2)) \space [z_1\in Nat, z_2\in Nat, z_3\in Id(Nat,z_1,z_2)]$$
+
+Ovvero se noi abbiamo una prova che $z_1 = z_2$  ovvero $z_3\in Id(Nat,z_1,z_2)$ vogliamo verificare che $succ(z_1)= succ(z_2)$ ovvero $h_2(z_1,z_2,z_3)\in Id(Nat, succ(z_1),succ(z_2))$
+
+Iniziamo con la dimostrazione:
+
+$$\frac{?}{h_2(z_1,z_2,z_3)\in Id(Nat, succ(z_1),succ(z_2)) \space [z_1\in Nat, z_2\in Nat, z_3\in Id(Nat,z_1,z_2)]}$$
+
+$M(z_1,z_2,z_3) = Id(Nat,succ(z_1),succ(z_2))$ (Per farlo dovremmo dimostrare $Id(Nat,succ(z_1),succ(z_2)) \space type \space [\Sigma]$)
+
+$$\frac{\begin{matrix}
+Id(Nat,succ(z_1), succ(z_2))\space type \space [z_1\in Nat, z_2\in Nat]\\
+id(succ(x)) \in Id(Nat,succ(x), succ(x)) \space [x\in Nat] \quad \text{(Da dimostrare)}
+\end{matrix}}{h_2(z_1,z_2,z_3)\in Id(Nat, succ(z_1),succ(z_2)) \space [z_1\in Nat, z_2\in Nat, z_3\in Id(Nat,z_1,z_2)]}$$
+
+
+
+
 
 ---
 [Torna su](#exs)
