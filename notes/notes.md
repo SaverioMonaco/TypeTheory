@@ -13,6 +13,7 @@
 9.  [Somma tra numeri naturali](#sommanat)
 10. [Tipo delle liste di un tipo](#liste)
 11. [Somma disgiunta](#somdis)
+12. [Tipo uguaglianza proposizionale](#ugprop)
 * [Esercizi](#exs)
 ---
 
@@ -794,13 +795,50 @@ $$\frac{\beta\space prop \space [\Gamma] \qquad \gamma \space prop \space [\Gamm
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 16</span></div>
 
-## 12. <a name=""></a>
+## 12. Tipo uguaglianza proposizionale (o identità proposizionale)<a name="ugprop"></a>
+(Tipo di uguaglianza di Martin-Loef)
 
+Questo è un esempio di **Tipo dipendente** in modo primitivo.
 
+### Regola di formazione:
 
+$$\text{F-Id)}\quad \frac{A \space type \space [\Gamma] \quad a \in A \space [\Gamma] \quad b \in A \space [\Gamma]}{Id(A,a,b)\space type \space [\Gamma]}$$
 
+$Id(A,a,b)$ viene pensata come una proposizione che verrà abitata dalle sue dimostrazioni.
 
+### Regole di uguaglianza
 
+$$\frac{A_1=A_2\space type \space [\Gamma]\quad a_1 = a_2 \in A_1\space [\Gamma]\quad b_1 = b_2 \in A_1\space [\Gamma]}{Id(A_1,a_1,b_1) = Id(A_2, a_2, b_2) \space type \space [\Gamma]}$$
+
+### Regole di introduzione
+L'uguaglianza è riflessiva, ogni elemento è uguale proposizionalmente a se stesso:
+
+$$\text{I-Id)}\quad \frac{a\in A\space [\Gamma]}{id(a)\in Id(A,a,a)\space [\Gamma]}$$
+
+$$\text{eq-I-Id)}\quad \frac{a_1 = a_2 \in A\space [\Gamma]}{id(a_1) = id(a_2) \in \underbrace{Id(A,a_1,a_1)}_{= Id(A,a_2, a_2)}\space [\Gamma]}$$
+
+### Regole di eliminazione
+
+* **Regola derivabile**: _"Gli elementi del tipo Identità sono generati intuitivamente a partire dagli elementi canonici, in altre parole, il Tipo Identità si dice generato intuitivamente dalla proprietà riflessiva degli elementi di A"_
+$$\frac{A \space type \space [\Gamma]\quad [\Gamma, z_1\in A,z_2\in A]}{Id(A,z_1,z_2)\space type \space [\Gamma, z_1\in A, z_2\in A]}$$
+
+L'eliminatore che costruiremo non dipenderà solo da un elemento di $Id(A,a,b)$ ma vogliamo che dipenda anche da $a$ e $b$ stessi, quindi il tipo di partenza $M$ sarà $M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1,z_2)]$
+
+$$\text{E-Id)}\quad \frac{\begin{matrix}
+M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1,z_2)]\\
+a \in A \space [\Gamma]\quad b \in A \space [\Gamma] \\
+t \in Id (A,a,b)\space [\Gamma]\\
+e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
+\end{matrix}}{El_{Id}(t,(x).e(x))\in M(a,b,t)\space [\Gamma]}\\[1cm]$$
+
+$$\text{E-Id)}_{dip}\quad \frac{\begin{matrix}
+M(z_1,z_2,z_3) \space type \space [\Gamma, z_1 \in A, z_2\in A, z_3 \in Id(A,z_1,z_2)]\\
+e(x) \in M(x,x,id(x))\space [\Gamma,x\in A]
+\end{matrix}}{El_{Id}(t,(x).e(x))\in M(a,b,t) \space [\Gamma, z_1\in A, z_2 \in A, z_3\in Id(A,z_1,z_2)]}$$
+
+### Regola di conversione
+
+$$\text{C-Id)}\quad \frac{a\in A\space [\Gamma]\quad e(x) \in M(x,x,id(x))\space [\Gamma, x\in A]}{El_{Id}(id(a),(x).e(x)) = e(a) \in M(a,a,id(a))\space [\Gamma]}$$
 
 
 
