@@ -14,6 +14,7 @@
 10. [Tipo delle liste di un tipo](#liste)
 11. [Somma disgiunta](#somdis)
 12. [Tipo uguaglianza proposizionale](#ugprop)
+13. [Tipo Somma indiciata Forte](#strindsumtype)
 * [Esercizi](#exs)
 ---
 
@@ -878,17 +879,61 @@ $$\frac{id(a)\in Id(A,a,a) \space [\Gamma]\quad Id(A,a,a)=Id(A,a,b) \space type 
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 17</span></div>
 
-## 13. <a name=""></a>
+## 13. Tipo Somma indiciata Forte <a name="strindsumtype"></a>
 
+Questo tipo (induttivo) è un _"potenziamento (indiciato) espressivo"_ del tipo somma [disgiunta binaria](#somdis) che abbiamo già visto.
 
+$\dot{\cup}$ è il simbolo di unione disgiunta,
 
+Dal punto di vista set-teoretico : rappresenta l'unione disgiunta di una famiglia di insiemi:
 
+$$\dot{\cup}_{x\in B \space set}C(x) := \lbrace(b,c) \quad b\in B \space and \space c\in C(b)\rbrace$$
 
+### Regole di Formazione:
+Il tipo somma indiciata forte è un tipo induttivo di tipi dipendenti:
 
+$$\Sigma\text{-F)}\quad \frac{C(x)\space type \space [\Gamma,x\in B]}{\sum_{x\in B} C(x)\space type \space[\Gamma]}$$
 
+### Regola di Introduzione
 
+$$\Sigma\text{-I)}\quad \frac{\begin{matrix}
+\sum_{x\in B} C(x)\space type \space [\Gamma]\\
+b\in B\space [\Gamma]\space c\in C(b) \space [\Gamma]\end{matrix}}{<b,c> \in \sum_{x\in B} C(x)\space [\Gamma]}$$
 
+Dove $<b.c>$ indica la coppia dei termini $b$ e $c$.
 
+### Regole di uguaglianza
+
+$$\text{eq-F-$\Sigma$)}\quad\frac{B_1=B_2 \space type \space [\Gamma] \quad C_1(x)=C_2(x) \space type \space [\Gamma,x\in B]}{\sum_{x\in B_1}C_1(x) = \sum_{x\in B_2}C_2(x)\space type \space[\Gamma]}$$
+
+$$\text{eq-I-$\Sigma$)}\quad\frac{b_1=b_2 \in B\space [\Gamma] \quad c_1(x)=c_2\in C(b_1) \space type \space [\Gamma]}{<b_1,c_1> = <b_2,c_2> \in \sum_{x\in B}C(x) \space[\Gamma]}$$
+
+### Regole di riduzione
+
+$$\frac{b_1\to_1 b_2}{<b_1,c>\to_1 <b_2,c>}\qquad \frac{c_1\to_1 c_2}{<b,c_1>\to_1 <b,c_2>}$$
+
+### Regole di eliminazione
+
+$$\text{E-$\Sigma$)}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+t \in \sum_{x_\in B}C(x)\space [\Gamma]\\
+e(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(t,(x,y).e(x,y))\in M(t)\space [\Gamma]}$$
+
+**Regola di uguaglianza dell'eliminatore**
+
+$$\text{eq-E-$\Sigma$)}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+t_1 = t_2 \in \sum_{x_\in B}C(x)\space [\Gamma]\\
+e_1(x,y) = e_2(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(t_1,e_1)=El_{\Sigma}(t_2,e_2)\in M(t)\space [\Gamma]}$$
+
+### Regola di conversione
+$$\text{C-$\Sigma$)}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+b \in B\space[\Gamma]\quad c \in C(b)\space [\Gamma]\\
+e(x,y)\in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(<b,c>,e)=e(b,c)\in M(<b,c>)\space [\Gamma]}$$
 
 
 
