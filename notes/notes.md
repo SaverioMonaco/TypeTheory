@@ -920,6 +920,11 @@ t \in \sum_{x_\in B}C(x)\space [\Gamma]\\
 e(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
 \end{matrix}}{El_{\Sigma}(t,(x,y).e(x,y))\in M(t)\space [\Gamma]}$$
 
+$$\text{E-$\Sigma$)}_{dip}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+e(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(t,(x,y).e(x,y))\in M(t)\space [\Gamma, z\in \sum_{x\in B}C(x)]}$$
+
 **Regola di uguaglianza dell'eliminatore**
 
 $$\text{eq-E-$\Sigma$)}\quad\frac{\begin{matrix}
