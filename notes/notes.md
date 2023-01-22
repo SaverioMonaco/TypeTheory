@@ -1047,9 +1047,11 @@ Dove $pf \in \phi(b)$ dice che $b$ soddisfa $\phi(x)$
 
 Con questa costruzione abbiamo:
 
-$$z \in \lbrace \underbrace{x\in B}_{\Sigma_{x\in B} C(x)}|\phi(x)\rbrace \Longleftrightarrow \phi(\pi_1 z) \text{\space \space vale}$$
+$$z \in \lbrace \underbrace{x\in B}_{\Sigma_{x\in B} C(x)}|\phi(x)\rbrace \Longleftrightarrow \phi(\pi_1 z) \space \space \text{vale}$$
 
 * **Uso logico**
+
+
 
 
 
