@@ -1272,7 +1272,7 @@ M(z) \space type\space [\Gamma,z\in N_0]
 
 * **Regola di riduzione** 
   
-  $$\frac{t_1\to_1 t_2}{El_{N_0}(t_1)\to_1 El_{N_0}(t_2)}
+$$\frac{t_1\to_1 t_2}{El_{N_0}(t_1)\to_1 El_{N_0}(t_2)}$$
 
 
 ### Che senso ha il tipo vuoto?
