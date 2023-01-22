@@ -19,6 +19,7 @@
     * 13.2 [Uso del tipo $\Sigma_{x\in B} C(x)$ ](#usisiff)
     * 13.3 [Tipo prodotto cartesiano come congiunzione logica](#conjlog)
 14. [Tipo prodotto dipendente](#prodip)
+15. [Tipo vuoto](#void)
 * [Esercizi](#exs)
 ---
 
@@ -1147,7 +1148,146 @@ $$\frac{\phi\space and \space\psi \space \text{vero}}{\phi\space \text{vero}}\qu
 <div style="text-align: right"><span style="color:orange">Lezione 20</span></div>
 
 ## 14. Tipo prodotto dipendente <a name="prodip"></a>
+Questo tipo è un potenziamento espressivo del tipo dello spazio delle funzioni (o tipo $\to$).
 
+Iniziamo col caso più semplice (non dipendente se applicato a tipi non dipendenti)
+
+### Regole di formazione
+
+$$\frac{B\space type \space [\Gamma]\quad C \space type \space [\Gamma]}{B\to C\space type \space [\Gamma]}$$
+
+### Regole di introduzione
+
+$$\frac{c(x) \in C\space [\Gamma,x\in B]}{\lambda x.c(x) \in B\to C}$$
+
+Dove $c(x)$ è una meta-variabile che può (o no) dipendere da x
+
+### $\xi$-rule
+(Regola di riduzione ammessa)
+
+$$\frac{c_1(x)=c_2(x)\in C\space [\Gamma,x\in B]}{\lambda x.c_1(x) = \lambda x.c_2(x)\in B\to C\space [\Gamma]}$$
+
+### Regole di eliminazione
+
+**!!!:** In questo caso, per il tipo $\to$ la regola di eliminazione non definisce un ricorsore, né principi di induzione.
+
+$$\frac{f\in B\to C\space [\Gamma]\quad b \in B\space [\Gamma]}{Ap(f,b)\in C\space [\Gamma]}$$
+
+### Regola di conversione
+
+$$\frac{c(x)\in C\space[\Gamma, x\in B]\quad b\in B\space [\Gamma]}{Ap(\lambda x.c(x),b)=c(b)\in C\space [\Gamma]}$$
+
+### Regole di uguaglianza dell'eliminatore
+
+$$\frac{f_1=f_2 \in B\to C\space [\Gamma]\quad b_1=b_2 \in B\space [\Gamma]}{Ap(f_1,b_1)=Ap(f_2,b_2)\in C\space [\Gamma]}$$
+
+
+### Regole di riduzione
+
+$$\frac{c_1\to_1 c_2}{\lambda x . c_1\to_1\lambda x . c_2}$$
+
+$$\frac{f_1\to f_2}{Ap(f_1,b)\to_1 Ap(f_2,b)}\qquad \frac{b_1\to_1 b_2}{Ap(f,b_1)\to_1Ap(f,b_2)}$$
+
+$$Ap(\lambda x.c(x), b)\to_1 c(b)$$
+
+Se applichiamo le regole sovrastanti a proposizioni logiche otteniamo:
+
+$$\text{Regola di formazione}\quad \to\quad \frac{\beta \space prop \space [\Gamma] \quad \gamma \space prop \space [\Gamma]}{\underbrace{\beta\to\gamma}_{\text{implicazione logica}}\space prop \space [\Gamma]}$$
+
+$$\text{Regola di introduzione}\quad \to\quad \frac{c(x)\in\gamma \space [\Gamma,\overbrace{x\in B}^{\beta\space\text{vero}}]}{\underbrace{\lambda x.c(x) \in \beta\to\gamma}_{\text{vero}}}$$
+
+$$\text{Regola di eliminazione}\quad \to \quad  \frac{\beta\to\gamma\space\text{vero} \quad \beta \space \text{vero}}{\gamma \space \text{vero}}  \quad\equiv \quad\text{Regola di modus ponens}$$
+
+### Tipo prodotto dipendente (caso generale)
+
+### Regole di formazione
+
+$$\frac{B\space type \space [\Gamma]\quad C(x) \space type \space [\Gamma, x\in B]}{\prod_{x\in B}C(x)\space type \space [\Gamma]}$$
+
+### Regole di introduzione
+
+$$\frac{c(x) \in C(x)\space [\Gamma,x\in B]}{\lambda x.c(x) \in \prod_{x\in B}C(x) \space [\Gamma]}$$
+
+### $\xi$-rule
+(Regola di riduzione ammessa)
+
+$$\frac{c_1(x)=c_2(x)\in C(x)\space [\Gamma,x\in B]}{\lambda x.c_1(x) = \lambda x.c_2(x)\in \prod_{x\in B}C(x)\space [\Gamma]}$$
+
+$$\frac{B_1=B_2\space type \space [\Gamma] \quad C_1(x)=C_2(x) \space type \space [\Gamma,x\in B]}{\prod_{x\in B_1}C_1(x) = \prod_{x\in B_2}C_2(x)\space [\Gamma]}$$
+
+### Regole di eliminazione
+
+**!!!:** In questo caso, per il tipo $\to$ la regola di eliminazione non definisce un ricorsore, né principi di induzione.
+
+$$\frac{f\in \prod_{x\in B}C(x)\space [\Gamma]\quad b \in B\space [\Gamma]}{Ap(f,b)\in C(x)\space [\Gamma]}$$
+
+### Regola di conversione
+
+$$\frac{c(x)\in C(x)\space[\Gamma, x\in B]\quad b\in B\space [\Gamma]}{Ap(\lambda x.c(x),b)=c(b)\in C(b)\space [\Gamma]}$$
+
+### Regole di uguaglianza dell'eliminatore
+
+$$\frac{f_1=f_2 \in \prod_{x\in B}C(x) [\Gamma]\quad b_1=b_2 \in B\space [\Gamma]}{Ap(f_1,b_1)=Ap(f_2,b_2)\in C(b_1)[\Gamma]}$$
+
+Come per il caso semplice, possiamo analizzare queste regole dal punto di vista logico considerando i tipi come proposizioni:
+
+$$\forall_{x\in B}\phi(x):=\prod_{x\in B}\phi(x)$$
+
+$$\text{Regola di formazione}\quad \to \quad \frac{B\space type\quad \phi(x)\space prob \space [\Gamma,x\in B]}{\forall_{x\in B}\space \phi(x)\space prop \space [\Gamma]}$$
+
+$$\text{Regola di introduzione}\quad \to \quad \frac{\phi(x)\space\text{vero}\space [\Gamma,x\in B]}{\forall_{x\in B}\space \phi(x) \space \text{vero}\space [\Gamma]}$$
+
+$$\text{Regola di eliminazione}\quad\to\quad
+\frac{f\in \forall_{x\in B}\space \phi(x)\space [\Gamma]\quad b \in B\space[\Gamma]}{f(b) \space \text{vero}}
+\quad\to\quad\begin{matrix}
+\text{evoluzione della}\\
+\text{regola di Modus Ponens}\end{matrix}$$
+
+## 15. Tipo vuoto <a name="void"></a><img src="https://static.jojowiki.com/images/3/3d/latest/20200609080332/DR_STAND3_Cream.png" alt="Cream Vanilla Ice Jojo" width = 80px>
+
+* **Regola di formazione**
+
+  $$\frac{\Gamma\space cont}{N_0 \space type \space [\Gamma]}$$
+
+* **Regola di introduzione**
+
+  Ovviamente non ci sono regole di introduzione, che introdurrebbero un elemento in $N_0$
+
+* **Regola di eliminazione**
+
+  L'eliminatore risulterebbe definito a partire dal suo valore canonico
+
+  $$\frac{t\in N_0 \space [\Gamma] \quad M(x)\space type \space[\Gamma, z\in N_0]}{El_{N_0}(t)\in M(t) \space [\Gamma]}$$
+
+* **Regola di uguaglianza**
+
+  $$\frac{\begin{matrix}
+  t_1 = t_2 \in N_0 \space [\Gamma]\\
+  M(z) \space type\space [\Gamma,z\in N_0]
+  \end{matrix}}{El_{N_0}(t_1) = El_{N_0}(t_2) \in M(t_1)\space [\Gamma]}$$
+
+* **Regola di conversione** 
+
+  Il tipo vuoto manca di regola di conversione.
+
+* **Regola di riduzione** 
+  
+  $$\frac{t_1\to_1 t_2}{El_{N_0}(t_1)\to_1 El_{N_0}(t_2)}
+
+
+### Che senso ha il tipo vuoto?
+
+Il tipo vuoto serve ad indicae il falso:
+
+$$\perp := N_0$$
+
+Che è l'opposto di quando indichiamo il vero, ovvero quando un tipo-proposizione è popolato (ha almeno un elemento).
+
+$$\frac{\overbrace{\perp \space\text{vero}}^{t\in N_0}\space [\Gamma]\qquad \phi\space prop \space [\Gamma]}{El_{N_0}(t)\in \phi\space[\Gamma]}\quad\to\quad \perp\vdash\phi$$
+
+"Se falso è vero sotto il contesto gamma, allora phi è vero sotto contento gamma"
+
+La regola di eliminazione di $N_0$ rappresenta la regola [ex falso quolibet](https://it.wikipedia.org/wiki/Ex_falso_sequitur_quodlibet)
 
 ---
 ---
