@@ -15,6 +15,10 @@
 11. [Somma disgiunta](#somdis)
 12. [Tipo uguaglianza proposizionale](#ugprop)
 13. [Tipo Somma indiciata Forte](#strindsumtype)
+    * 13.1 [La somma indiciata forte è un potenziamento con tipi dipendenti del tipo prodotto cartesiano](#prodcart)
+    * 13.2 [Uso del tipo $\Sigma_{x\in B} C(x)$ ](#usisiff)
+    * 13.3 [Tipo prodotto cartesiano come congiunzione logica](#conjlog)
+14. [Tipo prodotto dipendente](#prodip)
 * [Esercizi](#exs)
 ---
 
@@ -945,7 +949,7 @@ e(x,y)\in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 18</span></div>
 
-### 13.1 "La somma indiciata forte è un potenziamento con tipi dipendenti del tipo prodotto cartesiano"
+### 13.1 "La somma indiciata forte è un potenziamento con tipi dipendenti del tipo prodotto cartesiano" <a name="prodcart"></a>
 
 $$\Sigma_{x\in B} C(x) \equiv \dot{\cup}_{x\in B} C(x) := \lbrace (b,c) : b \in B, c \in C(b)\rbrace$$
 
@@ -1017,7 +1021,7 @@ $$\begin{cases}
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 19</span></div>
 
-### 13.2 Uso del tipo $\Sigma_{x\in B} C(x)$
+### 13.2 Uso del tipo $\Sigma_{x\in B} C(x)$ <a name="usisif"></a>
 
 1. **Unione indiciata insiemistica**
 2. **Uso set-teoretico** (Assioma di separazione)
@@ -1049,45 +1053,100 @@ Con questa costruzione abbiamo:
 
 $$z \in \lbrace \underbrace{x\in B}_{\Sigma_{x\in B} C(x)}|\phi(x)\rbrace \Longleftrightarrow \phi(\pi_1 z) \space \space \text{vale}$$
 
+Grazie al tipo di somma indiciata forte introdotta di Martin-Loef e in particolare grazie a questa proprietà, è stato possibile inglobare la Set-Theory nella teoria dei tipi.
+
 * **Uso logico**
+  
+Se:
 
+$$\frac{\underbrace{C(x)}_{=\phi(x)\space\text{proposizione}}type \space \underbrace{[x\in B]}_{set}}{\exist_{x\in B}\phi(x) :=\Sigma_{x\in B}\phi(x) \space \underbrace{type}_{\to \space prop} \space [\Gamma]}$$
 
+Se noi invece di considerare il set ed applicare l'assioma di separazione, lo consideriamo come proposizione, allora vediamo che le sue regole rappresentano il tipo della _quantificazione esistenziale in Logica_ $\exist$.
 
+---
 
+**Definizione** Un _proof-term_è un elemento $t\in \phi\space [\Gamma]$ ove $\phi$ è una proposizione.
 
+Consideriamo $\xi\space prop \space [\Gamma, x_1\in \phi_1, ..., x_n \in \phi_n]$
 
+$\xi$ dipende dal contesto $\Gamma$ e da le $n$ proprietà $\phi$
 
+Se consideriamo un _proof-term_:
 
+$$pf\in \xi\space prop \space [\Gamma, x_1\in \phi_1, ..., x_n \in \phi_n]$$
 
+Allora 
 
+$$\xi\space\space\text{è vero}\quad [\Gamma,\phi_1\space\space\text{è vero},...,\phi_n\space\space\text{è vero}] $$
 
+$$\equiv$$
 
+$$\phi_1, ...,\phi_n \vdash \xi$$
 
+Consideriamo le regole di introduzione e di eliminazione con le proposizioni:
 
+* **Regola di introduzione**
+  
+$$\text{I)}\quad\frac{\begin{matrix}
+(\exist_{x\in B} \phi(x)\space \space \text{ben formato} \space type \space [\Gamma])\\
+b \in B\space [\Gamma]\quad \underbrace{c \in \phi(b)\space [\Gamma]}_{\phi(b) \space\space\text{è vera}\space [\Gamma,\gamma_1,...,\gamma_n]}
+\end{matrix}}{\underbrace{\lt b,c\gt \in \Sigma_{x\in B}C(x)\space [\Gamma]}_{\exist_{x\in B}\phi(x) \space\space \text{è vera}\space [\Gamma]}}
+$$
 
+La regola di introduzione non è altro che la regola del calcolo dei seguenti che dice:
 
+$$\frac{\gamma_1,...\gamma_n\vdash \phi(b)}{\gamma_1,...,\gamma_n \vdash\exist_{x\in B}\phi(x)}$$
 
+* **Regola di Eliminazione**
 
+La regola di eleminazione per il tipo somma indiciata forte è:
 
+$$\text{E-$\Sigma$)}_{dip}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+e(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(t,(x,y).e(x,y))\in M(t)\space [\Gamma, z\in \sum_{x\in B}C(x)]}$$
 
+Supponiamo una nuova proposizione $\xi \space prop \space [\Gamma]$
 
+$$\text{E)}_{dip}\to \frac{\begin{matrix}
+\xi \space prop \space [\Gamma]\\
+\xi \space \space \text{è vero}\space [\Gamma,x\in B, \phi(x)\space\text{vero}]
+\end{matrix}}{\xi \space\text{vero}\space [\Gamma, \exist_{x \in B}\phi(x)]}$$
 
+La regola di eliminazione non è altro che la regola del calcolo dei seguenti che dice:
 
+$$\frac{\gamma_1, ..., \gamma_n, \phi(x)\vdash_{\Gamma,x\in B}\quad\xi}{\gamma_1,...,\gamma_n,\exist_{x\in B}\phi(x)\vdash_\Gamma \quad \xi}$$
 
+### 13.3 Tipo prodotto cartesiano come congiunzione logica <a name="conjlog"></a>
 
+Il tipo prodotto cartesiano permette di indicare la congiunzione logica di due preposizioni:
 
+Se abbiamo due preposizioni 
 
+$$\phi \space prop \space [\Gamma]\qquad \qquad \psi \space prop \space [\Gamma]$$
 
+La loro congiunzione logica può essere scritta come il loro prodotto cartesiano:
 
+$$\phi \& \psi:= \phi\times\psi$$
 
+Questa definizione è corretta, infatti dalla definizione del prodotto cartesiano abbiamo:
 
+$$\frac{a\in \phi\space [\Gamma] \quad b \in \psi \space [\Gamma]}{\lt a,b \gt \in \phi\times\psi}\quad \to \quad \frac{\phi \space \text{vero}\space [\Gamma]\quad \psi \space \text{vero}\space [\Gamma]}{\phi\&\psi \space \text{vero}}$$ 
 
+Dalla regola sopra sappiamo che se le sue parti sono vere, allora la congiunzione è vera. Ci serve dimostrare l'opposto:
 
+Tramite la regola di eliminazione del prodotto cartesiano abbiamo:
 
+$$\frac{d\in B\times C\space [\Gamma]}{\pi_1 d \in B\space [\Gamma]}\quad \frac{d \in B\times C\space [\Gamma]}{\pi_2 d \in C\space [\Gamma]}$$
 
+$$\downarrow$$
 
+$$\frac{\phi\&\psi \space \text{vero}}{\phi\space \text{vero}}\quad\frac{\phi\&\psi \space \text{vero}}{\psi\space \text{vero}}$$
 
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 20</span></div>
 
+## 14. Tipo prodotto dipendente <a name="prodip"></a>
 
 
 ---
