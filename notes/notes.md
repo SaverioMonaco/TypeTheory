@@ -900,7 +900,7 @@ $$\Sigma\text{-I)}\quad \frac{\begin{matrix}
 \sum_{x\in B} C(x)\space type \space [\Gamma]\\
 b\in B\space [\Gamma]\space c\in C(b) \space [\Gamma]\end{matrix}}{<b,c> \in \sum_{x\in B} C(x)\space [\Gamma]}$$
 
-Dove $<b.c>$ indica la coppia dei termini $b$ e $c$.
+Dove $<b,c>$ indica la coppia dei termini $b$ e $c$.
 
 ### Regole di uguaglianza
 
