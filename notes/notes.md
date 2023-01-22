@@ -16,7 +16,7 @@
 12. [Tipo uguaglianza proposizionale](#ugprop)
 13. [Tipo Somma indiciata Forte](#strindsumtype)
     * 13.1 [La somma indiciata forte è un potenziamento con tipi dipendenti del tipo prodotto cartesiano](#prodcart)
-    * 13.2 [Uso del tipo $\Sigma_{x\in B} C(x)$ ](#usisiff)
+    * 13.2 [Uso del tipo somma indiciata forte](#usisiff)
     * 13.3 [Tipo prodotto cartesiano come congiunzione logica](#conjlog)
 14. [Tipo prodotto dipendente](#prodip)
 15. [Tipo vuoto](#void)
@@ -1247,7 +1247,7 @@ $$\text{Regola di eliminazione}\quad\to\quad
 
 * **Regola di formazione**
 
-  $$\frac{\Gamma\space cont}{N_0 \space type \space [\Gamma]}$$
+$$\frac{\Gamma\space cont}{N_0 \space type \space [\Gamma]}$$
 
 * **Regola di introduzione**
 
@@ -1257,14 +1257,14 @@ $$\text{Regola di eliminazione}\quad\to\quad
 
   L'eliminatore risulterebbe definito a partire dal suo valore canonico
 
-  $$\frac{t\in N_0 \space [\Gamma] \quad M(x)\space type \space[\Gamma, z\in N_0]}{El_{N_0}(t)\in M(t) \space [\Gamma]}$$
+$$\frac{t\in N_0 \space [\Gamma] \quad M(x)\space type \space[\Gamma, z\in N_0]}{El_{N_0}(t)\in M(t) \space [\Gamma]}$$
 
 * **Regola di uguaglianza**
 
-  $$\frac{\begin{matrix}
-  t_1 = t_2 \in N_0 \space [\Gamma]\\
-  M(z) \space type\space [\Gamma,z\in N_0]
-  \end{matrix}}{El_{N_0}(t_1) = El_{N_0}(t_2) \in M(t_1)\space [\Gamma]}$$
+$$\frac{\begin{matrix}
+t_1 = t_2 \in N_0 \space [\Gamma]\\
+M(z) \space type\space [\Gamma,z\in N_0]
+\end{matrix}}{El_{N_0}(t_1) = El_{N_0}(t_2) \in M(t_1)\space [\Gamma]}$$
 
 * **Regola di conversione** 
 
