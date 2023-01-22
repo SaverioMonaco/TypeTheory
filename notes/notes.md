@@ -1059,9 +1059,9 @@ Grazie al tipo di somma indiciata forte introdotta di Martin-Loef e in particola
   
 Se:
 
-$$\frac{\underbrace{C(x)}_{=\phi(x)\space\text{proposizione}}type \space \underbrace{[x\in B]}_{set}}{\exist_{x\in B}\phi(x) :=\Sigma_{x\in B}\phi(x) \space \underbrace{type}_{\to \space prop} \space [\Gamma]}$$
+$$\frac{\underbrace{C(x)}_{=\phi(x)\space\text{proposizione}}type \space \underbrace{[x\in B]}_{set}}{\exists_{x\in B}\phi(x) :=\Sigma_{x\in B}\phi(x) \space \underbrace{type}_{\to \space prop} \space [\Gamma]}$$
 
-Se noi invece di considerare il set ed applicare l'assioma di separazione, lo consideriamo come proposizione, allora vediamo che le sue regole rappresentano il tipo della _quantificazione esistenziale in Logica_ $\exist$.
+Se noi invece di considerare il set ed applicare l'assioma di separazione, lo consideriamo come proposizione, allora vediamo che le sue regole rappresentano il tipo della _quantificazione esistenziale in Logica_ $\exists$.
 
 ---
 
@@ -1088,14 +1088,14 @@ Consideriamo le regole di introduzione e di eliminazione con le proposizioni:
 * **Regola di introduzione**
   
 $$\text{I)}\quad\frac{\begin{matrix}
-(\exist_{x\in B} \phi(x)\space \space \text{ben formato} \space type \space [\Gamma])\\
+(\exists_{x\in B} \phi(x)\space \space \text{ben formato} \space type \space [\Gamma])\\
 b \in B\space [\Gamma]\quad \underbrace{c \in \phi(b)\space [\Gamma]}_{\phi(b) \space\space\text{è vera}\space [\Gamma,\gamma_1,...,\gamma_n]}
-\end{matrix}}{\underbrace{\lt b,c\gt \in \Sigma_{x\in B}C(x)\space [\Gamma]}_{\exist_{x\in B}\phi(x) \space\space \text{è vera}\space [\Gamma]}}
+\end{matrix}}{\underbrace{\lt b,c\gt \in \Sigma_{x\in B}C(x)\space [\Gamma]}_{\exists_{x\in B}\phi(x) \space\space \text{è vera}\space [\Gamma]}}
 $$
 
 La regola di introduzione non è altro che la regola del calcolo dei seguenti che dice:
 
-$$\frac{\gamma_1,...\gamma_n\vdash \phi(b)}{\gamma_1,...,\gamma_n \vdash\exist_{x\in B}\phi(x)}$$
+$$\frac{\gamma_1,...\gamma_n\vdash \phi(b)}{\gamma_1,...,\gamma_n \vdash\exists_{x\in B}\phi(x)}$$
 
 * **Regola di Eliminazione**
 
@@ -1111,11 +1111,11 @@ Supponiamo una nuova proposizione $\xi \space prop \space [\Gamma]$
 $$\text{E)}_{dip}\to \frac{\begin{matrix}
 \xi \space prop \space [\Gamma]\\
 \xi \space \space \text{è vero}\space [\Gamma,x\in B, \phi(x)\space\text{vero}]
-\end{matrix}}{\xi \space\text{vero}\space [\Gamma, \exist_{x \in B}\phi(x)]}$$
+\end{matrix}}{\xi \space\text{vero}\space [\Gamma, \exists_{x \in B}\phi(x)]}$$
 
 La regola di eliminazione non è altro che la regola del calcolo dei seguenti che dice:
 
-$$\frac{\gamma_1, ..., \gamma_n, \phi(x)\vdash_{\Gamma,x\in B}\quad\xi}{\gamma_1,...,\gamma_n,\exist_{x\in B}\phi(x)\vdash_\Gamma \quad \xi}$$
+$$\frac{\gamma_1, ..., \gamma_n, \phi(x)\vdash_{\Gamma,x\in B}\quad\xi}{\gamma_1,...,\gamma_n,\exists_{x\in B}\phi(x)\vdash_\Gamma \quad \xi}$$
 
 ### 13.3 Tipo prodotto cartesiano come congiunzione logica <a name="conjlog"></a>
 
@@ -1127,11 +1127,11 @@ $$\phi \space prop \space [\Gamma]\qquad \qquad \psi \space prop \space [\Gamma]
 
 La loro congiunzione logica può essere scritta come il loro prodotto cartesiano:
 
-$$\phi \& \psi:= \phi\times\psi$$
+$$\phi \space and \space\psi:= \phi\times\psi$$
 
 Questa definizione è corretta, infatti dalla definizione del prodotto cartesiano abbiamo:
 
-$$\frac{a\in \phi\space [\Gamma] \quad b \in \psi \space [\Gamma]}{\lt a,b \gt \in \phi\times\psi}\quad \to \quad \frac{\phi \space \text{vero}\space [\Gamma]\quad \psi \space \text{vero}\space [\Gamma]}{\phi\&\psi \space \text{vero}}$$ 
+$$\frac{a\in \phi\space [\Gamma] \quad b \in \psi \space [\Gamma]}{\lt a,b \gt \in \phi\times\psi}\quad \to \quad \frac{\phi \space \text{vero}\space [\Gamma]\quad \psi \space \text{vero}\space [\Gamma]}{\phi\space and \space\psi \space \text{vero}}$$ 
 
 Dalla regola sopra sappiamo che se le sue parti sono vere, allora la congiunzione è vera. Ci serve dimostrare l'opposto:
 
@@ -1141,7 +1141,7 @@ $$\frac{d\in B\times C\space [\Gamma]}{\pi_1 d \in B\space [\Gamma]}\quad \frac{
 
 $$\downarrow$$
 
-$$\frac{\phi\&\psi \space \text{vero}}{\phi\space \text{vero}}\quad\frac{\phi\&\psi \space \text{vero}}{\psi\space \text{vero}}$$
+$$\frac{\phi\space and \space\psi \space \text{vero}}{\phi\space \text{vero}}\quad\frac{\phi\space and \space\psi \space \text{vero}}{\psi\space \text{vero}}$$
 
 --- 
 <div style="text-align: right"><span style="color:orange">Lezione 20</span></div>
