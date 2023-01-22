@@ -912,6 +912,8 @@ $$\text{eq-I-$\Sigma$)}\quad\frac{b_1=b_2 \in B\space [\Gamma] \quad c_1(x)=c_2\
 
 $$\frac{b_1\to_1 b_2}{<b_1,c>\to_1 <b_2,c>}\qquad \frac{c_1\to_1 c_2}{<b,c_1>\to_1 <b,c_2>}$$
 
+$$El_{\Sigma}(<b,c>,e)\to_1 e(b,c)$$
+
 ### Regole di eliminazione
 
 $$\text{E-$\Sigma$)}\quad\frac{\begin{matrix}
@@ -940,11 +942,114 @@ b \in B\space[\Gamma]\quad c \in C(b)\space [\Gamma]\\
 e(x,y)\in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
 \end{matrix}}{El_{\Sigma}(<b,c>,e)=e(b,c)\in M(<b,c>)\space [\Gamma]}$$
 
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 18</span></div>
 
+### 13.1 "La somma indiciata forte è un potenziamento con tipi dipendenti del tipo prodotto cartesiano"
 
+$$\Sigma_{x\in B} C(x) \equiv \dot{\cup}_{x\in B} C(x) := \lbrace (b,c) : b \in B, c \in C(b)\rbrace$$
 
+Se noi consideriamo $C(x) = C'\space$ tipo costante (non dipendente):
 
+$$\Sigma_{x\in B} C \equiv \dot{\cup}_{x\in B} C := \lbrace (b,c) : b \in B, c \in C'\rbrace \simeq B \times C'$$
 
+Quindi il prodotto cartesiano sarà definito come:
+
+$$B\times C  := \Sigma_{x\in B} C$$
+
+$$\frac{B \space type \space [\Gamma] \quad \frac{C \space type \space [\Gamma]}{C \space type \space [\Gamma, \space x\in B]}\space ind)}{B\times C := \Sigma_{x\in B} C}\quad \text{F-$\Sigma$)}$$
+
+#### Regole del tipo prodotto cartesiano:
+
+* **Formazione** 
+
+$$\frac{B \space type \space [\Gamma]\quad C \space type \space [\Gamma]}{B\times C \space type \space [\Gamma]}$$
+
+* **Introduzione**
+
+$$\frac{b\in B\space [\Gamma]\quad c \in C \space [\Gamma]}{<b,c>\in B\times C\space [\Gamma]}$$
+
+* **Eliminazione**
+
+$$\frac{d\in B\times C\space [\Gamma]}{\pi_1 d \in B\space [\Gamma]}\quad \frac{d \in B\times C\space [\Gamma]}{\pi_2 d \in C\space [\Gamma]}$$
+
+$\pi_1 d$ e $\pi_2 d$ sono "proiezioni" applicate su $d$, se consideriamo $d:=<b,c>$ allora:
+
+$$\begin{cases}
+\pi_1 d =\pi_1 <b,c> = b \in B\qquad & \pi_1(<,b,c>)\to_1 b\\
+\pi_2 d = \pi_2 <b,c> = c \in C & \pi_2(<,b,c>)\to_1 c
+\end{cases}$$
+
+$$\frac{b\in B\space [\Gamma]\quad c \in C\space [\Gamma]}{\pi_1 (<b,c>) = b \in B\space [\Gamma]}\quad \frac{b\in B\space [\Gamma]\quad c \in C\space [\Gamma]}{\pi_2 (<b,c>) = c \in B\space [\Gamma]}$$
+
+I costruttori si ricavano dalla regola di eliminazione (dipendente) del prodotto indiciato forte, adattato per $C(x)=C$
+
+Ricordiamo la regola di eliminazione (dipendente):
+
+$$\text{E-$\Sigma$)}_{dip}\quad\frac{\begin{matrix}
+M(z)\space type \space [\Gamma,z\in \sum_{x\in B}C(x)]\\
+e(x,y) \in M(<x,y>) \space [\Gamma,x\in B,y \in C(x)]
+\end{matrix}}{El_{\Sigma}(t,(x,y).e(x,y))\in M(t)\space [\Gamma, z\in \sum_{x\in B}C(x)]}$$
+
+Nel caso del prodotto cartesiano avremo:
+
+$$\frac{?}{\pi_1 z\in \underbrace{B}_{M(z)} \space [z\in \Sigma_{x\in B} C]}$$
+
+$$\frac{\begin{matrix}
+B \space type \space [\Gamma,z\in \sum_{x\in B}C]\\
+e(x,y)\equiv x \in  B\space [\Gamma,x\in B,y \in C]
+\end{matrix}}{\underbrace{El_{\Sigma}(z,(x,y).x)}_{\pi_1 z}\in B \space [z\in \Sigma_{x\in B} C]}$$
+
+Analogamente per la seconda proiezione abbiamo:
+
+$$\frac{\begin{matrix}
+B \space type \space [\Gamma,z\in \sum_{x\in B}C]\\
+e(x,y)\equiv y \in  B\space [\Gamma,x\in B,y \in C]
+\end{matrix}}{\underbrace{El_{\Sigma}(z,(x,y).y)}_{\pi_2 z}\in C \space [z\in \Sigma_{x\in B} C]}$$
+
+E' possibile definire le proiezioni anche nel caso generale della somma indiciata forte seguendo lo stesso metodo:
+
+$$\begin{cases}
+\pi_1 z := El_{\Sigma}(z, (x,y).x) \in B \space [\Gamma, z \in \Sigma_{x\in B} C(x)]\\
+\pi_2 z := El_{\Sigma}(z,(x,y).y)\in C(\pi_1 z)\space [\Gamma, z \in \Sigma_{x\in B}C(x)]
+\end{cases}$$
+
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 19</span></div>
+
+### 13.2 Uso del tipo $\Sigma_{x\in B} C(x)$
+
+1. **Unione indiciata insiemistica**
+2. **Uso set-teoretico** (Assioma di separazione)
+3. **Uso logico**
+   
+* **Uso set-teoretico:**
+
+Cosa dice l'assioma di separazione?
+
+_Dato_ $B$ _insieme_:
+
+$$\text{\textit{esiste}} \quad\lbrace x\in B | \underbrace{\phi(x)}_{\text{predicato}}\rbrace$$
+
+Per cui per ogni y insieme:
+
+$$y\in \lbrace x\in B | \phi(x)\rbrace\space\space \text{vale} \space\longleftrightarrow \phi(y) \space \space \text{vale}$$
+
+Introduciamo la seguente proposizione in base all'assioma:
+
+$$\frac{\phi(x) \space prop\space(type) \space[\Gamma, x \in B]}{\Sigma_{x\in B} \phi(x)\space type \space [\Gamma]}$$
+
+Tramite il tipo somma indiciata forte, le proposizioni sono indicate con il tipo delle loro dimostrazioni
+
+$$<b,pf> \in \Sigma_{x\in B}\phi(x)$$
+
+Dove $pf \in \phi(b)$ dice che $b$ soddisfa $\phi(x)$
+
+Con questa costruzione abbiamo:
+
+$$z \in \lbrace \underbrace{x\in B}_{\Sigma_{x\in B} C(x)}|\phi(x)\rbrace \Longleftrightarrow \phi(\pi_1 z) \text{\space \space vale}$$
+
+* **Uso logico**
 
 
 
