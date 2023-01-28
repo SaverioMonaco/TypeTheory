@@ -20,6 +20,7 @@
     * 13.3 [Tipo prodotto cartesiano come congiunzione logica](#conjlog)
 14. [Tipo prodotto dipendente](#prodip)
 15. [Tipo vuoto](#void)
+16. [Il tipo del Primo Universo](#tipuni)
 * [Esercizi](#exs)
 ---
 
@@ -1288,6 +1289,105 @@ $$\frac{\overbrace{\perp \space\text{vero}}^{t\in N_0}\space [\Gamma]\qquad \phi
 "Se falso è vero sotto il contesto gamma, allora phi è vero sotto contento gamma"
 
 La regola di eliminazione di $N_0$ rappresenta la regola [ex falso quolibet](https://it.wikipedia.org/wiki/Ex_falso_sequitur_quodlibet)
+
+--- 
+<div style="text-align: right"><span style="color:orange">Lezione 23</span></div>
+
+## 16.Il Tipo del primo Universo (dallo schema di tipi universi)<a name="tipuni"></a>
+
+Indicheremo solo il tipo del primo universo $U_0$, ma con il primo possiamo costruire una gerarchia di universi:
+
+$$U_0\to U_1\to ...\to U_n \qquad n\in Nat$$
+
+**Definizione**: un **Universo** è un contenitore (predicativo) di tipi.
+
+Cosa vuol dire _predicativo_? 
+
+$$U_0\notin U_0$$
+
+Quindi $U_0$ è un contenitore di tipi, ma non può contenere se stesso. Martin-Loef ha cercato di introdurre $U_0\in U_0$ ma la teoria risulta contraddittoria.
+
+(La versione dell'Universo che presenteremo sarà quello alla Tarski, migliore per la programmazione, al contrario dell'universo alla Russel)
+
+### Regole di Formazione
+
+$$\text{F-Uni)}\quad \frac{\Gamma\space cont}{U_0\space type \space [\Gamma]}$$
+
+$U_0$ è il contenitore dei tipi fin'ora costruiti.
+
+### Regole di Introduzione
+
+$$\text{$I_1$-Uni)}\quad \frac{\Gamma\space cont}{\hat{N_0} \in U_0\space[\Gamma]}\qquad\quad \text{$I_2$-Uni)}\quad \frac{\Gamma\space cont}{\hat{N_1} \in U_0\space[\Gamma]}$$
+
+$$\text{$I_3$-Uni)}\quad \frac{\Gamma\space cont}{\hat{Nat} \in U_0\space[\Gamma]}$$
+
+$$\text{$I_4$-Uni)}\quad \frac{\hat{b}\in U_0\space[\Gamma]}{\hat{List(b)} \in U_0\space[\Gamma]}$$
+
+$$\text{$I_5$-Uni)}\quad \frac{\hat{b}\in U_0\space[\Gamma]\quad \hat{c}\in U_0\space[\Gamma]}{\hat{b+c} \in U_0\space[\Gamma]}$$
+
+### Regola di Eliminazione 
+
+$$\text{E-Uni)}\quad \frac{a\in U_0\space[\Gamma]}{T(a)\space type \space[\Gamma]}$$
+
+### Regole di conversione
+
+$$\text{$C_1$-Uni)}\quad \frac{\Gamma\space cont}{T(\hat{N_0}) = N_0 \space type \space [\Gamma]}$$
+
+$$\text{$C_2$-Uni)}\quad \frac{\Gamma\space cont}{T(\hat{N_1}) = N_1 \space type \space [\Gamma]}$$
+
+$$\text{$C_3$-Uni)}\quad \frac{\Gamma\space cont}{T(\hat{Nat}) = Nat \space type \space [\Gamma]}$$
+
+**Cosa è T?**: T viene chiamato _decodifica_ e viene applicato ad un tipo di un universo e segue le regole di conversione sovrastanti.
+
+Perché abbiamo bisogno di T?
+
+Abbiamo omesso delle regole di introduzione con tipi dipendenti che sensa codice sarebbero mal tipate, ad esempio, la seguente regola è MAL TIPATA.
+
+$$\frac{c(x)\in U_0 \space[\Gamma,x\in A]}{\hat{\Sigma}_{x\in A}\in U_0 \space [\Gamma]}$$
+
+* Dichiariamo "small" tutti i tipi con codice in $U_0$
+* Dichiariamo "large" i tipi costruiti con $U_0$, ad esempio 
+$$U_0\to U_0 \space type \space [\Gamma]\quad\text{è large}$$
+
+### Altre regole di introduzione
+
+$$\text{$I_6$-Uni)}\quad \frac{c(x)\in U_0 \space[\Gamma,x\in T(b)]}{\hat{\Sigma}_{x\in b}\in U_0 \space [\Gamma]}$$
+
+$$\text{$I_7$-Uni)}\quad \frac{c(x)\in U_0 \space[\Gamma,x\in T(b)]}{\hat{\Pi}_{x\in b}\in U_0 \space [\Gamma]}$$
+
+$$\text{$I_8$-Uni)}\quad \frac{\begin{matrix}
+  b\in U_0 \space[\Gamma,x\in T(b)]\\
+  c_1 \in T(b)\space[\Gamma]\quad c_2 \in T(b)\space [\Gamma]\\
+  \end{matrix}}{\hat{Id}(b,c_1,c_2)\in U_0\space[\Gamma]}$$
+
+### Altre regole di conversione
+
+$$\text{$C_4$-Uni)}\quad \frac{\begin{matrix}
+b\in U_0\space [\Gamma]\\ 
+c(x) \in U_0\space[\Gamma,x\in T(b)]
+\end{matrix}}{T(\hat{\Sigma}_{x\in b}c(x)) = \Sigma_{x\in T(b)} T(c(x))\space type \space [\Gamma]}$$
+
+$$\text{$C_5$-Uni)}\quad \frac{\begin{matrix}
+b\in U_0\space [\Gamma]\\ 
+c(x) \in U_0\space[\Gamma,x\in T(b)]
+\end{matrix}}{T(\hat{\Pi}_{x\in b}c(x)) = \Pi_{x\in T(b)} T(c(x))\space type \space [\Gamma]}$$
+
+### Regole di uguaglianza
+
+$$\text{eq-$I_5$-Uni)}\quad \frac{b_1=b_2 \in U_0\space[\Gamma]\quad c_1=c_2\in U_0\space[\Gamma]}{\hat{b_1+c_1}=\hat{b_2+c_2}\in U_0\space[\Gamma]}$$
+
+$$\text{eq-$I_6$-Uni)}\quad \frac{c_1(x)=c_2(x)\in U_0 \space[\Gamma,x\in T(b)]}{\hat{\Sigma}_{x\in b_1}c(x) = \hat{\Sigma}_{x\in b_2}c(x)\in U_0\space[\Gamma]}$$
+
+$$\text{eq-$I_7$-Uni)}\quad \frac{c_1(x)=c_2(x)\in U_0 \space[\Gamma,x\in T(b)]}{\hat{\Pi}_{x\in b_1}c(x) = \hat{\Pi}_{x\in b_2}c(x)\in U_0\space[\Gamma]}$$
+
+### Altre regole ancora di uguaglianza
+
+$$\text{$C_6$-Uni)}\quad \frac{\begin{matrix}
+b\in U_0\space [\Gamma]\\ 
+a_1 \in T(b) \space[\Gamma]\quad a_2 \in T(b) \space [\Gamma]
+\end{matrix}}{T(\hat{Id}(b,a_1,a_2)) = Id(T(b), a_1,a_2)\space type \space [\Gamma]}$$
+
+
 
 ---
 ---

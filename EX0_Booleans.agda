@@ -26,7 +26,7 @@ false && b  = false -- false AND anything else is false
 ----------------------------
 _||_ : Bool → Bool → Bool
 -- Just as the AND case, we cover all scenarios
-true || b = true
+true  || b = true
 false || b = b
 
 ----------------------------
@@ -51,6 +51,47 @@ is-tautology₁ f = f false && f true
 is-tautology₂ : (Bool → Bool → Bool) → Bool
 is-tautology₂ f = (f true true && f false false) && (f false true && f true false)
 
+-- What are those "tautologies" actually?
+-- If we consider any function f that takes a Bool as argument (for is-tautology₁) or
+-- any function g that takes two Bools as arguments (for is-tautology₂)
+-- we can verify if that given function gives always true.
+-- You can imagine NOT as a function, but of course is not a tautology since
+-- NOT true = false
+-- Or you can even imagine AND or OR as functions (with two arguments), those two
+-- are not tautologies neither since they can give false as a result.
+
+-- This is of course a tautology
+f₁ : Bool → Bool
+f₁ a = true
+
+-- The negation function is not a tautology
+¬ : Bool → Bool
+¬ true  = false
+¬ false = true
+
+-- [ Ctrl+C Ctrl+N ]
+-- >> is-tautology₁ f₁
+-- true
+-- >> is-tautology₁ ¬
+-- false
+
+-- Now we move on to functions with two arguments:
+
+-- This is a tautology, it always gives true regardless of the two
+-- boolean arguments
+g₁ : Bool → Bool → Bool
+g₁ a b = true
+
+-- AND function, this is not a tautology
+and : Bool → Bool → Bool
+and true b  = b
+and false b = false
+
+-- [ Ctrl+C Ctrl+N ]
+-- >> is-tautology₂ g₁
+-- true
+-- >> is-tautology₂ and
+-- false
 
 data Comparison : Set where
   greater : Comparison

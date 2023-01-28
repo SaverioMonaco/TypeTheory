@@ -6,9 +6,13 @@
 2. [Framework for defining functions](#framework)
 3. [Lists and Vectors](#lists)
 4. [Module System](#modules)
-5. [if... else](#ifelse)
+6. [Proving lemmas with Witnesses](#wit)
 6. [Step for proving lemmas (Equality)](#eq1)
-7. [Decidability](#dec)
+7. [Keyword #1: where](#where)
+8. [Keyword #2: rewrite](#rewrite)
+9. [Keyword #3: with](#with)
+  9.1 [if... else](#ifelse)
+10. [Decidability](#dec)
 ---
 | **Command**  |       | **Input Combination** |
 |--------------|-------|-----------------------|
@@ -29,14 +33,14 @@ data $NAME : Set where
 Example: Natural Numbers ℕ
 ```agda
 data ℕ : Set where -- ℕ = \bN
--- base element (0)
-zero : ℕ
--- function succ is a generic function from
--- ℕ → ℕ, in our conception
--- succ zero              → 1
--- succ (succ zero)       → 2
--- succ (succ (succ zero) → 3
-succ : ℕ → ℕ
+  -- base element (0)
+  zero : ℕ
+  -- function succ is a generic function from
+  -- ℕ → ℕ, in our conception
+  -- succ zero              → 1
+  -- succ (succ zero)       → 2
+  -- succ (succ (succ zero) → 3
+  succ : ℕ → ℕ
 ```
 
 #### 1.2 Define Functions:
@@ -192,88 +196,61 @@ Now we can use the Types and Functions as it they where in the file:
 succ zero
 ```
 
-## 5. if... else <a name="ifelse"></a>
-Agda does not really have `if... else` statements, the closest structure to that is `with` in Agda
-Example: **Filter list**
+## 5. Proving lemmas with Witnesses <a name="wit"></a>
+In Agda (and in Type Theory) proving something means that the relative type of what we want to prove is inhabited. Namely if we want to prove that _"four is an even number"_ we can construct the type _Four is even_ and verify wether it is inhabited or not.
+
+**Example**:
+
+What is the Type _"four is an even number"_?
+
+1.Construct the Even data type which takes a natural number as input and outputs a set:
+
+  ```agda
+  data Even : ℕ → Set where
+    Base-even : Even zero                               -- "the number zero is even"
+    Step-even : (n : ℕ) → Even n → Even (succ (succ n)) -- "for every number n, if n
+                                                        -- is even so is
+                                                        -- succ (succ n)"
+  ```
+
+  The data type `Even` contains two elements:
+  - `Base-even` which is a **witness** that zero is even.
+  - `Step-even` that states that if we have a witness of the type `Even n`, then it next next successor is Even too, therefore another witness for another number.
+
+  Now if we cast `Even four`, this is a type.
+
+2. We can start proving that zero is even, next that two is even and then that four is even:
+
 ```agda
-data Bool : Set where
-  true  : Bool
-  false : Bool
+zero-is-even : Even zero
+-- the witness that zero is even is the base element of the Even type
+zero-is-even = Base-even
 
-data ℕ : Set where
-  zero : ℕ
-  succ : ℕ → ℕ
+two-is-even : Even two
+-- if zero is even (which we know as the base even number) then is next
+-- next successor is an even too.
+-- Step-even takes in input two elements:
+--          1. a natural number n
+--          2. the witness (proof) that that natural number is even
+-- and then it outputs the witness that two is a natural number
+two-is-even = Step-even zero Base-even
 
--- Define a function that returns false if
--- the argument integer is zero, truìe otherwise
-not-zero : ℕ → Bool
-not-zero zero = false
-not-zero (succ n) = true
-
--- Arguments:
--- > A → Bool filer function
--- > List A list to filter
-filter : {A : Set} → (A → Bool) → List A → List A
-filter p [] = []
-filter p (x ∷ xs) with p x
-...    | true  = x ∷ filter p xs
-...    | false = filter p xs
-
--- natural-vector = [3,0,2,0,1,0]
-natural-vector = (succ (succ (succ zero))) ∷ 
-                 (zero ∷ (succ (succ zero) ∷
-                 (zero ∷ (succ zero ∷ (zero ∷ [])))))
+four-is-even : Even four
+four-is-even = Step-even two (two-is-even)
 ```
-```
->> filter not-zero natural-vector
-succ (succ (succ zero)) ∷ (succ (succ zero) ∷ (succ zero ∷ []))
-```
+
+Similarly we can prove that _"three is an Odd number"_:
+
 ```agda
--- [3,2,1]
-```
-Example: **Compare numbers**
-You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
-You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
-You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
-```agda
-data Bool : Set where
-  true  : Bool
-  false : Bool
+data Odd : ℕ → Set where
+  Base-odd : Odd one
+  Step-odd : (n : ℕ) → Odd n → Odd (succ (succ n))
 
-data Comparison : Set where
-  greater : Comparison
-  less    : Comparison
-  equal   : Comparison
+one-is-odd : Odd one
+one-is-odd = Base-odd
 
-data ℕ : Set where
-  zero : ℕ
-  succ : ℕ → ℕ
-
-_<_ : (a : ℕ) → (b : ℕ) → Bool
-zero < zero     = false
-zero < (succ b) = true
-(succ a) < zero = false
-(succ a) < (succ b) = a < b
-
-one = succ zero
-two = succ one
-three = succ two
-four = succ three
-five = succ four
-
-compare : ℕ → ℕ → Comparison
-compare x y with x < y | y < x
-...            | true  | _     = less
-...            | _     | true  = greater
-...            | false | false = equal
-```
-```
->> compare two one
-greater
->> compare one three
-less
->> compare four four
-equal
+three-is-odd : Odd three
+three-is-odd = Step-odd one Base-odd
 ```
 
 ## 6. Proving lemmas (Equality) <a name="eq1"></a>
@@ -442,7 +419,188 @@ lemma-+-commutative (succ a) b = trans (cong succ (lemma-+-commutative a b)) (sy
 ```
 For other demonstrations of lemmas about equality see [./EX4_Equality.agda](EX4_Equality.agda)
 
-## 7. Decidability <a name="dec"></a>
+## 7. Special keyword #1 : where <a name="where"></a>
+`where` is the first special keyword, is use is to **carry simple lemmas into a bigger demonstration**. Let us see it with an example:
+
+Suppose we already introduced Natural Numbers `Nat`, the operation of addition `_+_` and the equality relation `_≡_`:
+
+```agda
+-- We want to demonstrate the trivial folowing relation
+theorem : {a : ℕ} → (succ a + a) ≡ succ (a + a)
+theorem {a} = ?
+```
+
+To demonstare it, `cong` property of the equivalence may come in handy:
+
+```agda
+cong : {A : Set} → {x y : A} → (f : A → A) → (x ≡ y) → (f x ≡ f y)
+cong f refl = refl
+
+theorem : {a : ℕ} → (succ a + a) ≡ succ (a + a)
+theorem {zero}   = refl
+theorem {succ a} = cong succ refl
+```
+
+We could have written the above demonstration using `where`:
+
+```agda
+theorem' : {a : ℕ} → (succ a + a) ≡ succ (a + a)
+theorem' {zero} = refl
+theorem' {succ a} = cong' succ refl -- at this line cong' is not defined, 
+                                    -- we carry its definition below using
+                                    -- with:
+  where
+  cong' : {A : Set} → {x y : A} → (f : A → A) → (x ≡ y) → (f x ≡ f y) 
+  cong' f refl = refl
+```
+
+## 8. Special keyword #2 : rewrite <a name="rewrite"></a>
+
+???
+
+## 9. Special keyword #3 : with <a name="with"></a>
+
+
+`with` is used to consider many possibilities a data type may have. Also it is almost essential to some recursive demonstrations:
+
+As an example, let us demonstrate that a given number is either even or odd.
+
+Let us define the required types:
+
+```agda
+data Even : ℕ → Set where
+  base-even : Even zero -- base element
+  step-even : {n : ℕ} → Even n → Even (succ (succ n))
+
+data Odd : ℕ → Set where
+  base-odd : Odd (succ zero) -- base element
+  step-odd : {n : ℕ} → Odd n → Odd (succ (succ n))
+
+data _⊎_ (A B : Set) : Set where
+  left  : A → A ⊎ B
+  right : B → A ⊎ B
+````
+
+And let us assume that we already demonstrated that if we have an odd number, its successor is even and viceversa:
+
+```agda
+lemma-succ-even : (a : ℕ) → (Even a) → Odd (succ a)
+lemma-succ-even zero base-even    = base-odd
+lemma-succ-even (succ (succ a)) (step-even p) = step-odd (lemma-succ-even a p)
+
+lemma-succ-odd : (b : ℕ) → (Odd b) → Even (succ b)
+lemma-succ-odd (succ zero) base-odd = step-even base-even
+lemma-succ-odd (succ (succ b)) (step-odd p) = step-even (lemma-succ-odd b p)
+```
+
+```agda
+lemma-even-odd : (a : ℕ) → Even a ⊎ Odd a
+lemma-even-odd zero = left base-even
+lemma-even-odd (succ a) = { }0
+```
+
+The goal here is to demonstrate that `succ a` is in `Even a ⊎ Odd a`, but the witness of it (left or right) depends on a, its precedessor. Let us use `with`
+
+```agda
+lemma-even-odd : (a : ℕ) → Even a ⊎ Odd a
+lemma-even-odd zero = left base-even
+lemma-even-odd (succ a) with lemma-even-odd a
+...| left  p = { }0 -- p : Odd a
+...| right p = { }1 -- p : Even a
+```
+Basically we want to demonstrate that succ a` is in `Even a ⊎ Odd a` **given that** (with) lemma-even-odd a holds in the two possible scenarios (Odd a and Even a).
+
+```agda
+lemma-even-odd : (a : ℕ) → Even a ⊎ Odd a
+lemma-even-odd zero = left base-even
+lemma-even-odd (succ a) with lemma-even-odd a
+...| left  p = right (lemma-succ-even a p)
+...| right p = left (lemma-succ-odd a p)
+```
+
+### 9.1. Special keyword #3 : with as if... else <a name="ifelse"></a>
+Agda does not really have `if... else` statements, the closest structure to that is `with` in Agda
+Example: **Filter list**
+```agda
+data Bool : Set where
+  true  : Bool
+  false : Bool
+
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+-- Define a function that returns false if
+-- the argument integer is zero, truìe otherwise
+not-zero : ℕ → Bool
+not-zero zero = false
+not-zero (succ n) = true
+
+-- Arguments:
+-- > A → Bool filer function
+-- > List A list to filter
+filter : {A : Set} → (A → Bool) → List A → List A
+filter p [] = []
+filter p (x ∷ xs) with p x
+...    | true  = x ∷ filter p xs
+...    | false = filter p xs
+
+-- natural-vector = [3,0,2,0,1,0]
+natural-vector = (succ (succ (succ zero))) ∷ 
+                 (zero ∷ (succ (succ zero) ∷
+                 (zero ∷ (succ zero ∷ (zero ∷ [])))))
+```
+```
+>> filter not-zero natural-vector
+succ (succ (succ zero)) ∷ (succ (succ zero) ∷ (succ zero ∷ []))
+```
+```agda
+-- [3,2,1]
+```
+Example: **Compare numbers**
+You can abstract over multiple terms in a single with-abstraction. To do this you separate the terms with vertical bars `|`.
+```agda
+data Bool : Set where
+  true  : Bool
+  false : Bool
+
+data Comparison : Set where
+  greater : Comparison
+  less    : Comparison
+  equal   : Comparison
+
+data ℕ : Set where
+  zero : ℕ
+  succ : ℕ → ℕ
+
+_<_ : (a : ℕ) → (b : ℕ) → Bool
+zero < zero     = false
+zero < (succ b) = true
+(succ a) < zero = false
+(succ a) < (succ b) = a < b
+
+one = succ zero
+two = succ one
+three = succ two
+four = succ three
+five = succ four
+
+compare : ℕ → ℕ → Comparison
+compare x y with x < y | y < x
+...            | true  | _     = less
+...            | _     | true  = greater
+...            | false | false = equal
+```
+```
+>> compare two one
+greater
+>> compare one three
+less
+>> compare four four
+equal
+```
+
+## 10. Decidability <a name="dec"></a>
 _"Decidability in CS is the property (some properties) that there are machines which are able to find out wether that property holds or not"_
 **Decidable properties** : Examples:
 - property that a natural number being a prime number
