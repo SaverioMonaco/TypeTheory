@@ -11,7 +11,7 @@
 7. [Keyword #1: where](#where)
 8. [Keyword #2: rewrite](#rewrite)
 9. [Keyword #3: with](#with)
-  9.1 [if... else](#ifelse)
+9.1 [if... else](#ifelse)
 10. [Decidability](#dec)
 ---
 | **Command**  |       | **Input Combination** |
